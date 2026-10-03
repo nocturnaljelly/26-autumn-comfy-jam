@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dfgj8mr7e351k"]
+
+[ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_2twif"]
+
+[resource]
+script = ExtResource("1_2twif")
+id = &"cocoa"
+display_name = "Cocoa"
+description = "Rich cocoa powder."
+color = Color(0.42, 0.26, 0.15, 1)

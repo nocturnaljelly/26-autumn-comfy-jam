@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dcoa8kgvxbtld"]
+
+[ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_irytp"]
+
+[resource]
+script = ExtResource("1_irytp")
+id = &"cinnamon"
+display_name = "Cinnamon"
+description = "Smells like autumn."
+color = Color(0.72, 0.38, 0.17, 1)

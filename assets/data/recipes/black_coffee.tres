@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Recipe" format=3]
+
+[ext_resource type="Script" path="res://assets/scripts/data/ingredient.gd" id="1_0pygv"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/coffee.tres" id="2_7vi1e"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/water.tres" id="3_mtjgh"]
+[ext_resource type="Script" path="res://assets/scripts/data/recipe.gd" id="4_8ivqh"]
+
+[resource]
+script = ExtResource("4_8ivqh")
+id = &"black_coffee"
+display_name = "Black Coffee"
+description = "No nonsense."
+ingredients = Array[ExtResource("1_0pygv")]([ExtResource("2_7vi1e"), ExtResource("3_mtjgh")])
+color = Color(0.2, 0.12, 0.07, 1)

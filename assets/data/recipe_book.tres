@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RecipeBook" format=3 uid="uid://c04trefohbse7"]
+
+[ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="1_jeor5"]
+[ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_kd47e"]
+[ext_resource type="Resource" path="res://assets/data/recipes/hot_chocolate.tres" id="2_2gs1i"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/milk.tres" id="2_q21u6"]
+[ext_resource type="Resource" uid="uid://dfgj8mr7e351k" path="res://assets/data/ingredients/cocoa.tres" id="3_f4n2d"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/coffee.tres" id="4_i1dnn"]
+[ext_resource type="Resource" path="res://assets/data/recipes/black_coffee.tres" id="4_y6406"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/water.tres" id="5_1pt8o"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/tea.tres" id="6_0s7hk"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/honey.tres" id="7_gfxx8"]
+[ext_resource type="Resource" path="res://assets/data/recipes/pumpkin_spice_latte.tres" id="7_shs6x"]
+[ext_resource type="Resource" uid="uid://dcoa8kgvxbtld" path="res://assets/data/ingredients/cinnamon.tres" id="8_kt73a"]
+[ext_resource type="Script" uid="uid://jgchdjmtgasy" path="res://assets/scripts/data/recipe_book.gd" id="8_msm3a"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/pumpkin.tres" id="9_a15jr"]
+
+[resource]
+script = ExtResource("8_msm3a")
+recipes = Array[ExtResource("1_jeor5")]([ExtResource("2_2gs1i"), ExtResource("4_y6406"), ExtResource("7_shs6x")])
+ingredients = Array[ExtResource("1_kd47e")]([ExtResource("2_q21u6"), ExtResource("3_f4n2d"), ExtResource("4_i1dnn"), ExtResource("5_1pt8o"), ExtResource("6_0s7hk"), ExtResource("7_gfxx8"), ExtResource("8_kt73a"), ExtResource("9_a15jr")])

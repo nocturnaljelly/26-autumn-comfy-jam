@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3]
+
+[ext_resource type="Script" path="res://assets/scripts/data/ingredient.gd" id="1_rrus6"]
+
+[resource]
+script = ExtResource("1_rrus6")
+id = &"honey"
+display_name = "Honey"
+description = "Sticky and sweet."
+color = Color(0.95, 0.72, 0.2, 1)

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Recipe" format=3]
+
+[ext_resource type="Script" path="res://assets/scripts/data/ingredient.gd" id="1_uqu6o"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/coffee.tres" id="2_qd05a"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/milk.tres" id="3_5ibvy"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/pumpkin.tres" id="4_wgvhq"]
+[ext_resource type="Resource" path="res://assets/data/ingredients/cinnamon.tres" id="5_pi1jt"]
+[ext_resource type="Script" path="res://assets/scripts/data/recipe.gd" id="6_wbjeo"]
+
+[resource]
+script = ExtResource("6_wbjeo")
+id = &"pumpkin_spice_latte"
+display_name = "Pumpkin Spice Latte"
+description = "The official drink of autumn."
+ingredients = Array[ExtResource("1_uqu6o")]([ExtResource("2_qd05a"), ExtResource("3_5ibvy"), ExtResource("4_wgvhq"), ExtResource("5_pi1jt")])
+color = Color(0.85, 0.55, 0.3, 1)

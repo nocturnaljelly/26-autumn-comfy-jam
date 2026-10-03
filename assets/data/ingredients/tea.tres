@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3]
+
+[ext_resource type="Script" path="res://assets/scripts/data/ingredient.gd" id="1_ro8xc"]
+
+[resource]
+script = ExtResource("1_ro8xc")
+id = &"tea"
+display_name = "Tea Leaves"
+description = "Loose leaf black tea."
+color = Color(0.55, 0.65, 0.3, 1)

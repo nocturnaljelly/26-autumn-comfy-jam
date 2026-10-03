@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3]
+
+[ext_resource type="Script" path="res://assets/scripts/data/ingredient.gd" id="1_g8gu2"]
+
+[resource]
+script = ExtResource("1_g8gu2")
+id = &"water"
+display_name = "Hot Water"
+description = "Straight from the kettle."
+color = Color(0.62, 0.82, 0.95, 1)

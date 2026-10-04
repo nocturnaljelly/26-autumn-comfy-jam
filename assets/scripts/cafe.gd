@@ -5,6 +5,7 @@ const CUP_CAPACITY := 4
 @export var recipe_book: RecipeBook
 @export var fade_duration := 0.8
 
+var menu: RecipeBook
 var order: Recipe
 var cup: Array[Ingredient] = []
 var facing_menu := false
@@ -23,7 +24,8 @@ var _fade_tween: Tween
 
 
 func _ready() -> void:
-	for ingredient in recipe_book.ingredients:
+	menu = recipe_book.create_runtime_copy()
+	for ingredient in menu.ingredients:
 		var button := AnimatedButton.new()
 		button.text = ingredient.display_name
 		button.pressed.connect(_add_ingredient.bind(ingredient))
@@ -38,17 +40,21 @@ func _ready() -> void:
 
 func _turn() -> void:
 	facing_menu = not facing_menu
+	if facing_menu:
+		menu.reset_from(recipe_book)
+		menu.change_random_recipe(CUP_CAPACITY)
+		_update_menu()
 	_show_view()
 
 func _next_customer() -> void:
-	order = recipe_book.get_random_recipe()
+	order = menu.get_random_recipe()
 	_update_order_label()
 	_update_controls()
 	_fade_customer(1.0)
 
 func _serve() -> void:
 	var correct := order.matches(cup)
-	order_label.text = "Correct!" if correct else "Wrong! That's not number %d." % recipe_book.get_number(order)
+	order_label.text = "Correct!" if correct else "Wrong! That's not number %d." % menu.get_number(order)
 	order = null
 	_clear_cup()
 	await _fade_customer(0.0)
@@ -76,12 +82,12 @@ func _show_view() -> void:
 	turn_button.text = "Back to customer" if facing_menu else "Look at menu"
 
 func _update_order_label() -> void:
-	order_label.text = "Customer wants number %d" % recipe_book.get_number(order)
+	order_label.text = "Customer wants number %d" % menu.get_number(order)
 
 func _update_menu() -> void:
 	var lines: PackedStringArray = []
-	for recipe in recipe_book.recipes:
-		lines.append("%d. %s = %s" % [recipe_book.get_number(recipe), recipe.get_formula(), recipe.display_name])
+	for recipe in menu.recipes:
+		lines.append("%d. %s = %s" % [menu.get_number(recipe), recipe.get_formula(), recipe.display_name])
 	menu_label.text = "\n".join(lines)
 
 func _update_controls() -> void:

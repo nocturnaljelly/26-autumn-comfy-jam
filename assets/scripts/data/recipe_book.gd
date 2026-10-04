@@ -14,8 +14,9 @@ func get_recipe(id: StringName) -> Recipe:
 func get_number(recipe: Recipe) -> int:
 	return recipes.find(recipe) + 1
 
-func get_random_recipe() -> Recipe:
-	return recipes.pick_random() if not recipes.is_empty() else null
+func get_random_recipe(exclude: Recipe = null) -> Recipe:
+	var options := recipes.filter(func(recipe: Recipe) -> bool: return recipe != exclude)
+	return options.pick_random() if not options.is_empty() else exclude
 
 func create_runtime_copy() -> RecipeBook:
 	var copy: RecipeBook = duplicate()

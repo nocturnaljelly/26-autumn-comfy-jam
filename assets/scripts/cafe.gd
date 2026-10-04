@@ -4,6 +4,7 @@ const CUP_CAPACITY := 4
 
 @export var recipe_book: RecipeBook
 @export var fade_duration := 0.8
+@export_range(0.0, 1.0, 0.05) var order_change_chance := 0.3
 
 var menu: RecipeBook
 var order: Recipe
@@ -44,6 +45,9 @@ func _turn() -> void:
 		menu.reset_from(recipe_book)
 		menu.change_random_recipe(CUP_CAPACITY)
 		_update_menu()
+	elif order and randf() < order_change_chance:
+		order = menu.get_random_recipe(order)
+		_update_order_label()
 	_show_view()
 
 func _next_customer() -> void:

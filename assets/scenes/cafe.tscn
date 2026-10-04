@@ -78,6 +78,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 11.0
 offset_bottom = 13.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -87,6 +88,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 27.0
 offset_bottom = 29.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -99,6 +101,7 @@ offset_left = -341.0
 offset_top = -58.0
 offset_right = 79.0
 offset_bottom = -18.0
+grow_horizontal = 0
 rotation = 0.436332
 mouse_filter = 2
 color = Color(0.52, 0.33, 0.19, 1)
@@ -109,6 +112,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 11.0
 offset_bottom = 13.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -118,6 +122,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 27.0
 offset_bottom = 29.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -135,6 +140,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 8.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -145,6 +151,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -6.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -178,6 +186,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -3.0
 offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -224,6 +234,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -6.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 color = Color(0.78, 0.76, 0.72, 1)
 
@@ -248,6 +260,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -6.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 color = Color(0.78, 0.76, 0.72, 1)
 
@@ -272,6 +286,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -6.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 color = Color(0.78, 0.76, 0.72, 1)
 
@@ -296,6 +312,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -6.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 color = Color(0.78, 0.76, 0.72, 1)
 
@@ -327,6 +345,8 @@ offset_left = 10.0
 offset_top = 22.0
 offset_right = -10.0
 offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0.99, 0.97, 0.92, 1)
 
@@ -338,6 +358,7 @@ offset_left = 14.0
 offset_top = 18.0
 offset_right = -14.0
 offset_bottom = 21.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.45, 0.42, 0.4, 1)
 
@@ -349,6 +370,7 @@ offset_left = 14.0
 offset_top = 36.0
 offset_right = -40.0
 offset_bottom = 39.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.45, 0.42, 0.4, 1)
 
@@ -360,6 +382,7 @@ offset_left = 14.0
 offset_top = 54.0
 offset_right = -14.0
 offset_bottom = 57.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.45, 0.42, 0.4, 1)
 
@@ -371,6 +394,7 @@ offset_left = 14.0
 offset_top = 72.0
 offset_right = -60.0
 offset_bottom = 75.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.45, 0.42, 0.4, 1)
 
@@ -383,6 +407,7 @@ offset_left = -24.0
 offset_top = 8.0
 offset_right = 24.0
 offset_bottom = 30.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.6, 0.6, 0.63, 1)
 
@@ -405,6 +430,8 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = -4.0
 offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0.95, 0.9, 0.81, 1)
 
@@ -427,6 +454,8 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = -4.0
 offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0.95, 0.9, 0.81, 1)
 
@@ -522,11 +551,522 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Content" type="CenterContainer" parent="MenuView" unique_id=1738107709]
+[node name="PrototypeGraphics" type="Control" parent="MenuView" unique_id=1653779445]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Wall" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=329717076]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.94, 0.88, 0.77, 1)
+
+[node name="BeamLeft" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=154483986]
+layout_mode = 1
+offset_left = -40.0
+offset_top = 119.0
+offset_right = 380.0
+offset_bottom = 159.0
+rotation = -0.436332
+mouse_filter = 2
+color = Color(0.52, 0.33, 0.19, 1)
+
+[node name="Grain1" type="ColorRect" parent="MenuView/PrototypeGraphics/BeamLeft" unique_id=384425742]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 11.0
+offset_bottom = 13.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Grain2" type="ColorRect" parent="MenuView/PrototypeGraphics/BeamLeft" unique_id=1046014590]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 27.0
+offset_bottom = 29.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="BeamRight" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=1836218667]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -341.0
+offset_top = -58.0
+offset_right = 79.0
+offset_bottom = -18.0
+rotation = 0.436332
+mouse_filter = 2
+color = Color(0.52, 0.33, 0.19, 1)
+
+[node name="Grain1" type="ColorRect" parent="MenuView/PrototypeGraphics/BeamRight" unique_id=484510372]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 11.0
+offset_bottom = 13.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Grain2" type="ColorRect" parent="MenuView/PrototypeGraphics/BeamRight" unique_id=1978600381]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 27.0
+offset_bottom = 29.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Wainscot" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=881994017]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.68, 0.47, 0.3, 1)
+
+[node name="TopRail" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=443330619]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Seam1" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=303728039]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.1
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="Seam2" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=1714994961]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_right = 0.2
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="Seam3" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=2144432332]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_right = 0.3
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="Seam4" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=1157366533]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_right = 0.4
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="Seam5" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=129146138]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="Seam6" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=1574492561]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6
+anchor_right = 0.6
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="Seam7" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=940963478]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_right = 0.7
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="Seam8" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=1159062503]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="Seam9" type="ColorRect" parent="MenuView/PrototypeGraphics/Wainscot" unique_id=850109709]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_right = 0.9
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 2.0
+mouse_filter = 2
+color = Color(0.55, 0.37, 0.23, 1)
+
+[node name="SignStringLeft" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=541454124]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.43
+anchor_right = 0.43
+anchor_bottom = 0.07
+offset_left = -1.5
+offset_right = 1.5
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="SignStringRight" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=1446229331]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.57
+anchor_right = 0.57
+anchor_bottom = 0.07
+offset_left = -1.5
+offset_right = 1.5
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Sign" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=683803485]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.07
+anchor_right = 0.6
+anchor_bottom = 0.15
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="SignText" type="Label" parent="MenuView/PrototypeGraphics/Sign" unique_id=89029456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.98, 0.93, 0.8, 1)
+theme_override_font_sizes/font_size = 28
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoardFrame" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=440780228]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 0.2
+anchor_right = 0.92
+anchor_bottom = 0.74
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Paper" type="ColorRect" parent="MenuView/PrototypeGraphics/BoardFrame" unique_id=1391014409]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+mouse_filter = 2
+color = Color(0.99, 0.96, 0.89, 1)
+
+[node name="PinTopLeft" type="ColorRect" parent="MenuView/PrototypeGraphics/BoardFrame/Paper" unique_id=1549375593]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 18.0
+offset_bottom = 18.0
+mouse_filter = 2
+color = Color(0.78, 0.22, 0.18, 1)
+
+[node name="PinTopRight" type="ColorRect" parent="MenuView/PrototypeGraphics/BoardFrame/Paper" unique_id=599580457]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 18.0
+mouse_filter = 2
+color = Color(0.78, 0.22, 0.18, 1)
+
+[node name="PinBottomLeft" type="ColorRect" parent="MenuView/PrototypeGraphics/BoardFrame/Paper" unique_id=1814327336]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = -8.0
+mouse_filter = 2
+color = Color(0.78, 0.22, 0.18, 1)
+
+[node name="PinBottomRight" type="ColorRect" parent="MenuView/PrototypeGraphics/BoardFrame/Paper" unique_id=779229381]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -18.0
+offset_right = -8.0
+offset_bottom = -8.0
+mouse_filter = 2
+color = Color(0.78, 0.22, 0.18, 1)
+
+[node name="ShelfLeftTop" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=673912043]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.42
+anchor_right = 0.07
+anchor_bottom = 0.42
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Jar1" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfLeftTop" unique_id=577261626]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_right = 0.08
+offset_top = -30.0
+offset_right = 24.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Lid" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfLeftTop/Jar1" unique_id=544407855]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.36, 0.31, 0.28, 1)
+
+[node name="Jar2" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfLeftTop" unique_id=970202662]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_right = 0.55
+offset_top = -30.0
+offset_right = 24.0
+mouse_filter = 2
+color = Color(0.95, 0.72, 0.2, 1)
+
+[node name="Lid" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfLeftTop/Jar2" unique_id=636133661]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.36, 0.31, 0.28, 1)
+
+[node name="ShelfLeftBottom" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=1403143317]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.62
+anchor_right = 0.07
+anchor_bottom = 0.62
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Jar1" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfLeftBottom" unique_id=537277917]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_right = 0.08
+offset_top = -30.0
+offset_right = 24.0
+mouse_filter = 2
+color = Color(0.55, 0.65, 0.3, 1)
+
+[node name="Lid" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfLeftBottom/Jar1" unique_id=1912432239]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.36, 0.31, 0.28, 1)
+
+[node name="Jar2" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfLeftBottom" unique_id=398158736]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_right = 0.55
+offset_top = -30.0
+offset_right = 24.0
+mouse_filter = 2
+color = Color(0.25, 0.15, 0.09, 1)
+
+[node name="Lid" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfLeftBottom/Jar2" unique_id=96212005]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.36, 0.31, 0.28, 1)
+
+[node name="ShelfRightTop" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=1224933164]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.93
+anchor_top = 0.42
+anchor_right = 0.99
+anchor_bottom = 0.42
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Jar1" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfRightTop" unique_id=1956011168]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_right = 0.08
+offset_top = -30.0
+offset_right = 24.0
+mouse_filter = 2
+color = Color(0.93, 0.5, 0.15, 1)
+
+[node name="Lid" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfRightTop/Jar1" unique_id=171198812]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.36, 0.31, 0.28, 1)
+
+[node name="Jar2" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfRightTop" unique_id=663355065]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_right = 0.55
+offset_top = -30.0
+offset_right = 24.0
+mouse_filter = 2
+color = Color(0.72, 0.38, 0.17, 1)
+
+[node name="Lid" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfRightTop/Jar2" unique_id=865096547]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.36, 0.31, 0.28, 1)
+
+[node name="ShelfRightBottom" type="ColorRect" parent="MenuView/PrototypeGraphics" unique_id=1854754946]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.93
+anchor_top = 0.62
+anchor_right = 0.99
+anchor_bottom = 0.62
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Jar1" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfRightBottom" unique_id=11558420]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_right = 0.08
+offset_top = -30.0
+offset_right = 24.0
+mouse_filter = 2
+color = Color(0.97, 0.95, 0.89, 1)
+
+[node name="Lid" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfRightBottom/Jar1" unique_id=946315172]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.36, 0.31, 0.28, 1)
+
+[node name="Jar2" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfRightBottom" unique_id=1398377249]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_right = 0.55
+offset_top = -30.0
+offset_right = 24.0
+mouse_filter = 2
+color = Color(0.62, 0.82, 0.95, 1)
+
+[node name="Lid" type="ColorRect" parent="MenuView/PrototypeGraphics/ShelfRightBottom/Jar2" unique_id=1768030849]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 2
+color = Color(0.36, 0.31, 0.28, 1)
+
+[node name="Content" type="CenterContainer" parent="MenuView" unique_id=1738107709]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 0.2
+anchor_right = 0.92
+anchor_bottom = 0.74
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 

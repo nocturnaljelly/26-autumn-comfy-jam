@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Customer" format=3]
+[gd_resource type="Resource" script_class="Customer" format=3 uid="uid://ddjpt78ye5ftp"]
 
-[ext_resource type="Script" path="res://assets/scripts/data/customer.gd" id="1_customer"]
+[ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="1_customer"]
 
 [sub_resource type="Gradient" id="Gradient_maple"]
 offsets = PackedFloat32Array(0)

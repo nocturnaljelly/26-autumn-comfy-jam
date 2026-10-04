@@ -2,21 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bc8u40pcene65" path="res://assets/scripts/cafe.gd" id="1_cafe"]
 [ext_resource type="Resource" uid="uid://c04trefohbse7" path="res://assets/data/recipe_book.tres" id="2_book"]
-[ext_resource type="Theme" path="res://assets/themes/ui_theme.tres" id="3_theme"]
-[ext_resource type="Script" path="res://assets/scripts/animated_button.gd" id="4_button"]
-[ext_resource type="Script" path="res://assets/scripts/data/customer.gd" id="5_customer"]
-[ext_resource type="Resource" path="res://assets/data/customers/hazel.tres" id="6_hazel"]
-[ext_resource type="Resource" path="res://assets/data/customers/rowan.tres" id="7_rowan"]
-[ext_resource type="Resource" path="res://assets/data/customers/maple.tres" id="8_maple"]
-
-[sub_resource type="Gradient" id="Gradient_black"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_customer"]
-gradient = SubResource("Gradient_black")
-width = 160
-height = 240
+[ext_resource type="Theme" uid="uid://2lg1780hstov" path="res://assets/themes/ui_theme.tres" id="3_theme"]
+[ext_resource type="Script" uid="uid://dyqb2m2klxrdx" path="res://assets/scripts/animated_button.gd" id="4_button"]
+[ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="5_customer"]
+[ext_resource type="Resource" uid="uid://dap4wlsjc36ot" path="res://assets/data/customers/hazel.tres" id="6_hazel"]
+[ext_resource type="Resource" uid="uid://cmqx4n3vwt3dh" path="res://assets/data/customers/rowan.tres" id="7_rowan"]
+[ext_resource type="Resource" uid="uid://ddjpt78ye5ftp" path="res://assets/data/customers/maple.tres" id="8_maple"]
+[ext_resource type="PackedScene" path="res://assets/scenes/customer_slot.tscn" id="9_slot"]
 
 [node name="Cafe" type="Control" unique_id=432355658]
 layout_mode = 3
@@ -28,7 +20,7 @@ grow_vertical = 2
 theme = ExtResource("3_theme")
 script = ExtResource("1_cafe")
 recipe_book = ExtResource("2_book")
-customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("7_rowan"), ExtResource("8_maple")])
+customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("8_maple"), ExtResource("7_rowan")])
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
 unique_name_in_owner = true
@@ -40,7 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Background" type="TextureRect" parent="CounterView"]
+[node name="Background" type="TextureRect" parent="CounterView" unique_id=97142765]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,37 +43,447 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Content" type="VBoxContainer" parent="CounterView"]
+[node name="PrototypeGraphics" type="Control" parent="CounterView" unique_id=323166498]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 16
+mouse_filter = 2
+
+[node name="Wall" type="ColorRect" parent="CounterView/PrototypeGraphics" unique_id=134285140]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.94, 0.88, 0.77, 1)
+
+[node name="BeamLeft" type="ColorRect" parent="CounterView/PrototypeGraphics" unique_id=1852242127]
+layout_mode = 1
+offset_left = -40.0
+offset_top = 119.0
+offset_right = 380.0
+offset_bottom = 159.0
+rotation = -0.436332
+mouse_filter = 2
+color = Color(0.52, 0.33, 0.19, 1)
+
+[node name="Grain1" type="ColorRect" parent="CounterView/PrototypeGraphics/BeamLeft" unique_id=1256556548]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 11.0
+offset_bottom = 13.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Grain2" type="ColorRect" parent="CounterView/PrototypeGraphics/BeamLeft" unique_id=1731544967]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 27.0
+offset_bottom = 29.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="BeamRight" type="ColorRect" parent="CounterView/PrototypeGraphics" unique_id=1955929105]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -341.0
+offset_top = -58.0
+offset_right = 79.0
+offset_bottom = -18.0
+rotation = 0.436332
+mouse_filter = 2
+color = Color(0.52, 0.33, 0.19, 1)
+
+[node name="Grain1" type="ColorRect" parent="CounterView/PrototypeGraphics/BeamRight" unique_id=1365391072]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 11.0
+offset_bottom = 13.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Grain2" type="ColorRect" parent="CounterView/PrototypeGraphics/BeamRight" unique_id=1125571241]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 27.0
+offset_bottom = 29.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Counter" type="ColorRect" parent="CounterView/PrototypeGraphics" unique_id=950014841]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.48
+anchor_right = 1.0
+anchor_bottom = 0.635
+mouse_filter = 2
+color = Color(0.68, 0.47, 0.3, 1)
+
+[node name="TopEdge" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=1177341266]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="BottomEdge" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=880947242]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Divider1" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=1387122697]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.1
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Divider2" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=348101928]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_right = 0.3
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Divider3" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=1038180216]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Divider4" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=415305906]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_right = 0.7
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Divider5" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=1189844465]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_right = 0.9
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Plate1" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=1073933126]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.5
+anchor_right = 0.2
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -26.0
+offset_right = 85.0
+offset_bottom = 26.0
+mouse_filter = 2
+color = Color(0.97, 0.96, 0.93, 1)
+
+[node name="Rim" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter/Plate1" unique_id=1489574298]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+mouse_filter = 2
+color = Color(0.78, 0.76, 0.72, 1)
+
+[node name="Plate2" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=2016711073]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.5
+anchor_right = 0.4
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -26.0
+offset_right = 85.0
+offset_bottom = 26.0
+mouse_filter = 2
+color = Color(0.97, 0.96, 0.93, 1)
+
+[node name="Rim" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter/Plate2" unique_id=1820122775]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+mouse_filter = 2
+color = Color(0.78, 0.76, 0.72, 1)
+
+[node name="Plate3" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=1981798182]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6
+anchor_top = 0.5
+anchor_right = 0.6
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -26.0
+offset_right = 85.0
+offset_bottom = 26.0
+mouse_filter = 2
+color = Color(0.97, 0.96, 0.93, 1)
+
+[node name="Rim" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter/Plate3" unique_id=415344418]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+mouse_filter = 2
+color = Color(0.78, 0.76, 0.72, 1)
+
+[node name="Plate4" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter" unique_id=1547579560]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.5
+anchor_right = 0.8
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -26.0
+offset_right = 85.0
+offset_bottom = 26.0
+mouse_filter = 2
+color = Color(0.97, 0.96, 0.93, 1)
+
+[node name="Rim" type="ColorRect" parent="CounterView/PrototypeGraphics/Counter/Plate4" unique_id=1968514864]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+mouse_filter = 2
+color = Color(0.78, 0.76, 0.72, 1)
+
+[node name="Workstation" type="ColorRect" parent="CounterView/PrototypeGraphics" unique_id=2081330979]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.635
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.84, 0.75, 0.6, 1)
+
+[node name="Clipboard" type="ColorRect" parent="CounterView/PrototypeGraphics" unique_id=1609075837]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.67
+anchor_right = 0.195
+anchor_bottom = 0.97
+mouse_filter = 2
+color = Color(0.55, 0.36, 0.22, 1)
+
+[node name="Paper" type="ColorRect" parent="CounterView/PrototypeGraphics/Clipboard" unique_id=212716239]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 22.0
+offset_right = -10.0
+offset_bottom = -10.0
+mouse_filter = 2
+color = Color(0.99, 0.97, 0.92, 1)
+
+[node name="Line1" type="ColorRect" parent="CounterView/PrototypeGraphics/Clipboard/Paper" unique_id=1255205874]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 14.0
+offset_top = 18.0
+offset_right = -14.0
+offset_bottom = 21.0
+mouse_filter = 2
+color = Color(0.45, 0.42, 0.4, 1)
+
+[node name="Line2" type="ColorRect" parent="CounterView/PrototypeGraphics/Clipboard/Paper" unique_id=1778725136]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 14.0
+offset_top = 36.0
+offset_right = -40.0
+offset_bottom = 39.0
+mouse_filter = 2
+color = Color(0.45, 0.42, 0.4, 1)
+
+[node name="Line3" type="ColorRect" parent="CounterView/PrototypeGraphics/Clipboard/Paper" unique_id=561761765]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 14.0
+offset_top = 54.0
+offset_right = -14.0
+offset_bottom = 57.0
+mouse_filter = 2
+color = Color(0.45, 0.42, 0.4, 1)
+
+[node name="Line4" type="ColorRect" parent="CounterView/PrototypeGraphics/Clipboard/Paper" unique_id=1651628000]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 14.0
+offset_top = 72.0
+offset_right = -60.0
+offset_bottom = 75.0
+mouse_filter = 2
+color = Color(0.45, 0.42, 0.4, 1)
+
+[node name="Clip" type="ColorRect" parent="CounterView/PrototypeGraphics/Clipboard" unique_id=1126043649]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 30.0
+mouse_filter = 2
+color = Color(0.6, 0.6, 0.63, 1)
+
+[node name="IngredientsBox" type="ColorRect" parent="CounterView/PrototypeGraphics" unique_id=1473635730]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21
+anchor_top = 0.67
+anchor_right = 0.575
+anchor_bottom = 0.97
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Fill" type="ColorRect" parent="CounterView/PrototypeGraphics/IngredientsBox" unique_id=42703983]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+mouse_filter = 2
+color = Color(0.95, 0.9, 0.81, 1)
+
+[node name="PrepBox" type="ColorRect" parent="CounterView/PrototypeGraphics" unique_id=1991395481]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.59
+anchor_top = 0.67
+anchor_right = 0.79
+anchor_bottom = 0.97
+mouse_filter = 2
+color = Color(0.42, 0.26, 0.15, 1)
+
+[node name="Fill" type="ColorRect" parent="CounterView/PrototypeGraphics/PrepBox" unique_id=1151928139]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+mouse_filter = 2
+color = Color(0.95, 0.9, 0.81, 1)
+
+[node name="CustomerSlots" type="HBoxContainer" parent="CounterView" unique_id=1966658511]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.635
+offset_top = 8.0
+offset_bottom = -26.0
+theme_override_constants/separation = 0
+
+[node name="CustomerSlot1" parent="CounterView/CustomerSlots" unique_id=2123331058 instance=ExtResource("9_slot")]
+layout_mode = 2
+
+[node name="CustomerSlot2" parent="CounterView/CustomerSlots" unique_id=1832369746 instance=ExtResource("9_slot")]
+layout_mode = 2
+
+[node name="CustomerSlot3" parent="CounterView/CustomerSlots" unique_id=840071003 instance=ExtResource("9_slot")]
+layout_mode = 2
+
+[node name="CustomerSlot4" parent="CounterView/CustomerSlots" unique_id=1180743430 instance=ExtResource("9_slot")]
+layout_mode = 2
+
+[node name="IngredientButtons" type="HFlowContainer" parent="CounterView" unique_id=974106549]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21
+anchor_top = 0.67
+anchor_right = 0.575
+anchor_bottom = 0.97
+offset_left = 12.0
+offset_top = 16.0
+offset_right = -12.0
+offset_bottom = -12.0
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
 alignment = 1
 
-[node name="CustomerSprite" type="TextureRect" parent="CounterView/Content" unique_id=729411638]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 240)
-layout_mode = 2
-size_flags_horizontal = 4
-texture = SubResource("GradientTexture2D_customer")
-expand_mode = 1
+[node name="Cup" type="VBoxContainer" parent="CounterView" unique_id=168903030]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.59
+anchor_top = 0.67
+anchor_right = 0.79
+anchor_bottom = 0.97
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+theme_override_constants/separation = 12
+alignment = 1
 
-[node name="OrderLabel" type="RichTextLabel" parent="CounterView/Content" unique_id=5133325]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 28
-bbcode_enabled = true
-text = "Customer wants [wave]number 1[/wave]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="CupLabel" type="RichTextLabel" parent="CounterView/Content" unique_id=1807857194]
+[node name="CupLabel" type="RichTextLabel" parent="CounterView/Cup" unique_id=1807857194]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
@@ -89,29 +491,12 @@ bbcode_enabled = true
 text = "Cup: empty"
 fit_content = true
 scroll_active = false
-autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="IngredientButtons" type="HBoxContainer" parent="CounterView/Content" unique_id=476903310]
+[node name="ClearButton" type="Button" parent="CounterView/Cup" unique_id=244709931]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="CupButtons" type="HBoxContainer" parent="CounterView/Content" unique_id=1972538575]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="ServeButton" type="Button" parent="CounterView/Content/CupButtons" unique_id=1340777403]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Serve"
-script = ExtResource("4_button")
-
-[node name="ClearButton" type="Button" parent="CounterView/Content/CupButtons" unique_id=244709931]
-unique_name_in_owner = true
-layout_mode = 2
+size_flags_horizontal = 4
 text = "Clear"
 script = ExtResource("4_button")
 
@@ -126,7 +511,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Background" type="TextureRect" parent="MenuView"]
+[node name="Background" type="TextureRect" parent="MenuView" unique_id=403544082]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -137,7 +522,7 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Content" type="CenterContainer" parent="MenuView"]
+[node name="Content" type="CenterContainer" parent="MenuView" unique_id=1738107709]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,13 +545,21 @@ autowrap_mode = 0
 [node name="TurnButton" type="Button" parent="." unique_id=1640946055]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -216.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = 60.0
-grow_horizontal = 0
+anchors_preset = -1
+anchor_left = 0.1025
+anchor_top = 0.97
+anchor_right = 0.1025
+anchor_bottom = 0.97
+offset_left = -100.0
+offset_top = -62.0
+offset_right = 100.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Look at menu"
 script = ExtResource("4_button")
+
+[node name="ArrivalTimer" type="Timer" parent="." unique_id=155262835]
+unique_name_in_owner = true
+wait_time = 4.0
+autostart = true

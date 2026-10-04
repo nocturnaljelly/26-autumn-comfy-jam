@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Customer" format=3]
+
+[ext_resource type="Script" path="res://assets/scripts/data/customer.gd" id="1_customer"]
+
+[sub_resource type="Gradient" id="Gradient_rowan"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.27, 0.42, 0.26, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rowan"]
+gradient = SubResource("Gradient_rowan")
+width = 160
+height = 240
+
+[resource]
+script = ExtResource("1_customer")
+id = &"rowan"
+display_name = "Rowan"
+sprite = SubResource("GradientTexture2D_rowan")
+order_change_chance = 0.3

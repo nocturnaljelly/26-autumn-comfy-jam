@@ -4,10 +4,11 @@ const CUP_CAPACITY := 4
 const HIGHLIGHT_COLOR := "#ffd27a"
 
 @export var recipe_book: RecipeBook
+@export var customers: Array[Customer] = []
 @export var fade_duration := 0.8
-@export_range(0.0, 1.0, 0.05) var order_change_chance := 0.3
 
 var menu: RecipeBook
+var customer: Customer
 var order: Recipe
 var cup: Array[Ingredient] = []
 var facing_menu := false
@@ -46,16 +47,22 @@ func _turn() -> void:
 		menu.reset_from(recipe_book)
 		menu.change_random_recipe(CUP_CAPACITY)
 		_update_menu()
-	elif order and randf() < order_change_chance:
+	elif order and randf() < customer.order_change_chance:
 		order = menu.get_random_recipe(order)
 		_update_order_label()
 	_show_view()
 
 func _next_customer() -> void:
+	customer = _pick_customer()
+	customer_sprite.texture = customer.sprite
 	order = menu.get_random_recipe()
 	_update_order_label()
 	_update_controls()
 	_fade_customer(1.0)
+
+func _pick_customer() -> Customer:
+	var options := customers.filter(func(other: Customer) -> bool: return other != customer)
+	return options.pick_random() if not options.is_empty() else customer
 
 func _serve() -> void:
 	var correct := order.matches(cup)

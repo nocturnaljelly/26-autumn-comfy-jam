@@ -4,6 +4,10 @@
 [ext_resource type="Resource" uid="uid://c04trefohbse7" path="res://assets/data/recipe_book.tres" id="2_book"]
 [ext_resource type="Theme" path="res://assets/themes/ui_theme.tres" id="3_theme"]
 [ext_resource type="Script" path="res://assets/scripts/animated_button.gd" id="4_button"]
+[ext_resource type="Script" path="res://assets/scripts/data/customer.gd" id="5_customer"]
+[ext_resource type="Resource" path="res://assets/data/customers/hazel.tres" id="6_hazel"]
+[ext_resource type="Resource" path="res://assets/data/customers/rowan.tres" id="7_rowan"]
+[ext_resource type="Resource" path="res://assets/data/customers/maple.tres" id="8_maple"]
 
 [sub_resource type="Gradient" id="Gradient_black"]
 offsets = PackedFloat32Array(0)
@@ -24,6 +28,7 @@ grow_vertical = 2
 theme = ExtResource("3_theme")
 script = ExtResource("1_cafe")
 recipe_book = ExtResource("2_book")
+customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("7_rowan"), ExtResource("8_maple")])
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
 unique_name_in_owner = true

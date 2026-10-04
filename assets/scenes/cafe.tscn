@@ -64,17 +64,27 @@ size_flags_horizontal = 4
 texture = SubResource("GradientTexture2D_customer")
 expand_mode = 1
 
-[node name="OrderLabel" type="Label" parent="CounterView/Content" unique_id=5133325]
+[node name="OrderLabel" type="RichTextLabel" parent="CounterView/Content" unique_id=5133325]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "Customer wants number 1"
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "Customer wants [wave]number 1[/wave]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="CupLabel" type="Label" parent="CounterView/Content" unique_id=1807857194]
+[node name="CupLabel" type="RichTextLabel" parent="CounterView/Content" unique_id=1807857194]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
+bbcode_enabled = true
 text = "Cup: empty"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 horizontal_alignment = 1
 
 [node name="IngredientButtons" type="HBoxContainer" parent="CounterView/Content" unique_id=476903310]
@@ -130,11 +140,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MenuLabel" type="Label" parent="MenuView/Content" unique_id=801672414]
+[node name="MenuLabel" type="RichTextLabel" parent="MenuView/Content" unique_id=801672414]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "1. Milk + Cocoa = Hot Chocolate"
+theme_override_constants/line_separation = 14
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "1. Milk + Cocoa = [wave]Hot Chocolate[/wave]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="TurnButton" type="Button" parent="." unique_id=1640946055]
 unique_name_in_owner = true

@@ -1,6 +1,7 @@
 extends Control
 
 const CUP_CAPACITY := 4
+const HIGHLIGHT_COLOR := "#ffd27a"
 
 @export var recipe_book: RecipeBook
 @export var fade_duration := 0.8
@@ -14,13 +15,13 @@ var _fade_tween: Tween
 
 @onready var counter_view: Control = %CounterView
 @onready var customer_sprite: TextureRect = %CustomerSprite
-@onready var order_label: Label = %OrderLabel
-@onready var cup_label: Label = %CupLabel
+@onready var order_label: RichTextLabel = %OrderLabel
+@onready var cup_label: RichTextLabel = %CupLabel
 @onready var ingredient_buttons: Container = %IngredientButtons
 @onready var serve_button: Button = %ServeButton
 @onready var clear_button: Button = %ClearButton
 @onready var menu_view: Control = %MenuView
-@onready var menu_label: Label = %MenuLabel
+@onready var menu_label: RichTextLabel = %MenuLabel
 @onready var turn_button: Button = %TurnButton
 
 
@@ -86,20 +87,28 @@ func _show_view() -> void:
 	turn_button.text = "Back to customer" if facing_menu else "Look at menu"
 
 func _update_order_label() -> void:
-	order_label.text = "Customer wants number %d" % menu.get_number(order)
+	order_label.text = "Customer wants [wave amp=40 freq=5][color=%s]number %d[/color][/wave]" % [HIGHLIGHT_COLOR, menu.get_number(order)]
 
 func _update_menu() -> void:
 	var lines: PackedStringArray = []
 	for recipe in menu.recipes:
-		lines.append("%d. %s = %s" % [menu.get_number(recipe), recipe.get_formula(), recipe.display_name])
+		var names: PackedStringArray = []
+		for ingredient in recipe.ingredients:
+			names.append(_ingredient_text(ingredient))
+		lines.append("[color=%s]%d.[/color] %s = [wave amp=25 freq=3]%s[/wave]" % [HIGHLIGHT_COLOR, menu.get_number(recipe), " + ".join(names), recipe.display_name])
 	menu_label.text = "\n".join(lines)
 
 func _update_controls() -> void:
 	var names: PackedStringArray = []
 	for ingredient in cup:
-		names.append(ingredient.display_name)
-	cup_label.text = "Cup: " + (" + ".join(names) if not names.is_empty() else "empty")
+		names.append(_ingredient_text(ingredient))
+	if not names.is_empty():
+		names[names.size() - 1] = "%s" % names[names.size() - 1]
+	cup_label.text = "Cup: " + (" + ".join(names) if not names.is_empty() else "[color=#ffffff80]empty[/color]")
 	for button: Button in ingredient_buttons.get_children():
 		button.disabled = cup.size() >= CUP_CAPACITY
 	serve_button.disabled = order == null or cup.is_empty()
 	clear_button.disabled = cup.is_empty()
+
+func _ingredient_text(ingredient: Ingredient) -> String:
+	return "[color=#%s]%s[/color]" % [ingredient.color.lightened(0.35).to_html(false), ingredient.display_name]

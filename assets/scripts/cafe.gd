@@ -2,12 +2,14 @@ extends Control
 
 const CUP_CAPACITY := 4
 const HIGHLIGHT_COLOR := "#ffd27a"
+enum View { CUSTOMERS, PREP }
 
 @export var recipe_book: RecipeBook
 @export var customers: Array[Customer] = []
 
 var menu: RecipeBook
 var cup: Array[Ingredient] = []
+var current_view := View.CUSTOMERS
 var facing_menu := false
 
 @onready var counter_view: Control = %CounterView
@@ -16,6 +18,10 @@ var facing_menu := false
 @onready var cup_label: RichTextLabel = %CupLabel
 @onready var ingredient_buttons: Container = %IngredientButtons
 @onready var clear_button: Button = %ClearButton
+@onready var customer_view: Control = %CustomerView
+@onready var to_prep_button: Button = $CounterView/CustomerView/ToPrepButton
+@onready var prep_view: Control = %PrepView
+@onready var to_customers_button: Button = $CounterView/PrepView/ToCustomersButton
 @onready var menu_view: Control = %MenuView
 @onready var menu_label: RichTextLabel = %MenuLabel
 @onready var turn_button: Button = %TurnButton
@@ -33,8 +39,11 @@ func _ready() -> void:
 	clear_button.pressed.connect(_clear_cup)
 	turn_button.pressed.connect(_turn)
 	arrival_timer.timeout.connect(_seat_next_customer)
+	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
+	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
+	menu_view.visible = false
 	_update_menu()
-	_show_view()
+	_show_view(View.CUSTOMERS)
 	_seat_next_customer()
 	_update_controls()
 
@@ -49,7 +58,9 @@ func _turn() -> void:
 			if slot.order and randf() < slot.customer.order_change_chance:
 				slot.order = menu.get_random_recipe(slot.order)
 				_update_order_text(slot)
-	_show_view()
+	counter_view.visible = not facing_menu
+	menu_view.visible = facing_menu
+	turn_button.text = "Back to prep" if facing_menu else "Look at menu"
 
 func _slots() -> Array[CustomerSlot]:
 	var slots: Array[CustomerSlot] = []
@@ -85,10 +96,10 @@ func _clear_cup() -> void:
 	cup.clear()
 	_update_controls()
 
-func _show_view() -> void:
-	counter_view.visible = not facing_menu
-	menu_view.visible = facing_menu
-	turn_button.text = "Back to customer" if facing_menu else "Look at menu"
+func _show_view(view: View) -> void:
+	current_view = view
+	customer_view.visible = view == View.CUSTOMERS
+	prep_view.visible = view == View.PREP
 
 func _update_order_text(slot: CustomerSlot) -> void:
 	slot.say("[wave amp=40 freq=5][color=%s]Number %d[/color][/wave]" % [HIGHLIGHT_COLOR, menu.get_number(slot.order)])

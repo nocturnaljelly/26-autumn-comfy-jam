@@ -32,7 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Background" type="TextureRect" parent="CounterView" unique_id=97142765]
+[node name="Background" type="TextureRect" parent="CounterView" unique_id=403544082]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,6 +44,7 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="PrototypeGraphics" type="Control" parent="CounterView" unique_id=323166498]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -459,7 +460,16 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.95, 0.9, 0.81, 1)
 
-[node name="CustomerSlots" type="HBoxContainer" parent="CounterView" unique_id=1966658511]
+[node name="CustomerView" type="Control" parent="CounterView" unique_id=211543271]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CustomerSlots" type="HBoxContainer" parent="CounterView/CustomerView" unique_id=1966658511]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -470,19 +480,38 @@ offset_top = 8.0
 offset_bottom = -26.0
 theme_override_constants/separation = 0
 
-[node name="CustomerSlot1" parent="CounterView/CustomerSlots" unique_id=2123331058 instance=ExtResource("9_slot")]
+[node name="CustomerSlot1" parent="CounterView/CustomerView/CustomerSlots" unique_id=2123331058 instance=ExtResource("9_slot")]
 layout_mode = 2
 
-[node name="CustomerSlot2" parent="CounterView/CustomerSlots" unique_id=1832369746 instance=ExtResource("9_slot")]
+[node name="CustomerSlot2" parent="CounterView/CustomerView/CustomerSlots" unique_id=1832369746 instance=ExtResource("9_slot")]
 layout_mode = 2
 
-[node name="CustomerSlot3" parent="CounterView/CustomerSlots" unique_id=840071003 instance=ExtResource("9_slot")]
+[node name="CustomerSlot3" parent="CounterView/CustomerView/CustomerSlots" unique_id=840071003 instance=ExtResource("9_slot")]
 layout_mode = 2
 
-[node name="CustomerSlot4" parent="CounterView/CustomerSlots" unique_id=1180743430 instance=ExtResource("9_slot")]
+[node name="CustomerSlot4" parent="CounterView/CustomerView/CustomerSlots" unique_id=1180743430 instance=ExtResource("9_slot")]
 layout_mode = 2
 
-[node name="IngredientButtons" type="HFlowContainer" parent="CounterView" unique_id=974106549]
+[node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=153750261]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="PrepView" type="Control" parent="CounterView" unique_id=1206113019]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IngredientButtons" type="HFlowContainer" parent="CounterView/PrepView" unique_id=974106549]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -492,13 +521,13 @@ anchor_right = 0.575
 anchor_bottom = 0.97
 offset_left = 12.0
 offset_top = 16.0
-offset_right = -12.0
-offset_bottom = -12.0
+offset_right = -2.6000366
+offset_bottom = 3.999939
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
 alignment = 1
 
-[node name="Cup" type="VBoxContainer" parent="CounterView" unique_id=168903030]
+[node name="Cup" type="VBoxContainer" parent="CounterView/PrepView" unique_id=168903030]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.59
@@ -512,7 +541,7 @@ offset_bottom = -12.0
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="CupLabel" type="RichTextLabel" parent="CounterView/Cup" unique_id=1807857194]
+[node name="CupLabel" type="RichTextLabel" parent="CounterView/PrepView/Cup" unique_id=1807857194]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
@@ -522,12 +551,25 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="ClearButton" type="Button" parent="CounterView/Cup" unique_id=244709931]
+[node name="ClearButton" type="Button" parent="CounterView/PrepView/Cup" unique_id=244709931]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Clear"
 script = ExtResource("4_button")
+
+[node name="ToCustomersButton" type="Button" parent="CounterView/PrepView" unique_id=654988117]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="MenuView" type="Control" parent="." unique_id=718232917]
 unique_name_in_owner = true
@@ -540,7 +582,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Background" type="TextureRect" parent="MenuView" unique_id=403544082]
+[node name="Background" type="TextureRect" parent="MenuView" unique_id=97142765]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -586,6 +628,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 11.0
 offset_bottom = 13.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -595,6 +638,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 27.0
 offset_bottom = 29.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -607,6 +651,7 @@ offset_left = -341.0
 offset_top = -58.0
 offset_right = 79.0
 offset_bottom = -18.0
+grow_horizontal = 0
 rotation = 0.436332
 mouse_filter = 2
 color = Color(0.52, 0.33, 0.19, 1)
@@ -617,6 +662,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 11.0
 offset_bottom = 13.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -626,6 +672,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 27.0
 offset_bottom = 29.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -643,6 +690,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 8.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
@@ -703,6 +751,8 @@ anchor_bottom = 1.0
 offset_left = -2.0
 offset_top = 8.0
 offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0.55, 0.37, 0.23, 1)
 
@@ -818,6 +868,8 @@ offset_left = 16.0
 offset_top = 16.0
 offset_right = -16.0
 offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0.99, 0.96, 0.89, 1)
 
@@ -839,6 +891,7 @@ offset_left = -18.0
 offset_top = 8.0
 offset_right = -8.0
 offset_bottom = 18.0
+grow_horizontal = 0
 mouse_filter = 2
 color = Color(0.78, 0.22, 0.18, 1)
 
@@ -851,6 +904,7 @@ offset_left = 8.0
 offset_top = -18.0
 offset_right = 18.0
 offset_bottom = -8.0
+grow_vertical = 0
 mouse_filter = 2
 color = Color(0.78, 0.22, 0.18, 1)
 
@@ -865,6 +919,8 @@ offset_left = -18.0
 offset_top = -18.0
 offset_right = -8.0
 offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
 mouse_filter = 2
 color = Color(0.78, 0.22, 0.18, 1)
 
@@ -894,6 +950,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.36, 0.31, 0.28, 1)
 
@@ -912,6 +969,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.36, 0.31, 0.28, 1)
 
@@ -941,6 +999,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.36, 0.31, 0.28, 1)
 
@@ -959,6 +1018,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.36, 0.31, 0.28, 1)
 
@@ -988,6 +1048,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.36, 0.31, 0.28, 1)
 
@@ -1006,6 +1067,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.36, 0.31, 0.28, 1)
 
@@ -1035,6 +1097,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.36, 0.31, 0.28, 1)
 
@@ -1053,6 +1116,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.36, 0.31, 0.28, 1)
 

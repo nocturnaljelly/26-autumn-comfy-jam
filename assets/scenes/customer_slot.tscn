@@ -2,22 +2,31 @@
 
 [ext_resource type="Script" uid="uid://y4nvg08k6p73" path="res://assets/scripts/customer_slot.gd" id="1_slot"]
 [ext_resource type="Script" uid="uid://dyqb2m2klxrdx" path="res://assets/scripts/animated_button.gd" id="2_button"]
+[ext_resource type="Resource" uid="uid://bufsoanpww30r" path="res://assets/dialogue/customer_speech.dialogue" id="2_u6vf3"]
 [ext_resource type="Texture2D" uid="uid://5iyfay8kfdp8" path="res://assets/images/sprites/02_customer_alt.png" id="2_y7x0e"]
+[ext_resource type="Script" uid="uid://cxge1wx70prau" path="res://addons/dialogue_manager/nodes/marker/dialogue_marker_2d.gd" id="4_vkf0n"]
 
-[node name="CustomerSlot" type="VBoxContainer" unique_id=165065692]
+[node name="CustomerSlot" type="Control" unique_id=113397052]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 217.0
 offset_bottom = 355.0
 size_flags_horizontal = 3
-alignment = 2
 script = ExtResource("1_slot")
+customer_dialogue = ExtResource("2_u6vf3")
 
-[node name="Customer" type="VBoxContainer" parent="." unique_id=1340471545]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=960441949]
+layout_mode = 0
+offset_right = 217.0
+offset_bottom = 355.0
+
+[node name="Customer" type="VBoxContainer" parent="VBoxContainer" unique_id=1340471545]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Bubble" type="RichTextLabel" parent="Customer" unique_id=397006509]
+[node name="Bubble" type="RichTextLabel" parent="VBoxContainer/Customer" unique_id=397006509]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 clip_contents = false
@@ -31,7 +40,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Sprite" type="TextureRect" parent="Customer" unique_id=351227027]
+[node name="Sprite" type="TextureRect" parent="VBoxContainer/Customer" unique_id=351227027]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(217, 280)
 layout_mode = 2
@@ -41,7 +50,7 @@ texture = ExtResource("2_y7x0e")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlateButton" type="Button" parent="." unique_id=106953439]
+[node name="PlateButton" type="Button" parent="VBoxContainer" unique_id=106953439]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
@@ -50,3 +59,9 @@ size_flags_vertical = 4
 disabled = true
 text = "Serve"
 script = ExtResource("2_button")
+
+[node name="DialogueMarker2D" type="Marker2D" parent="." unique_id=1196649018]
+unique_name_in_owner = true
+position = Vector2(40, 71)
+script = ExtResource("4_vkf0n")
+metadata/_custom_type_script = "uid://cxge1wx70prau"

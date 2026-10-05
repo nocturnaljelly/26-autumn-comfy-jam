@@ -61,6 +61,7 @@ func _turn() -> void:
 	counter_view.visible = not facing_menu
 	menu_view.visible = facing_menu
 	turn_button.text = "Back to prep" if facing_menu else "Look at menu"
+	_update_balloon_visibility()
 
 func _slots() -> Array[CustomerSlot]:
 	var slots: Array[CustomerSlot] = []
@@ -83,7 +84,7 @@ func _pick_customer() -> Customer:
 
 func _serve(slot: CustomerSlot) -> void:
 	var correct := slot.order.matches(cup)
-	slot.say("[wave]Thanks![/wave]" if correct else "[shake rate=20 level=10]What is this?[/shake]")
+	slot.say("correct_order" if correct else "incorrect_order")
 	slot.leave()
 	_clear_cup()
 
@@ -100,9 +101,16 @@ func _show_view(view: View) -> void:
 	current_view = view
 	customer_view.visible = view == View.CUSTOMERS
 	prep_view.visible = view == View.PREP
-
+	_update_balloon_visibility()
+	
 func _update_order_text(slot: CustomerSlot) -> void:
-	slot.say("[wave amp=40 freq=5][color=%s]Number %d[/color][/wave]" % [HIGHLIGHT_COLOR, menu.get_number(slot.order)])
+	slot.order_number = menu.get_number(slot.order)
+	slot.say("order")
+
+func _update_balloon_visibility() -> void:
+	var should_be_visible := current_view == View.CUSTOMERS and not facing_menu
+	for slot in _slots():
+		slot.set_balloon_visible(should_be_visible)
 
 func _update_menu() -> void:
 	var lines: PackedStringArray = []

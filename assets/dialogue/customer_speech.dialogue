@@ -1,0 +1,11 @@
+~ order
+[wave amp=40 freq=5][color=#ffd27a]Number {{order_number}}[/color][/wave]
+=> END
+
+~ correct_order
+[wave]Thanks![/wave]
+=> END
+
+~ incorrect_order
+[shake rate=20 level=10]What is this?[/shake]
+=> END

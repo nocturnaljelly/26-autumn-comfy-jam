@@ -54,6 +54,18 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kr2h2"]
+bg_color = Color(0.9607843, 0.8980392, 0.88235295, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.09019608, 0.0627451, 0.09019608, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
 [resource]
 default_font_size = 20
 Button/colors/font_color = Color(1, 0.95, 0.86, 1)
@@ -67,5 +79,6 @@ Button/styles/focus = SubResource("StyleBoxEmpty_focus")
 Button/styles/hover = SubResource("StyleBoxFlat_hover")
 Button/styles/normal = SubResource("StyleBoxFlat_normal")
 Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_kr2h2")
 RichTextLabel/colors/font_outline_color = Color(0.13, 0.08, 0.05, 1)
 RichTextLabel/constants/outline_size = 6

@@ -1,19 +1,24 @@
 class_name CustomerSlot
-extends VBoxContainer
+extends Control
 
 signal customer_arrived(customer: Customer)
 signal customer_left(customer: Customer)
 
 @export var fade_duration := 0.8
+@export var customer_dialogue: DialogueResource
 
 var customer: Customer
 var order: Recipe
+var order_number := 0
 var _fade_tween: Tween
+var active_balloon: Node
+var balloon_visible := true
 
 @onready var customer_view: Control = %Customer
 @onready var bubble: RichTextLabel = %Bubble
 @onready var sprite: TextureRect = %Sprite
 @onready var plate_button: Button = %PlateButton
+@onready var dialogue_marker: DialogueMarker2D = %DialogueMarker2D
 
 
 func _ready() -> void:
@@ -29,8 +34,20 @@ func seat(new_customer: Customer, new_order: Recipe) -> void:
 	_fade(1.0)
 	customer_arrived.emit(customer)
 
-func say(text: String) -> void:
-	bubble.text = text
+func say(cue: String) -> void:
+	if is_instance_valid(active_balloon):
+		active_balloon.queue_free()
+		
+	active_balloon = DialogueManager.show_dialogue_balloon(customer_dialogue, cue, [self])
+	
+	await get_tree().process_frame
+	if is_instance_valid(active_balloon):
+		active_balloon.visible = balloon_visible
+
+func set_balloon_visible(value: bool) -> void:
+	balloon_visible = value
+	if is_instance_valid(active_balloon):
+		active_balloon.visible = value
 
 func leave() -> void:
 	if order == null:

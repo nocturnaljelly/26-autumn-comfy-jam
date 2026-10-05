@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://bufsoanpww30r"
+path="res://.godot/imported/customer_speech.dialogue-a858d22aa59cbdd3b782d9ca0395efb9.tres"
+
+[deps]
+
+source_file="res://assets/dialogue/customer_speech.dialogue"
+dest_files=["res://.godot/imported/customer_speech.dialogue-a858d22aa59cbdd3b782d9ca0395efb9.tres"]
+
+[params]
+
+defaults=true

@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 DialogueManager="*uid://c3rodes2l3gxb"
 
+[dialogue_manager]
+
+runtime/balloon_path="res://assets/scenes/customer_balloon.tscn"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -26,6 +30,10 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://assets/dialogue/customer_speech.dialogue")
 
 [physics]
 

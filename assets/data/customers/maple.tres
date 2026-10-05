@@ -1,19 +1,11 @@
 [gd_resource type="Resource" script_class="Customer" format=3 uid="uid://ddjpt78ye5ftp"]
 
 [ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="1_customer"]
-
-[sub_resource type="Gradient" id="Gradient_maple"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.8, 0.33, 0.13, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_maple"]
-gradient = SubResource("Gradient_maple")
-width = 160
-height = 240
+[ext_resource type="Texture2D" uid="uid://5iyfay8kfdp8" path="res://assets/images/sprites/02_customer_alt.png" id="2_blpxh"]
 
 [resource]
 script = ExtResource("1_customer")
 id = &"maple"
 display_name = "Maple"
-sprite = SubResource("GradientTexture2D_maple")
+sprite = ExtResource("2_blpxh")
 order_change_chance = 0.6

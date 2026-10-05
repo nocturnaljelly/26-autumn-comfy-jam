@@ -7,8 +7,11 @@
 [ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="5_customer"]
 [ext_resource type="Resource" uid="uid://dap4wlsjc36ot" path="res://assets/data/customers/hazel.tres" id="6_hazel"]
 [ext_resource type="Resource" uid="uid://cmqx4n3vwt3dh" path="res://assets/data/customers/rowan.tres" id="7_rowan"]
+[ext_resource type="Texture2D" uid="uid://baqu6p0dsbgyo" path="res://assets/images/environment.png" id="8_bf56q"]
 [ext_resource type="Resource" uid="uid://ddjpt78ye5ftp" path="res://assets/data/customers/maple.tres" id="8_maple"]
-[ext_resource type="PackedScene" path="res://assets/scenes/customer_slot.tscn" id="9_slot"]
+[ext_resource type="Texture2D" uid="uid://dsb6qkfqi24vm" path="res://assets/images/stall.png" id="9_fsjem"]
+[ext_resource type="PackedScene" uid="uid://dxsoep4cx2uxg" path="res://assets/scenes/customer_slot.tscn" id="9_slot"]
+[ext_resource type="Texture2D" uid="uid://c82v3ikrwodmm" path="res://assets/images/arrow.png" id="11_gei2f"]
 
 [node name="Cafe" type="Control" unique_id=432355658]
 layout_mode = 3
@@ -31,17 +34,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="Background" type="TextureRect" parent="CounterView" unique_id=403544082]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 6
 
 [node name="PrototypeGraphics" type="Control" parent="CounterView" unique_id=323166498]
 visible = false
@@ -469,15 +461,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Background" type="TextureRect" parent="CounterView/CustomerView" unique_id=403544082]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_bf56q")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Stall" type="TextureRect" parent="CounterView/CustomerView" unique_id=1597311596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_fsjem")
+expand_mode = 1
+stretch_mode = 6
+
 [node name="CustomerSlots" type="HBoxContainer" parent="CounterView/CustomerView" unique_id=1966658511]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.635
-offset_top = 8.0
-offset_bottom = -26.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -237.0
+offset_right = 460.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="CustomerSlot1" parent="CounterView/CustomerView/CustomerSlots" unique_id=2123331058 instance=ExtResource("9_slot")]
@@ -492,18 +513,20 @@ layout_mode = 2
 [node name="CustomerSlot4" parent="CounterView/CustomerView/CustomerSlots" unique_id=1180743430 instance=ExtResource("9_slot")]
 layout_mode = 2
 
-[node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=153750261]
+[node name="ToPrepButton" type="TextureButton" parent="CounterView/CustomerView" unique_id=1758865248]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_top = -20.0
-offset_right = 40.0
-offset_bottom = 20.0
+offset_right = 73.0
+offset_bottom = 42.0
 grow_vertical = 2
+texture_normal = ExtResource("11_gei2f")
 
 [node name="PrepView" type="Control" parent="CounterView" unique_id=1206113019]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -558,7 +581,7 @@ size_flags_horizontal = 4
 text = "Clear"
 script = ExtResource("4_button")
 
-[node name="ToCustomersButton" type="Button" parent="CounterView/PrepView" unique_id=654988117]
+[node name="ToCustomersButton" type="TextureButton" parent="CounterView/PrepView" unique_id=1763591570]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -570,6 +593,8 @@ offset_top = -20.0
 offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
+texture_normal = ExtResource("11_gei2f")
+flip_h = true
 
 [node name="MenuView" type="Control" parent="." unique_id=718232917]
 unique_name_in_owner = true

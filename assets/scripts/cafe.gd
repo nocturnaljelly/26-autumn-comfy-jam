@@ -11,6 +11,7 @@ var menu: RecipeBook
 var cup: Array[Ingredient] = []
 var current_view := View.CUSTOMERS
 var facing_menu := false
+var customers_in_sight := true
 
 @onready var counter_view: Control = %CounterView
 @onready var customer_slots: Container = %CustomerSlots
@@ -108,9 +109,17 @@ func _update_order_text(slot: CustomerSlot) -> void:
 	slot.say("order")
 
 func _update_balloon_visibility() -> void:
-	var should_be_visible := current_view == View.CUSTOMERS and not facing_menu
+	var in_sight := current_view == View.CUSTOMERS and not facing_menu
+	if customers_in_sight and not in_sight:
+		_change_customer_sprites()
+	customers_in_sight = in_sight
 	for slot in _slots():
-		slot.set_balloon_visible(should_be_visible)
+		slot.set_balloon_visible(in_sight)
+
+func _change_customer_sprites() -> void:
+	for slot in _slots():
+		if slot.order and randf() < slot.customer.sprite_change_chance:
+			slot.change_sprite()
 
 func _update_menu() -> void:
 	var lines: PackedStringArray = []

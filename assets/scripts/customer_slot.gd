@@ -34,6 +34,9 @@ func seat(new_customer: Customer, new_order: Recipe) -> void:
 	_fade(1.0)
 	customer_arrived.emit(customer)
 
+func change_sprite() -> void:
+	sprite.texture = customer.get_random_sprite(sprite.texture)
+
 func say(cue: String) -> void:
 	if is_instance_valid(active_balloon):
 		active_balloon.queue_free()

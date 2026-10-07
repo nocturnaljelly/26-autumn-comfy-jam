@@ -26,7 +26,8 @@ var customers_in_sight := true
 @onready var to_customers_button: TextureButton = $CounterView/PrepView/ToCustomersButton
 @onready var menu_view: Control = %MenuView
 @onready var menu_label: RichTextLabel = %MenuLabel
-@onready var turn_button: Button = %TurnButton
+@onready var recipes_button: Button = %RecipesButton
+@onready var back_button: Button = %BackButton
 
 
 func _ready() -> void:
@@ -40,7 +41,8 @@ func _ready() -> void:
 	for slot in _slots():
 		slot.plate_button.pressed.connect(_serve.bind(slot))
 	clear_button.pressed.connect(_clear_cup)
-	turn_button.pressed.connect(_turn)
+	recipes_button.pressed.connect(_turn)
+	back_button.pressed.connect(_turn)
 	arrival_timer.timeout.connect(_seat_next_customer)
 	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
@@ -63,7 +65,6 @@ func _turn() -> void:
 				_update_order_text(slot)
 	counter_view.visible = not facing_menu
 	menu_view.visible = facing_menu
-	turn_button.text = "Back to prep" if facing_menu else "Look at menu"
 	_update_balloon_visibility()
 
 func _slots() -> Array[CustomerSlot]:

@@ -16,8 +16,9 @@ var customers_in_sight := true
 @onready var counter_view: Control = %CounterView
 @onready var customer_slots: Container = %CustomerSlots
 @onready var arrival_timer: Timer = %ArrivalTimer
+@onready var cup_view: CupView = %CupView
 @onready var cup_label: RichTextLabel = %CupLabel
-@onready var ingredient_buttons: Container = %IngredientButtons
+@onready var ingredient_bins: Control = %IngredientBins
 @onready var clear_button: Button = %ClearButton
 @onready var customer_view: Control = %CustomerView
 @onready var to_prep_button: TextureButton = $CounterView/CustomerView/ToPrepButton
@@ -30,11 +31,12 @@ var customers_in_sight := true
 
 func _ready() -> void:
 	menu = recipe_book.create_runtime_copy()
-	for ingredient in menu.ingredients:
-		var button := AnimatedButton.new()
-		button.text = ingredient.display_name
-		button.pressed.connect(_add_ingredient.bind(ingredient))
-		ingredient_buttons.add_child(button)
+	var bins := _bins()
+	if menu.ingredients.size() > bins.size():
+		push_warning("%d ingredients but only %d ingredient bins" % [menu.ingredients.size(), bins.size()])
+	for i in mini(menu.ingredients.size(), bins.size()):
+		bins[i].ingredient = menu.ingredients[i]
+	cup_view.ingredient_dropped.connect(_add_ingredient)
 	for slot in _slots():
 		slot.plate_button.pressed.connect(_serve.bind(slot))
 	clear_button.pressed.connect(_clear_cup)
@@ -68,6 +70,11 @@ func _slots() -> Array[CustomerSlot]:
 	var slots: Array[CustomerSlot] = []
 	slots.assign(customer_slots.get_children())
 	return slots
+
+func _bins() -> Array[IngredientBin]:
+	var bins: Array[IngredientBin] = []
+	bins.assign(ingredient_bins.get_children())
+	return bins
 
 func _seat_next_customer() -> void:
 	var free_slots := _slots().filter(func(slot: CustomerSlot) -> bool: return slot.is_free())
@@ -137,8 +144,9 @@ func _update_controls() -> void:
 	if not names.is_empty():
 		names[names.size() - 1] = "%s" % names[names.size() - 1]
 	cup_label.text = "Cup: " + (" + ".join(names) if not names.is_empty() else "[color=#ffffff80]empty[/color]")
-	for button: Button in ingredient_buttons.get_children():
-		button.disabled = cup.size() >= CUP_CAPACITY
+	for bin in _bins():
+		bin.disabled = cup.size() >= CUP_CAPACITY
+	cup_view.is_full = cup.size() >= CUP_CAPACITY
 	for slot in _slots():
 		slot.plate_button.disabled = slot.order == null or cup.is_empty()
 	clear_button.disabled = cup.is_empty()

@@ -1,11 +1,17 @@
 [gd_resource type="Resource" script_class="Customer" format=3 uid="uid://ddjpt78ye5ftp"]
 
+[ext_resource type="Texture2D" uid="uid://cw3lo3b1ux0lj" path="res://assets/images/sprites/1_customer_alt_dissatisfied.png" id="1_bkpaq"]
 [ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="1_customer"]
-[ext_resource type="Texture2D" uid="uid://5iyfay8kfdp8" path="res://assets/images/sprites/02_customer_alt.png" id="2_blpxh"]
+[ext_resource type="Texture2D" uid="uid://duvckqmqchvba" path="res://assets/images/sprites/1_customer_alt_neutral.png" id="2_3em5n"]
+[ext_resource type="Texture2D" uid="uid://cw8xbjsmx6of4" path="res://assets/images/sprites/1_customer_alt_satisfied.png" id="3_mx3nl"]
+[ext_resource type="Texture2D" uid="uid://x1kqp6y686xk" path="res://assets/images/sprites/1_customer_normal_dissatisfied.png" id="4_jvk64"]
+[ext_resource type="Texture2D" uid="uid://bpgesfay1kqvh" path="res://assets/images/sprites/1_customer_normal_neutral.png" id="5_wsen6"]
+[ext_resource type="Texture2D" uid="uid://csk6q5fiovucw" path="res://assets/images/sprites/1_customer_normal_satisfied.png" id="6_n3dmc"]
 
 [resource]
 script = ExtResource("1_customer")
 id = &"maple"
 display_name = "Maple"
-sprite = ExtResource("2_blpxh")
+normal_sprites = Array[Texture2D]([ExtResource("5_wsen6"), ExtResource("6_n3dmc"), ExtResource("4_jvk64")])
+alternate_sprites = Array[Texture2D]([ExtResource("2_3em5n"), ExtResource("3_mx3nl"), ExtResource("1_bkpaq")])
 order_change_chance = 0.6

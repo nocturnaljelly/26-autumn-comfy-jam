@@ -93,6 +93,7 @@ func _pick_customer() -> Customer:
 
 func _serve(slot: CustomerSlot) -> void:
 	var correct := slot.order.matches(cup)
+	slot.set_expression(Customer.CustomerExpression.SATISFIED if correct else Customer.CustomerExpression.DISSATISFIED)
 	slot.say("correct_order" if correct else "incorrect_order")
 	slot.leave()
 	_clear_cup()
@@ -114,6 +115,7 @@ func _show_view(view: View) -> void:
 	
 func _update_order_text(slot: CustomerSlot) -> void:
 	slot.order_number = menu.get_number(slot.order)
+	slot.set_expression(Customer.CustomerExpression.NEUTRAL)
 	slot.say("order")
 
 func _update_balloon_visibility() -> void:

@@ -1,11 +1,17 @@
 [gd_resource type="Resource" script_class="Customer" format=3 uid="uid://dap4wlsjc36ot"]
 
+[ext_resource type="Texture2D" uid="uid://c2jibggl2vh2o" path="res://assets/images/sprites/0_customer_alt_dissatisfied.png" id="1_5mgfj"]
 [ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="1_customer"]
-[ext_resource type="Texture2D" uid="uid://v3c41xlsybqj" path="res://assets/images/sprites/0_customer_alt.png" id="2_s2p4f"]
+[ext_resource type="Texture2D" uid="uid://x56lvv82330o" path="res://assets/images/sprites/0_customer_alt_neutral.png" id="2_dywso"]
+[ext_resource type="Texture2D" uid="uid://ty53euclrfwf" path="res://assets/images/sprites/0_customer_alt_satisfied.png" id="3_d1oma"]
+[ext_resource type="Texture2D" uid="uid://dcji26se6c1u8" path="res://assets/images/sprites/0_customer_normal_dissatisfied.png" id="4_36lqm"]
+[ext_resource type="Texture2D" uid="uid://cfygtxf1pfn4y" path="res://assets/images/sprites/0_customer_normal_neutral.png" id="5_1asw5"]
+[ext_resource type="Texture2D" uid="uid://dr3ij06tp7ahv" path="res://assets/images/sprites/0_customer_normal_satisfied.png" id="6_taukw"]
 
 [resource]
 script = ExtResource("1_customer")
 id = &"hazel"
 display_name = "Hazel"
-sprite = ExtResource("2_s2p4f")
+normal_sprites = Array[Texture2D]([ExtResource("5_1asw5"), ExtResource("6_taukw"), ExtResource("4_36lqm")])
+alternate_sprites = Array[Texture2D]([ExtResource("2_dywso"), ExtResource("3_d1oma"), ExtResource("1_5mgfj")])
 order_change_chance = 0.1

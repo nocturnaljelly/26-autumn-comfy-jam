@@ -10,6 +10,7 @@ signal customer_left(customer: Customer)
 var customer: Customer
 var order: Recipe
 var order_number := 0
+var expression := Customer.CustomerExpression.NEUTRAL
 var _fade_tween: Tween
 var active_balloon: Node
 var balloon_visible := true
@@ -30,12 +31,17 @@ func is_free() -> bool:
 func seat(new_customer: Customer, new_order: Recipe) -> void:
 	customer = new_customer
 	order = new_order
-	sprite.texture = customer.sprite
+	expression = Customer.CustomerExpression.NEUTRAL
+	sprite.texture = customer.get_random_sprite(expression)
 	_fade(1.0)
 	customer_arrived.emit(customer)
 
 func change_sprite() -> void:
-	sprite.texture = customer.get_random_sprite(sprite.texture)
+	sprite.texture = customer.get_random_sprite(expression, sprite.texture)
+
+func set_expression(new_expression: Customer.CustomerExpression) -> void:
+	expression = new_expression
+	sprite.texture = customer.get_expression_sprite(sprite.texture, expression)
 
 func say(cue: String) -> void:
 	if is_instance_valid(active_balloon):

@@ -1,10 +1,16 @@
 [gd_resource type="Resource" script_class="Customer" format=3 uid="uid://cmqx4n3vwt3dh"]
 
 [ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="1_customer"]
-[ext_resource type="Texture2D" uid="uid://cafqc0nkpjq80" path="res://assets/images/sprites/1_customer_alt.png" id="2_fyp4l"]
+[ext_resource type="Texture2D" uid="uid://c2s75hyugfeho" path="res://assets/images/sprites/2_customer_alt_dissatisfied.png" id="1_dtd0n"]
+[ext_resource type="Texture2D" uid="uid://dpuf5ttqulv5f" path="res://assets/images/sprites/2_customer_alt_neutral.png" id="2_t1f2a"]
+[ext_resource type="Texture2D" uid="uid://c5gegpkhp75ib" path="res://assets/images/sprites/2_customer_alt_satisfied.png" id="3_coi8q"]
+[ext_resource type="Texture2D" uid="uid://be671uq4ks52" path="res://assets/images/sprites/2_customer_normal_dissatisfied.png" id="4_0ixu0"]
+[ext_resource type="Texture2D" uid="uid://clhodhw82m7v1" path="res://assets/images/sprites/2_customer_normal_neutral.png" id="5_xqc6w"]
+[ext_resource type="Texture2D" uid="uid://dgr2isbjqn4bc" path="res://assets/images/sprites/2_customer_normal_satisfied.png" id="6_6fghl"]
 
 [resource]
 script = ExtResource("1_customer")
 id = &"rowan"
 display_name = "Rowan"
-sprite = ExtResource("2_fyp4l")
+normal_sprites = Array[Texture2D]([ExtResource("5_xqc6w"), ExtResource("6_6fghl"), ExtResource("4_0ixu0")])
+alternate_sprites = Array[Texture2D]([ExtResource("2_t1f2a"), ExtResource("3_coi8q"), ExtResource("1_dtd0n")])

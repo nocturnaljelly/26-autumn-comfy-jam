@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://baqu6p0dsbgyo" path="res://assets/images/environment.png" id="8_bf56q"]
 [ext_resource type="Resource" uid="uid://ddjpt78ye5ftp" path="res://assets/data/customers/maple.tres" id="8_maple"]
 [ext_resource type="Texture2D" uid="uid://dsb6qkfqi24vm" path="res://assets/images/stall.png" id="9_fsjem"]
-[ext_resource type="PackedScene" path="res://assets/scenes/customer_slot.tscn" id="9_slot"]
+[ext_resource type="PackedScene" uid="uid://dxsoep4cx2uxg" path="res://assets/scenes/customer_slot.tscn" id="9_slot"]
 [ext_resource type="Texture2D" uid="uid://c82v3ikrwodmm" path="res://assets/images/arrow.png" id="11_gei2f"]
 [ext_resource type="PackedScene" path="res://assets/scenes/ingredient_bin.tscn" id="12_bin"]
 [ext_resource type="Script" uid="uid://dqd1yjgci38qu" path="res://assets/scripts/cup_view.gd" id="13_cup"]
@@ -587,9 +587,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -460.0
-offset_top = -206.0
+offset_top = -224.0
 offset_right = 460.0
-offset_bottom = 196.0
+offset_bottom = 178.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0

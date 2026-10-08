@@ -74,6 +74,7 @@ var mutation_cooldown: Timer = Timer.new()
 
 
 func _ready() -> void:
+	balloon.pivot_offset = balloon.size / 2.0
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
@@ -178,7 +179,23 @@ func apply_dialogue_line() -> void:
 func next(next_id: String) -> void:
 	dialogue_line = await dialogue_resource.get_next_dialogue_line(next_id, temporary_game_states)
 
-
+func open_animation() -> void:
+	var balloon := %Balloon
+	balloon.pivot_offset = balloon.size / 2.0
+	var tween := create_tween()
+	tween.tween_property(balloon, "scale", Vector2.ONE * 1.08, 0.4).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(balloon, "scale", Vector2.ONE, 0.1)
+	await tween.finished
+	
+func close_animation() -> void:
+	var balloon := %Balloon
+	balloon.pivot_offset = balloon.size / 2.0
+	var tween := create_tween()
+	tween.tween_property(balloon, "scale", Vector2.ONE * 0.92, 0.08)
+	tween.tween_property(balloon, "scale", Vector2.ONE * 1.08, 0.12)
+	tween.tween_property(balloon, "scale", Vector2.ZERO, 0.4).set_trans(Tween.TRANS_QUINT)
+	await tween.finished
+	
 #region Signals
 
 

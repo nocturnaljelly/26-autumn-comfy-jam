@@ -46,12 +46,10 @@ func set_expression(new_expression: Customer.CustomerExpression) -> void:
 func say(cue: String) -> void:
 	if is_instance_valid(active_balloon):
 		active_balloon.queue_free()
-		
 	active_balloon = DialogueManager.show_dialogue_balloon(customer_dialogue, cue, [self])
-	
-	await get_tree().process_frame
 	if is_instance_valid(active_balloon):
 		active_balloon.visible = balloon_visible
+		await active_balloon.open_animation()
 
 func set_balloon_visible(value: bool) -> void:
 	balloon_visible = value
@@ -63,7 +61,13 @@ func leave() -> void:
 		return
 	order = null
 	plate_button.disabled = true
-	await _fade(0.0)
+	_fade(0.0)
+	if is_instance_valid(active_balloon):
+		await active_balloon.close_animation()
+		active_balloon.queue_free()
+		active_balloon = null
+	if _fade_tween and _fade_tween.is_running():
+		await _fade_tween.finished
 	var leaving := customer
 	customer = null
 	bubble.text = ""

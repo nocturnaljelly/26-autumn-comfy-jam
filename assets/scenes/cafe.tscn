@@ -547,6 +547,7 @@ color = Color(0.95, 0.9, 0.81, 1)
 
 [node name="CustomerView" type="Control" parent="CounterView" unique_id=211543271]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -606,16 +607,28 @@ layout_mode = 2
 [node name="CustomerSlot4" parent="CounterView/CustomerView/CustomerSlots" unique_id=1180743430 instance=ExtResource("9_slot")]
 layout_mode = 2
 
-[node name="ToPrepButton" type="TextureButton" parent="CounterView/CustomerView" unique_id=1758865248]
+[node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=927681668]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 73.0
-offset_bottom = 42.0
+offset_top = -33.0
+offset_right = 74.0
+offset_bottom = 33.0
 grow_vertical = 2
-texture_normal = ExtResource("11_gei2f")
+flat = true
+script = ExtResource("4_button")
+
+[node name="TextureRect" type="TextureRect" parent="CounterView/CustomerView/ToPrepButton" unique_id=298266754]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.030000001
+anchor_right = 1.0
+anchor_bottom = 0.93900007
+offset_top = -1.98
+offset_bottom = 0.025997162
+grow_vertical = 2
+texture = ExtResource("11_gei2f")
 
 [node name="PrepView" type="Control" parent="CounterView" unique_id=1206113019]
 unique_name_in_owner = true
@@ -1008,20 +1021,25 @@ theme_override_font_sizes/font_size = 16
 text = "Clear"
 script = ExtResource("4_button")
 
-[node name="ToCustomersButton" type="TextureButton" parent="CounterView/PrepView" unique_id=1763591570]
+[node name="ToCustomersButton" type="Button" parent="CounterView/PrepView" unique_id=543424645]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.82
-anchor_right = 1.0
-anchor_bottom = 0.82
-offset_left = -80.0
-offset_top = -31.0
-offset_right = -6.0
-offset_bottom = 31.0
-grow_horizontal = 0
-grow_vertical = 2
-texture_normal = ExtResource("11_gei2f")
+anchor_left = 0.93100005
+anchor_top = 0.772
+anchor_right = 0.994
+anchor_bottom = 0.86700004
+offset_left = -0.51208496
+offset_top = -0.25601196
+offset_right = -0.088012695
+offset_bottom = 0.18395996
+flat = true
+script = ExtResource("4_button")
+
+[node name="TextureRect" type="TextureRect" parent="CounterView/PrepView/ToCustomersButton" unique_id=1228714730]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("11_gei2f")
 flip_h = true
 
 [node name="MenuView" type="Control" parent="." unique_id=718232917]

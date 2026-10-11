@@ -43,10 +43,10 @@ func _draw() -> void:
 
 static func draw_piece(canvas: CanvasItem, piece_ingredient: Ingredient, center: Vector2, piece_size: float, angle := 0.0, tint := Color.WHITE) -> void:
 	canvas.draw_set_transform(center, angle)
-	if piece_ingredient.food_graphic:
-		var icon_size := piece_ingredient.food_graphic.get_size()
+	if piece_ingredient.grab_cursor:
+		var icon_size := piece_ingredient.grab_cursor.get_size()
 		var fitted := icon_size * piece_size / maxf(icon_size.x, icon_size.y)
-		canvas.draw_texture_rect(piece_ingredient.food_graphic, Rect2(-fitted / 2, fitted), false, tint)
+		canvas.draw_texture_rect(piece_ingredient.grab_cursor, Rect2(-fitted / 2, fitted), false, tint)
 	else:
 		var color := piece_ingredient.color * tint
 		var square := Rect2(-Vector2.ONE * piece_size * 0.4, Vector2.ONE * piece_size * 0.8)

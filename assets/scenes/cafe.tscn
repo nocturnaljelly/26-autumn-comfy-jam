@@ -555,6 +555,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" type="TextureRect" parent="CounterView/CustomerView" unique_id=403544082]
+visible = false
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -900,8 +901,8 @@ anchor_left = 0.215
 anchor_top = 0.26
 anchor_right = 0.32
 anchor_bottom = 0.395
-offset_right = 0.0
-offset_bottom = 0.0
+offset_right = -14.959991
+offset_bottom = -28.480011
 
 [node name="Bin2" parent="CounterView/PrepView/IngredientBins" unique_id=651772881 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -910,8 +911,8 @@ anchor_left = 0.33
 anchor_top = 0.26
 anchor_right = 0.435
 anchor_bottom = 0.395
-offset_right = 0.0
-offset_bottom = 0.0
+offset_right = -14.959991
+offset_bottom = -28.480011
 
 [node name="Bin3" parent="CounterView/PrepView/IngredientBins" unique_id=733577762 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -920,8 +921,8 @@ anchor_left = 0.445
 anchor_top = 0.26
 anchor_right = 0.55
 anchor_bottom = 0.395
-offset_right = 0.0
-offset_bottom = 0.0
+offset_right = -14.960022
+offset_bottom = -28.480011
 
 [node name="Bin4" parent="CounterView/PrepView/IngredientBins" unique_id=391446420 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -930,8 +931,8 @@ anchor_left = 0.56
 anchor_top = 0.26
 anchor_right = 0.665
 anchor_bottom = 0.395
-offset_right = 0.0
-offset_bottom = 0.0
+offset_right = -14.960022
+offset_bottom = -28.480011
 
 [node name="Bin5" parent="CounterView/PrepView/IngredientBins" unique_id=347126343 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -940,8 +941,8 @@ anchor_left = 0.69
 anchor_top = 0.26
 anchor_right = 0.795
 anchor_bottom = 0.395
-offset_right = 0.0
-offset_bottom = 0.0
+offset_right = -14.960022
+offset_bottom = -28.480011
 
 [node name="Bin6" parent="CounterView/PrepView/IngredientBins" unique_id=116942694 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -950,8 +951,8 @@ anchor_left = 0.69
 anchor_top = 0.415
 anchor_right = 0.795
 anchor_bottom = 0.55
-offset_right = 0.0
-offset_bottom = 0.0
+offset_right = -14.960022
+offset_bottom = -28.480011
 
 [node name="Bin7" parent="CounterView/PrepView/IngredientBins" unique_id=587454471 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -960,8 +961,8 @@ anchor_left = 0.69
 anchor_top = 0.57
 anchor_right = 0.795
 anchor_bottom = 0.705
-offset_right = 0.0
-offset_bottom = 0.0
+offset_right = -14.960022
+offset_bottom = -28.480011
 
 [node name="Bin8" parent="CounterView/PrepView/IngredientBins" unique_id=471020756 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -970,8 +971,8 @@ anchor_left = 0.69
 anchor_top = 0.725
 anchor_right = 0.795
 anchor_bottom = 0.86
-offset_right = 0.0
-offset_bottom = 0.0
+offset_right = -14.960022
+offset_bottom = -28.47998
 
 [node name="CupView" type="Control" parent="CounterView/PrepView" unique_id=728199504]
 unique_name_in_owner = true

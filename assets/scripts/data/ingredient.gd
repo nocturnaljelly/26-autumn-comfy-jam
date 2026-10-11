@@ -8,7 +8,8 @@ extends Resource
 @export_group("Visuals")
 @export var color: Color = Color.WHITE
 @export var food_graphic: Texture2D
-
+@export var hover_cursor: Texture2D
+@export var grab_cursor: Texture2D
 
 func _to_string() -> String:
 	return "Ingredient(%s)" % id

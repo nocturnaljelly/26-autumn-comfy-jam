@@ -7,6 +7,20 @@
 atlas = ExtResource("1_2hj6x")
 region = Rect2(128, 79, 106, 59)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2hj6x"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt35v"]
+atlas = SubResource("CompressedTexture2D_2hj6x")
+region = Rect2(332, 82, 50, 44)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vt35v"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plvcr"]
+atlas = SubResource("CompressedTexture2D_vt35v")
+region = Rect2(256, 82, 50, 44)
+
 [resource]
 script = ExtResource("1_2twif")
 id = &"cocoa"
@@ -14,3 +28,5 @@ display_name = "Cocoa"
 description = "Rich cocoa powder."
 color = Color(0.42, 0.26, 0.15, 1)
 food_graphic = SubResource("AtlasTexture_pd00h")
+hover_cursor = SubResource("AtlasTexture_plvcr")
+grab_cursor = SubResource("AtlasTexture_vt35v")

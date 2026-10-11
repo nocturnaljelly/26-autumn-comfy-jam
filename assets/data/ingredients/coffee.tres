@@ -7,6 +7,20 @@
 atlas = ExtResource("1_wccan")
 region = Rect2(128, 153, 106, 59)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wccan"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snvly"]
+atlas = SubResource("CompressedTexture2D_wccan")
+region = Rect2(332, 158, 50, 44)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ci2dh"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wccan"]
+atlas = SubResource("CompressedTexture2D_ci2dh")
+region = Rect2(256, 15, 50, 44)
+
 [resource]
 script = ExtResource("1_cgr1a")
 id = &"coffee"
@@ -14,3 +28,5 @@ display_name = "Coffee"
 description = "A strong shot of espresso."
 color = Color(0.25, 0.15, 0.09, 1)
 food_graphic = SubResource("AtlasTexture_2hj6x")
+hover_cursor = SubResource("AtlasTexture_wccan")
+grab_cursor = SubResource("AtlasTexture_snvly")

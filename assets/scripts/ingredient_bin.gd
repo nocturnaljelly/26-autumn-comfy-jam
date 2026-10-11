@@ -46,7 +46,8 @@ func _set_hovered(value: bool) -> void:
 
 func _update_state() -> void:
 	var active := ingredient != null and not disabled
-	mouse_default_cursor_shape = CURSOR_POINTING_HAND if active else CURSOR_ARROW
+	mouse_default_cursor_shape = CURSOR_ARROW
+	Input.set_custom_mouse_cursor(ingredient.hover_cursor if active and _hovered else null)
 	modulate = Color.WHITE if active else disabled_tint
 	if _lift_tween:
 		_lift_tween.kill()

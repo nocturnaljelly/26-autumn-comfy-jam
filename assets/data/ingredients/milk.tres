@@ -7,6 +7,17 @@
 atlas = ExtResource("1_ci2dh")
 region = Rect2(128, 0, 106, 59)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_id6vg"]
+atlas = ExtResource("1_ci2dh")
+region = Rect2(333, 15, 50, 44)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ci2dh"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwlu8"]
+atlas = SubResource("CompressedTexture2D_ci2dh")
+region = Rect2(256, 15, 50, 44)
+
 [resource]
 script = ExtResource("1_kpeik")
 id = &"milk"
@@ -14,3 +25,5 @@ display_name = "Milk"
 description = "Fresh and creamy."
 color = Color(0.97, 0.95, 0.89, 1)
 food_graphic = SubResource("AtlasTexture_0hgwt")
+hover_cursor = SubResource("AtlasTexture_gwlu8")
+grab_cursor = SubResource("AtlasTexture_id6vg")

@@ -7,6 +7,20 @@
 atlas = ExtResource("1_we4np")
 region = Rect2(124, 538, 106, 59)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_we4np"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs0xd"]
+atlas = SubResource("CompressedTexture2D_we4np")
+region = Rect2(332, 549, 50, 44)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vt35v"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_we4np"]
+atlas = SubResource("CompressedTexture2D_vt35v")
+region = Rect2(256, 82, 50, 44)
+
 [resource]
 script = ExtResource("1_e7nh3")
 id = &"pumpkin"
@@ -14,3 +28,5 @@ display_name = "Pumpkin Spice"
 description = "It's that time of year."
 color = Color(0.93, 0.5, 0.15, 1)
 food_graphic = SubResource("AtlasTexture_i0h1t")
+hover_cursor = SubResource("AtlasTexture_we4np")
+grab_cursor = SubResource("AtlasTexture_hs0xd")

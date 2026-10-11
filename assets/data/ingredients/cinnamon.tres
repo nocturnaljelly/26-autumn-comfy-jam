@@ -7,6 +7,20 @@
 atlas = ExtResource("1_i0h1t")
 region = Rect2(128, 458, 106, 59)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i0h1t"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76b2o"]
+atlas = SubResource("CompressedTexture2D_i0h1t")
+region = Rect2(332, 470, 50, 44)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vt35v"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0h1t"]
+atlas = SubResource("CompressedTexture2D_vt35v")
+region = Rect2(256, 82, 50, 44)
+
 [resource]
 script = ExtResource("1_irytp")
 id = &"cinnamon"
@@ -14,3 +28,5 @@ display_name = "Cinnamon"
 description = "Smells like autumn."
 color = Color(0.72, 0.38, 0.17, 1)
 food_graphic = SubResource("AtlasTexture_fy3fd")
+hover_cursor = SubResource("AtlasTexture_i0h1t")
+grab_cursor = SubResource("AtlasTexture_76b2o")

@@ -7,6 +7,20 @@
 atlas = ExtResource("1_o5alu")
 region = Rect2(126, 232, 106, 59)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o5alu"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dre2"]
+atlas = SubResource("CompressedTexture2D_o5alu")
+region = Rect2(332, 235, 50, 44)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ci2dh"]
+load_path = "res://.godot/imported/food_items.png-bb0e6886318c19e15a66eab4e160ac3a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5alu"]
+atlas = SubResource("CompressedTexture2D_ci2dh")
+region = Rect2(256, 15, 50, 44)
+
 [resource]
 script = ExtResource("1_g8gu2")
 id = &"water"
@@ -14,3 +28,5 @@ display_name = "Hot Water"
 description = "Straight from the kettle."
 color = Color(0.62, 0.82, 0.95, 1)
 food_graphic = SubResource("AtlasTexture_snvly")
+hover_cursor = SubResource("AtlasTexture_o5alu")
+grab_cursor = SubResource("AtlasTexture_6dre2")

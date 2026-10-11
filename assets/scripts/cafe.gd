@@ -14,6 +14,7 @@ var facing_menu := false
 var customers_in_sight := true
 var recipe_swap_in_progress := false
 var recipe_swap_pending := false
+var completed_recipes: Array[StringName] = []
 
 @onready var counter_view: Control = %CounterView
 @onready var customer_slots: Container = %CustomerSlots
@@ -92,7 +93,7 @@ func _pick_customer() -> Customer:
 	return options.pick_random() if not options.is_empty() else customers.pick_random()
 
 func _serve(slot: CustomerSlot) -> void:
-	var correct := slot.order.matches(cup)
+	var correct := completed_recipes.has(slot.order.id)
 	slot.set_expression(Customer.CustomerExpression.SATISFIED if correct else Customer.CustomerExpression.DISSATISFIED)
 	slot.say("correct_order" if correct else "incorrect_order")
 	slot.leave()
@@ -102,9 +103,15 @@ func _add_ingredient(ingredient: Ingredient) -> void:
 	if cup.size() < CUP_CAPACITY:
 		cup.append(ingredient)
 		_update_controls()
-
+		completed_recipes.clear()
+		for recipe in menu.recipes:
+			if recipe.matches(cup):
+				completed_recipes.append(recipe.id)
+		_update_controls()
+		
 func _clear_cup() -> void:
 	cup.clear()
+	completed_recipes.clear()
 	_update_controls()
 
 func _show_view(view: View) -> void:

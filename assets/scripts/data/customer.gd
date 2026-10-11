@@ -9,6 +9,12 @@ enum CustomerExpression { NEUTRAL, SATISFIED, DISSATISFIED }
 @export var alternate_sprites: Array[Texture2D] = []
 @export_range(0.0, 1.0, 0.05) var sprite_change_chance := 0.3
 
+@export_group("Sounds")
+@export var enters_sound: AudioStream
+@export var satisfied_sound: AudioStream
+@export var dissatisfied_sound: AudioStream
+
+
 func get_random_sprite(expression: CustomerExpression, exclude: Texture2D = null) -> Texture2D:
 	var options: Array[Texture2D] = [normal_sprites[expression], alternate_sprites[expression]]
 	options = options.filter(func(texture: Texture2D) -> bool: return texture and texture != exclude)

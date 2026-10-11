@@ -83,7 +83,9 @@ func _seat_next_customer() -> void:
 	if free_slots.is_empty():
 		return
 	var free_slot: CustomerSlot = free_slots.pick_random()
-	free_slot.seat(_pick_customer(), menu.get_random_recipe())
+	var customer := _pick_customer()
+	free_slot.seat(customer, menu.get_random_recipe())
+	SFXManager.play(customer.enters_sound)
 	_update_order_text(free_slot)
 	_update_controls()
 
@@ -94,6 +96,8 @@ func _pick_customer() -> Customer:
 
 func _serve(slot: CustomerSlot) -> void:
 	var correct := completed_recipes.has(slot.order.id)
+	var sound: AudioStream = slot.customer.satisfied_sound if correct else slot.customer.dissatisfied_sound
+	SFXManager.play(sound)
 	slot.set_expression(Customer.CustomerExpression.SATISFIED if correct else Customer.CustomerExpression.DISSATISFIED)
 	slot.say("correct_order" if correct else "incorrect_order")
 	slot.leave()

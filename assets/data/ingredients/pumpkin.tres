@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cpcwvf1d0qx1d"]
 
 [ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_e7nh3"]
+[ext_resource type="Texture2D" uid="uid://ccrecovvyu0p1" path="res://assets/images/gameplay/food_items.png" id="1_we4np"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0h1t"]
+atlas = ExtResource("1_we4np")
+region = Rect2(124, 538, 106, 59)
 
 [resource]
 script = ExtResource("1_e7nh3")
@@ -8,3 +13,4 @@ id = &"pumpkin"
 display_name = "Pumpkin Spice"
 description = "It's that time of year."
 color = Color(0.93, 0.5, 0.15, 1)
+food_graphic = SubResource("AtlasTexture_i0h1t")

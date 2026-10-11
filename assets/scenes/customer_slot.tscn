@@ -43,6 +43,7 @@ vertical_alignment = 2
 
 [node name="Sprite" type="TextureRect" parent="VBoxContainer/Customer" unique_id=351227027]
 unique_name_in_owner = true
+z_index = -1
 custom_minimum_size = Vector2(217, 280)
 layout_mode = 2
 size_flags_horizontal = 4

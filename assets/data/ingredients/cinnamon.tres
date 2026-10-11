@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dcoa8kgvxbtld"]
 
+[ext_resource type="Texture2D" uid="uid://ccrecovvyu0p1" path="res://assets/images/gameplay/food_items.png" id="1_i0h1t"]
 [ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_irytp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy3fd"]
+atlas = ExtResource("1_i0h1t")
+region = Rect2(128, 458, 106, 59)
 
 [resource]
 script = ExtResource("1_irytp")
@@ -8,3 +13,4 @@ id = &"cinnamon"
 display_name = "Cinnamon"
 description = "Smells like autumn."
 color = Color(0.72, 0.38, 0.17, 1)
+food_graphic = SubResource("AtlasTexture_fy3fd")

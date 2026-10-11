@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://ct67tppfc2lo4"]
 
+[ext_resource type="Texture2D" uid="uid://ccrecovvyu0p1" path="res://assets/images/gameplay/food_items.png" id="1_5f178"]
 [ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_ro8xc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dre2"]
+atlas = ExtResource("1_5f178")
+region = Rect2(128, 305, 106, 59)
 
 [resource]
 script = ExtResource("1_ro8xc")
@@ -8,3 +13,4 @@ id = &"tea"
 display_name = "Tea Leaves"
 description = "Loose leaf black tea."
 color = Color(0.55, 0.65, 0.3, 1)
+food_graphic = SubResource("AtlasTexture_6dre2")

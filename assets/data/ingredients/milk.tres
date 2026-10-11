@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://57opvs1j7i2u"]
 
+[ext_resource type="Texture2D" uid="uid://ccrecovvyu0p1" path="res://assets/images/gameplay/food_items.png" id="1_ci2dh"]
 [ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_kpeik"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hgwt"]
+atlas = ExtResource("1_ci2dh")
+region = Rect2(128, 0, 106, 59)
 
 [resource]
 script = ExtResource("1_kpeik")
@@ -8,3 +13,4 @@ id = &"milk"
 display_name = "Milk"
 description = "Fresh and creamy."
 color = Color(0.97, 0.95, 0.89, 1)
+food_graphic = SubResource("AtlasTexture_0hgwt")

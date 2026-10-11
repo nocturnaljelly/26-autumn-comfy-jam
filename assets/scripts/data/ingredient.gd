@@ -7,7 +7,7 @@ extends Resource
 
 @export_group("Visuals")
 @export var color: Color = Color.WHITE
-@export var icon: Texture2D
+@export var food_graphic: Texture2D
 
 
 func _to_string() -> String:

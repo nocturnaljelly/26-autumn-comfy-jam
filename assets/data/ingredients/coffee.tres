@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://l8rpfr7mla05"]
 
 [ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_cgr1a"]
+[ext_resource type="Texture2D" uid="uid://ccrecovvyu0p1" path="res://assets/images/gameplay/food_items.png" id="1_wccan"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hj6x"]
+atlas = ExtResource("1_wccan")
+region = Rect2(128, 153, 106, 59)
 
 [resource]
 script = ExtResource("1_cgr1a")
@@ -8,3 +13,4 @@ id = &"coffee"
 display_name = "Coffee"
 description = "A strong shot of espresso."
 color = Color(0.25, 0.15, 0.09, 1)
+food_graphic = SubResource("AtlasTexture_2hj6x")

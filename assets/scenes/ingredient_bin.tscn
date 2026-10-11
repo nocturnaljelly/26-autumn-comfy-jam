@@ -1,33 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dljmag3i214da"]
 
 [ext_resource type="Script" uid="uid://bvgpakpwpavdw" path="res://assets/scripts/ingredient_bin.gd" id="1_bin"]
+[ext_resource type="Texture2D" uid="uid://ccrecovvyu0p1" path="res://assets/images/gameplay/food_items.png" id="2_prokb"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bin_frame"]
-bg_color = Color(0.82, 0.81, 0.82, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.42, 0.26, 0.15, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-shadow_color = Color(0.31, 0.18, 0.12, 0.35)
-shadow_size = 1
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bin_well"]
-bg_color = Color(0.4, 0.36, 0.38, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.31, 0.27, 0.29, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg5ck"]
+atlas = ExtResource("2_prokb")
+region = Rect2(0, 0, 106, 59)
 
 [node name="IngredientBin" type="Control" unique_id=1630458187]
 layout_mode = 3
@@ -37,36 +15,26 @@ offset_bottom = 88.0
 mouse_default_cursor_shape = 2
 script = ExtResource("1_bin")
 
-[node name="Frame" type="Panel" parent="." unique_id=289517344]
+[node name="Frame" type="TextureRect" parent="." unique_id=777315987]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -14.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bin_frame")
+texture = SubResource("AtlasTexture_rg5ck")
 
-[node name="Well" type="Panel" parent="." unique_id=1902218465]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = -7.0
-offset_bottom = -22.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bin_well")
-
-[node name="Pile" type="Control" parent="Well" unique_id=748613270]
+[node name="Pile" type="TextureRect" parent="." unique_id=277054171]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_right = 0.883
+anchor_bottom = 0.67
+offset_right = 0.040000916
+offset_bottom = 0.0399971
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -74,14 +42,13 @@ mouse_filter = 2
 [node name="NameTag" type="Label" parent="." unique_id=1188430352]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = -22.0
-offset_right = -4.0
-offset_bottom = -2.0
+anchors_preset = -1
+anchor_top = 0.97700006
+anchor_right = 0.883
+anchor_bottom = 0.97700006
+offset_top = -26.976006
+offset_right = 0.040000916
+offset_bottom = 0.023994446
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.42, 0.26, 0.15, 1)

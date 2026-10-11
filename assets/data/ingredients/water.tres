@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://nsyin5fkiwcd"]
 
 [ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_g8gu2"]
+[ext_resource type="Texture2D" uid="uid://ccrecovvyu0p1" path="res://assets/images/gameplay/food_items.png" id="1_o5alu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snvly"]
+atlas = ExtResource("1_o5alu")
+region = Rect2(126, 232, 106, 59)
 
 [resource]
 script = ExtResource("1_g8gu2")
@@ -8,3 +13,4 @@ id = &"water"
 display_name = "Hot Water"
 description = "Straight from the kettle."
 color = Color(0.62, 0.82, 0.95, 1)
+food_graphic = SubResource("AtlasTexture_snvly")

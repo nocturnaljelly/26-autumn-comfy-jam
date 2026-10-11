@@ -7,7 +7,6 @@ enum CustomerExpression { NEUTRAL, SATISFIED, DISSATISFIED }
 @export var display_name: String = ""
 @export var normal_sprites: Array[Texture2D] = []
 @export var alternate_sprites: Array[Texture2D] = []
-@export_range(0.0, 1.0, 0.05) var order_change_chance := 0.3
 @export_range(0.0, 1.0, 0.05) var sprite_change_chance := 0.3
 
 func get_random_sprite(expression: CustomerExpression, exclude: Texture2D = null) -> Texture2D:

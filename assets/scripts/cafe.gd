@@ -12,6 +12,8 @@ var cup: Array[Ingredient] = []
 var current_view := View.CUSTOMERS
 var facing_menu := false
 var customers_in_sight := true
+var recipe_swap_in_progress := false
+var recipe_swap_pending := false
 
 @onready var counter_view: Control = %CounterView
 @onready var customer_slots: Container = %CustomerSlots
@@ -28,6 +30,8 @@ var customers_in_sight := true
 @onready var menu_label: RichTextLabel = %MenuLabel
 @onready var recipes_button: Button = %RecipesButton
 @onready var back_button: Button = %BackButton
+@onready var paw_graphic: ColorRect = %PawGraphic
+@onready var recipe_swap_timer: Timer = %RecipeSwapTimer
 
 
 func _ready() -> void:
@@ -47,6 +51,10 @@ func _ready() -> void:
 	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
 	menu_view.visible = false
+	recipe_swap_timer.wait_time = 8
+	recipe_swap_timer.one_shot = false
+	recipe_swap_timer.timeout.connect(_request_recipe_swap)
+	recipe_swap_timer.start()
 	_update_menu()
 	_show_view(View.CUSTOMERS)
 	_seat_next_customer()
@@ -54,19 +62,11 @@ func _ready() -> void:
 
 func _turn() -> void:
 	facing_menu = not facing_menu
-	if facing_menu:
-		menu.reset_from(recipe_book)
-		menu.change_random_recipe(CUP_CAPACITY)
-		_update_menu()
-	else:
-		for slot in _slots():
-			if slot.order and randf() < slot.customer.order_change_chance:
-				slot.order = menu.get_random_recipe(slot.order)
-				_update_order_text(slot)
 	counter_view.visible = not facing_menu
 	menu_view.visible = facing_menu
 	_update_balloon_visibility()
-
+	_check_pending_recipe_swap()
+	
 func _slots() -> Array[CustomerSlot]:
 	var slots: Array[CustomerSlot] = []
 	slots.assign(customer_slots.get_children())
@@ -112,6 +112,7 @@ func _show_view(view: View) -> void:
 	customer_view.visible = view == View.CUSTOMERS
 	prep_view.visible = view == View.PREP
 	_update_balloon_visibility()
+	_check_pending_recipe_swap()
 	
 func _update_order_text(slot: CustomerSlot) -> void:
 	slot.order_number = menu.get_number(slot.order)
@@ -130,6 +131,50 @@ func _change_customer_sprites() -> void:
 	for slot in _slots():
 		if slot.order and randf() < slot.customer.sprite_change_chance:
 			slot.change_sprite()
+
+func _request_recipe_swap() -> void:
+	recipe_swap_pending = true
+	_check_pending_recipe_swap()
+
+func _check_pending_recipe_swap() -> void:
+	if not recipe_swap_pending or recipe_swap_in_progress or facing_menu or current_view != View.PREP:
+		return
+	recipe_swap_pending = false
+	recipe_swap_in_progress = true
+	recipes_button.disabled = true
+	_animate_recipe_swap()
+
+# hash out the motion
+func _animate_recipe_swap() -> void:
+	var button_start := recipes_button.global_position.x
+	var paw_end := paw_graphic.global_position.x
+	var paw_start := -paw_graphic.size.x
+	paw_graphic.global_position.x = paw_start
+	paw_graphic.visible = true
+	
+	var tween := create_tween()
+	tween.tween_property(paw_graphic, "global_position:x", paw_end, 0.2)
+	tween.tween_property(paw_graphic, "global_position:x", paw_start, 0.3)
+	tween.parallel().tween_property(recipes_button, "global_position:x", -recipes_button.size.x - 10.0, 0.3)
+	await tween.finished
+	
+	menu.reset_from(recipe_book)
+	menu.change_random_recipe(CUP_CAPACITY)
+	_update_menu()
+	
+	await get_tree().create_timer(0.3).timeout
+	
+	tween = create_tween()
+	tween.tween_property(paw_graphic, "global_position:x", paw_end, 0.5)
+	tween.parallel().tween_property(recipes_button, "global_position:x", button_start, 0.5)
+	tween.tween_property(paw_graphic, "global_position:x", paw_start, 0.2)
+	await tween.finished
+	
+	paw_graphic.visible = false
+	paw_graphic.global_position.x = paw_end
+	recipe_swap_in_progress = false
+	recipes_button.disabled = false
+	_check_pending_recipe_swap()
 
 func _update_menu() -> void:
 	var lines: PackedStringArray = []

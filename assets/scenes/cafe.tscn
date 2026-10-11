@@ -547,6 +547,7 @@ color = Color(0.95, 0.9, 0.81, 1)
 
 [node name="CustomerView" type="Control" parent="CounterView" unique_id=211543271]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -630,7 +631,6 @@ texture = ExtResource("11_gei2f")
 
 [node name="PrepView" type="Control" parent="CounterView" unique_id=1206113019]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -879,6 +879,21 @@ offset_top = 6.0
 offset_bottom = 26.0
 mouse_filter = 2
 color = Color(0.6, 0.6, 0.63, 1)
+
+[node name="PawGraphic" type="ColorRect" parent="CounterView/PrepView" unique_id=2135399802]
+unique_name_in_owner = true
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -19.5
+offset_right = 206.0
+offset_bottom = 19.5
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.32264355, 0.16302705, 0.20494804, 1)
 
 [node name="IngredientBins" type="Control" parent="CounterView/PrepView" unique_id=374861868]
 unique_name_in_owner = true
@@ -1636,3 +1651,6 @@ script = ExtResource("4_button")
 unique_name_in_owner = true
 wait_time = 4.0
 autostart = true
+
+[node name="RecipeSwapTimer" type="Timer" parent="." unique_id=643335518]
+unique_name_in_owner = true

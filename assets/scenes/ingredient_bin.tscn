@@ -12,7 +12,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 106.0
 offset_bottom = 59.0
-mouse_default_cursor_shape = 2
 script = ExtResource("1_bin")
 
 [node name="Frame" type="TextureRect" parent="." unique_id=777315987]

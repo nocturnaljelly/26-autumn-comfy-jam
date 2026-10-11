@@ -33,6 +33,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	if disabled or not ingredient:
 		return null
 	set_drag_preview(_create_drag_preview())
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	return ingredient
 
 func _refresh() -> void:
@@ -46,8 +47,7 @@ func _set_hovered(value: bool) -> void:
 
 func _update_state() -> void:
 	var active := ingredient != null and not disabled
-	mouse_default_cursor_shape = CURSOR_ARROW
-	Input.set_custom_mouse_cursor(ingredient.hover_cursor if active and _hovered else null)
+	Input.set_custom_mouse_cursor(ingredient.hover_cursor if active and _hovered else preload("res://assets/images/custom_cursor.png"))
 	modulate = Color.WHITE if active else disabled_tint
 	if _lift_tween:
 		_lift_tween.kill()
@@ -68,3 +68,7 @@ func _create_drag_preview() -> Control:
 	holder.z_index = RenderingServer.CANVAS_ITEM_Z_MAX
 	holder.add_child(piece)
 	return holder
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_END:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

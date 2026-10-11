@@ -26,6 +26,7 @@ runtime/balloon_path="res://assets/scenes/customer_balloon.tscn"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="uid://6ox7502nelwh"
 
 [editor_plugins]
 

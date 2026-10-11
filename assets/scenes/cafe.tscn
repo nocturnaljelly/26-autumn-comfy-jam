@@ -588,9 +588,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -460.0
+offset_left = -355.0
 offset_top = -84.0
-offset_right = 460.0
+offset_right = 356.0
 offset_bottom = 318.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -603,9 +603,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CustomerSlot3" parent="CounterView/CustomerView/CustomerSlots" unique_id=840071003 instance=ExtResource("9_slot")]
-layout_mode = 2
-
-[node name="CustomerSlot4" parent="CounterView/CustomerView/CustomerSlots" unique_id=1180743430 instance=ExtResource("9_slot")]
 layout_mode = 2
 
 [node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=927681668]
@@ -799,7 +796,6 @@ anchor_top = 0.33
 anchor_right = 0.165
 anchor_bottom = 0.68
 tooltip_text = "Check recipes"
-mouse_default_cursor_shape = 2
 flat = true
 script = ExtResource("4_button")
 idle_bob_pixels = 0.0

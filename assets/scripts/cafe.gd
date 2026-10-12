@@ -6,7 +6,8 @@ enum View { CUSTOMERS, PREP }
 
 @export var recipe_book: RecipeBook
 @export var customers: Array[Customer] = []
-
+@export var ambience: AudioStream
+	
 var menu: RecipeBook
 var cup: Array[Ingredient] = []
 var current_view := View.CUSTOMERS
@@ -36,6 +37,7 @@ var completed_recipes: Array[StringName] = []
 
 
 func _ready() -> void:
+	SFXManager.play(ambience, -30.0)
 	menu = recipe_book.create_runtime_copy()
 	var bins := _bins()
 	if menu.ingredients.size() > bins.size():

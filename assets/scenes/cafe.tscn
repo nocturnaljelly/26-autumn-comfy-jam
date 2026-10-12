@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://cmqx4n3vwt3dh" path="res://assets/data/customers/rowan.tres" id="7_rowan"]
 [ext_resource type="Texture2D" uid="uid://baqu6p0dsbgyo" path="res://assets/images/environment.png" id="8_bf56q"]
 [ext_resource type="Resource" uid="uid://ddjpt78ye5ftp" path="res://assets/data/customers/maple.tres" id="8_maple"]
+[ext_resource type="AudioStream" uid="uid://cpe1vftwt44et" path="res://assets/audio/sfx/ambience.ogg" id="8_pd00h"]
 [ext_resource type="Texture2D" uid="uid://cwvb270hrl6hl" path="res://assets/images/Client_View.png" id="9_0hgwt"]
 [ext_resource type="PackedScene" uid="uid://dxsoep4cx2uxg" path="res://assets/scenes/customer_slot.tscn" id="9_slot"]
 [ext_resource type="Texture2D" uid="uid://c82v3ikrwodmm" path="res://assets/images/arrow.png" id="11_gei2f"]
@@ -117,6 +118,7 @@ theme = ExtResource("3_theme")
 script = ExtResource("1_cafe")
 recipe_book = ExtResource("2_book")
 customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("8_maple"), ExtResource("7_rowan")])
+ambience = ExtResource("8_pd00h")
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
 unique_name_in_owner = true

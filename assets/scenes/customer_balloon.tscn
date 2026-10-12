@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7vxq2dm84bfl" path="res://assets/scripts/customer_balloon.gd" id="1_v4w2v"]
 [ext_resource type="Theme" uid="uid://2lg1780hstov" path="res://assets/themes/ui_theme.tres" id="2_aa7qb"]
+[ext_resource type="Texture2D" uid="uid://dhavv0fycm5fs" path="res://assets/images/gameplay/dialogue_box.png" id="3_aa7qb"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/nodes/dialogue_label/dialogue_label.tscn" id="3_my5j2"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/nodes/responses_menu/dialogue_responses_menu.gd" id="4_bnnv7"]
 
@@ -135,14 +136,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer" unique_id=2145270309]
+[node name="PanelContainer" type="Control" parent="Balloon/MarginContainer" unique_id=2020727169]
 clip_children = 2
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("2_aa7qb")
 
+[node name="TextureRect" type="TextureRect" parent="Balloon/MarginContainer/PanelContainer" unique_id=1865480668]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_aa7qb")
+
 [node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer" unique_id=903640783]
-layout_mode = 2
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 184.0
+offset_bottom = 117.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_right = 15
 
@@ -185,6 +199,7 @@ libraries/ = SubResource("AnimationLibrary_1337t")
 autoplay = &"progress"
 
 [node name="Tail" type="Control" parent="Balloon" unique_id=2036076114]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

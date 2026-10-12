@@ -55,7 +55,7 @@ func _ready() -> void:
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
 	menu_view.visible = false
 	recipe_swap_timer.wait_time = 8
-	recipe_swap_timer.one_shot = false
+	recipe_swap_timer.one_shot = true
 	recipe_swap_timer.timeout.connect(_request_recipe_swap)
 	recipe_swap_timer.start()
 	_update_menu()
@@ -187,7 +187,7 @@ func _animate_recipe_swap() -> void:
 	paw_graphic.global_position.x = paw_end
 	recipe_swap_in_progress = false
 	recipes_button.disabled = false
-	_check_pending_recipe_swap()
+	recipe_swap_timer.start()
 
 func _update_menu() -> void:
 	var lines: PackedStringArray = []

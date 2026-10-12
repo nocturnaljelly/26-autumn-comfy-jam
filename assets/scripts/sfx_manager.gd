@@ -1,4 +1,5 @@
 extends Node
+@onready var cat_cue: AudioStreamPlayer = %CatCue
 
 func play(sound: AudioStream, volume_db: float = 0.0) -> void:
 	var player := AudioStreamPlayer.new()

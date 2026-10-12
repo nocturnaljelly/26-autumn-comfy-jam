@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dxsoep4cx2uxg" path="res://assets/scenes/customer_slot.tscn" id="9_slot"]
 [ext_resource type="Texture2D" uid="uid://c82v3ikrwodmm" path="res://assets/images/arrow.png" id="11_gei2f"]
 [ext_resource type="PackedScene" uid="uid://dljmag3i214da" path="res://assets/scenes/ingredient_bin.tscn" id="12_bin"]
+[ext_resource type="Texture2D" uid="uid://dkponkelv6ki5" path="res://assets/images/gameplay/cat_recipe_swap_alert.png" id="12_l312g"]
 [ext_resource type="Script" uid="uid://dqd1yjgci38qu" path="res://assets/scripts/cup_view.gd" id="13_cup"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prep_board"]
@@ -549,7 +550,6 @@ color = Color(0.95, 0.9, 0.81, 1)
 
 [node name="CustomerView" type="Control" parent="CounterView" unique_id=211543271]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -608,6 +608,20 @@ layout_mode = 2
 [node name="CustomerSlot3" parent="CounterView/CustomerView/CustomerSlots" unique_id=840071003 instance=ExtResource("9_slot")]
 layout_mode = 2
 
+[node name="SwapBubble" type="TextureRect" parent="CounterView/CustomerView" unique_id=729347793]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -261.0
+offset_right = 196.0
+offset_bottom = -121.0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("12_l312g")
+
 [node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=927681668]
 layout_mode = 1
 anchors_preset = 4
@@ -633,6 +647,7 @@ texture = ExtResource("11_gei2f")
 
 [node name="PrepView" type="Control" parent="CounterView" unique_id=1206113019]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

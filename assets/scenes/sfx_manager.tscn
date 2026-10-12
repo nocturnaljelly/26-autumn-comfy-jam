@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://bcu4clqdh355o"]
 
 [ext_resource type="Script" uid="uid://cqua2yplygqtb" path="res://assets/scripts/sfx_manager.gd" id="1_5kghb"]
+[ext_resource type="AudioStream" uid="uid://cn7gjm45u3dyp" path="res://assets/audio/sfx/cat_cue.ogg" id="2_c13na"]
 
 [node name="SFXManager" type="Node" unique_id=92360530]
 script = ExtResource("1_5kghb")
+
+[node name="CatCue" type="AudioStreamPlayer" parent="." unique_id=281554023]
+unique_name_in_owner = true
+stream = ExtResource("2_c13na")

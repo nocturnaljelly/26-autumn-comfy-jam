@@ -34,6 +34,7 @@ var completed_recipes: Array[StringName] = []
 @onready var back_button: Button = %BackButton
 @onready var paw_graphic: ColorRect = %PawGraphic
 @onready var recipe_swap_timer: Timer = %RecipeSwapTimer
+@onready var swap_bubble: TextureRect = %SwapBubble
 
 
 func _ready() -> void:
@@ -150,12 +151,15 @@ func _request_recipe_swap() -> void:
 	_check_pending_recipe_swap()
 
 func _check_pending_recipe_swap() -> void:
-	if not recipe_swap_pending or recipe_swap_in_progress or facing_menu or current_view != View.PREP:
+	if not recipe_swap_pending or recipe_swap_in_progress or facing_menu:
 		return
 	recipe_swap_pending = false
 	recipe_swap_in_progress = true
-	recipes_button.disabled = true
-	_animate_recipe_swap()
+	if current_view == View.PREP:
+		recipes_button.disabled = true
+		_animate_recipe_swap()
+	else:
+		_animate_swap_bubble()
 
 # hash out the motion
 func _animate_recipe_swap() -> void:
@@ -171,10 +175,7 @@ func _animate_recipe_swap() -> void:
 	tween.parallel().tween_property(recipes_button, "global_position:x", -recipes_button.size.x - 10.0, 0.3)
 	await tween.finished
 	
-	menu.reset_from(recipe_book)
-	menu.change_random_recipe(CUP_CAPACITY)
-	_update_menu()
-	
+	_swap_recipes()
 	await get_tree().create_timer(0.3).timeout
 	
 	tween = create_tween()
@@ -185,8 +186,34 @@ func _animate_recipe_swap() -> void:
 	
 	paw_graphic.visible = false
 	paw_graphic.global_position.x = paw_end
+	_finish_recipe_swap()
+
+func _animate_swap_bubble() -> void:
+	SFXManager.cat_cue.play()
+	menu.reset_from(recipe_book)
+	swap_bubble.pivot_offset = swap_bubble.size / 2.0
+	swap_bubble.scale = Vector2.ZERO
+	swap_bubble.visible = true
+	var tween := create_tween()
+	tween.tween_property(swap_bubble, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_EXPO)
+	for i in 4:
+		tween.tween_property(swap_bubble, "rotation_degrees", -5.0, 0.1)
+		tween.tween_property(swap_bubble, "rotation_degrees", 5.0, 0.1)
+	tween.tween_property(swap_bubble, "rotation_degrees", 0.0, 0.05)
+	tween.tween_property(swap_bubble, "scale", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	
+	_finish_recipe_swap()
+
+func _swap_recipes() -> void:
+	menu.reset_from(recipe_book)
+	menu.change_random_recipe(CUP_CAPACITY)
+	_update_menu()
+
+func _finish_recipe_swap() -> void:
 	recipe_swap_in_progress = false
 	recipes_button.disabled = false
+	swap_bubble.visible = false
 	recipe_swap_timer.start()
 
 func _update_menu() -> void:

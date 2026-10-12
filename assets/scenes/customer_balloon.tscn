@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dhavv0fycm5fs" path="res://assets/images/gameplay/dialogue_box.png" id="3_aa7qb"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/nodes/dialogue_label/dialogue_label.tscn" id="3_my5j2"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/nodes/responses_menu/dialogue_responses_menu.gd" id="4_bnnv7"]
+[ext_resource type="PackedScene" uid="uid://dxa7amu3dujsp" path="res://assets/scenes/order_timer.tscn" id="6_my5j2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 content_margin_left = 20.0
@@ -243,6 +244,15 @@ response_template = NodePath("ResponseExample")
 [node name="ResponseExample" type="Button" parent="Balloon/CenterContainer/ResponsesMenu" unique_id=1446810977]
 layout_mode = 2
 text = "Response example"
+
+[node name="OrderTimer" parent="Balloon" unique_id=592437979 instance=ExtResource("6_my5j2")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -37.000004
+offset_top = -24.0
+offset_right = -37.000004
+offset_bottom = -24.0
+scale = Vector2(0.7, 0.7)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1162558754]
 unique_name_in_owner = true

@@ -23,6 +23,8 @@ extends CanvasLayer
 ## A sound player for voice lines (if they exist).
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 
+@onready var order_timer: OrderTimer = %OrderTimer
+
 ## Temporary game states
 var temporary_game_states: Array = []
 

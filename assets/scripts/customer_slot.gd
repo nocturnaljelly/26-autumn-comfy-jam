@@ -49,6 +49,12 @@ func say(cue: String) -> void:
 	active_balloon = DialogueManager.show_dialogue_balloon(customer_dialogue, cue, [self])
 	if is_instance_valid(active_balloon):
 		active_balloon.visible = balloon_visible
+		if cue == "order":
+			var order_timer: OrderTimer = active_balloon.get_node("Balloon/OrderTimer")
+			if not order_timer.is_node_ready():
+				await order_timer.ready
+			order_timer.timer_expired.connect(_on_order_expired)
+			order_timer.start()
 		await active_balloon.open_animation()
 
 func set_balloon_visible(value: bool) -> void:
@@ -56,6 +62,15 @@ func set_balloon_visible(value: bool) -> void:
 	if is_instance_valid(active_balloon):
 		active_balloon.visible = value
 
+func react(correct: bool) -> void:
+	if order == null:
+		return
+	var sound := customer.satisfied_sound if correct else customer.dissatisfied_sound
+	SFXManager.play(sound)
+	set_expression(Customer.CustomerExpression.SATISFIED if correct else Customer.CustomerExpression.DISSATISFIED)
+	say("correct_order" if correct else "incorrect_order")
+	leave()
+	
 func leave() -> void:
 	if order == null:
 		return
@@ -72,6 +87,11 @@ func leave() -> void:
 	customer = null
 	bubble.text = ""
 	customer_left.emit(leaving)
+
+func _on_order_expired() -> void:
+	if order == null:
+		return
+	react(false)
 
 func _fade(alpha: float) -> void:
 	if _fade_tween:

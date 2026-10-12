@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dxa7amu3dujsp"]
+
+[ext_resource type="Texture2D" uid="uid://b44eajwqxeiyu" path="res://assets/images/gameplay/timer_graphic.png" id="1_6btrt"]
+[ext_resource type="Script" uid="uid://v4ab178l183h" path="res://assets/scripts/order_timer.gd" id="1_efagt"]
+[ext_resource type="Texture2D" uid="uid://btq3fcwkk4aok" path="res://assets/images/gameplay/warning_bar.png" id="3_2ibj4"]
+[ext_resource type="Texture2D" uid="uid://bmavx86p4328f" path="res://assets/images/gameplay/normal_bar.png" id="3_r7ps1"]
+[ext_resource type="Texture2D" uid="uid://n8lq8e4ocqxv" path="res://assets/images/gameplay/critical_bar.png" id="4_mw1qy"]
+
+[node name="OrderTimer" type="Control" unique_id=592437979]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_efagt")
+normal_bar = ExtResource("3_r7ps1")
+warning_bar = ExtResource("3_2ibj4")
+critical_bar = ExtResource("4_mw1qy")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=912497156]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_6btrt")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1902926629]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 98.0
+offset_top = 40.0
+offset_right = 367.0
+offset_bottom = 80.0
+
+[node name="Timer" type="Timer" parent="." unique_id=267887348]
+unique_name_in_owner = true

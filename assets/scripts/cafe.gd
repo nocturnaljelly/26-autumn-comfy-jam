@@ -99,11 +99,7 @@ func _pick_customer() -> Customer:
 
 func _serve(slot: CustomerSlot) -> void:
 	var correct := completed_recipes.has(slot.order.id)
-	var sound: AudioStream = slot.customer.satisfied_sound if correct else slot.customer.dissatisfied_sound
-	SFXManager.play(sound)
-	slot.set_expression(Customer.CustomerExpression.SATISFIED if correct else Customer.CustomerExpression.DISSATISFIED)
-	slot.say("correct_order" if correct else "incorrect_order")
-	slot.leave()
+	slot.react(correct)
 	_clear_cup()
 
 func _add_ingredient(ingredient: Ingredient) -> void:

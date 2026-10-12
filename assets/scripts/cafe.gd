@@ -194,14 +194,14 @@ func _update_menu() -> void:
 	for recipe in menu.recipes:
 		var names: PackedStringArray = []
 		for ingredient in recipe.ingredients:
-			names.append(_ingredient_text(ingredient))
+			names.append(_ingredient_image(ingredient))
 		lines.append("[color=%s]%d.[/color] %s = [wave amp=25 freq=3]%s[/wave]" % [HIGHLIGHT_COLOR, menu.get_number(recipe), " + ".join(names), recipe.display_name])
 	menu_label.text = "\n".join(lines)
 
 func _update_controls() -> void:
 	var names: PackedStringArray = []
 	for ingredient in cup:
-		names.append(_ingredient_text(ingredient))
+		names.append(_ingredient_image(ingredient, true))
 	if not names.is_empty():
 		names[names.size() - 1] = "%s" % names[names.size() - 1]
 	cup_label.text = "Cup: " + (" + ".join(names) if not names.is_empty() else "[color=#ffffff80]empty[/color]")
@@ -212,5 +212,9 @@ func _update_controls() -> void:
 		slot.plate_button.disabled = slot.order == null or cup.is_empty()
 	clear_button.disabled = cup.is_empty()
 
+func _ingredient_image(ingredient: Ingredient, in_cup: bool = false) -> String:
+	var texture := ingredient.grab_cursor if in_cup else ingredient.food_graphic
+	return "[img]%s[/img]" % texture.resource_path
+	
 func _ingredient_text(ingredient: Ingredient) -> String:
 	return "[color=#%s]%s[/color]" % [ingredient.color.lightened(0.35).to_html(false), ingredient.display_name]

@@ -12,9 +12,11 @@ shader_parameter/mask_scale = 0.0
 [node name="SceneTransition" type="CanvasLayer" unique_id=501498253]
 layer = 100
 script = ExtResource("1_0x8vl")
-hide_duration = 1.2
+scene_change_delay = 0.0
+hide_duration = 1.0
 hide_transition = 1
 hide_ease = 2
+show_duration = 1.0
 
 [node name="Mask" type="ColorRect" parent="." unique_id=1316519914]
 unique_name_in_owner = true

@@ -306,10 +306,10 @@ func _advance_progression():
 	await create_tween().tween_property(music_player, "volume_db", -30.0, 2.0).finished
 	music_player.stop()
 	await get_tree().create_timer(1.0).timeout
-	await SceneTransition.fade_out()
+	await SceneTransition.hide_screen()
 	current_progression += 1
 	_apply_progression()
-	await SceneTransition.fade_in(2.0)
+	await SceneTransition.show_screen(2.0)
 	recipe_swap_pending = false
 	recipe_swap_timer.start()
 	_fade_in_music()

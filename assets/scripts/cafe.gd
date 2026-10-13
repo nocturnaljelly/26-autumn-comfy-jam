@@ -303,5 +303,7 @@ func _advance_progression():
 	current_progression += 1
 	_apply_progression()
 	await SceneTransition.fade_in(2.0)
+	recipe_swap_pending = false
+	recipe_swap_timer.start()
 	_fade_in_music()
 	progression_in_progress = false

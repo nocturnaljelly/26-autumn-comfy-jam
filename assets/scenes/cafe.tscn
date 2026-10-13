@@ -17,8 +17,13 @@
 [ext_resource type="Resource" uid="uid://dyiyfqmw13rkk" path="res://assets/data/game_progression/night_shift.tres" id="10_m6dpc"]
 [ext_resource type="Texture2D" uid="uid://c82v3ikrwodmm" path="res://assets/images/arrow.png" id="11_gei2f"]
 [ext_resource type="PackedScene" uid="uid://dljmag3i214da" path="res://assets/scenes/ingredient_bin.tscn" id="12_bin"]
+[ext_resource type="AudioStream" uid="uid://diqg2yn3o7uq8" path="res://assets/audio/sfx/recipe_open.wav" id="12_e2hk2"]
 [ext_resource type="Texture2D" uid="uid://dkponkelv6ki5" path="res://assets/images/gameplay/cat_recipe_swap_alert.png" id="12_l312g"]
+[ext_resource type="AudioStream" uid="uid://btqef5w10w67q" path="res://assets/audio/sfx/recipe_close.wav" id="13_4hvve"]
 [ext_resource type="Script" uid="uid://dqd1yjgci38qu" path="res://assets/scripts/cup_view.gd" id="13_cup"]
+[ext_resource type="AudioStream" uid="uid://cd68ia5of8bkn" path="res://assets/audio/sfx/correct_order.ogg" id="16_u5134"]
+[ext_resource type="AudioStream" uid="uid://322yrmh6uhca" path="res://assets/audio/sfx/customer_transform.ogg" id="17_2ro4j"]
+[ext_resource type="AudioStream" uid="uid://cn7gjm45u3dyp" path="res://assets/audio/sfx/cat_cue.ogg" id="18_2ro4j"]
 [ext_resource type="Shader" uid="uid://cid4jbqg6w31t" path="res://assets/shaders/lighting.gdshader" id="18_wx11x"]
 [ext_resource type="Texture2D" uid="uid://b42jf1236aoe6" path="res://assets/images/gameplay/light.png" id="19_ygu5f"]
 [ext_resource type="Texture2D" uid="uid://1c4bwwgwlmiv" path="res://assets/images/gameplay/Recipe_Menu_Background.png" id="20_s8y5s"]
@@ -142,6 +147,11 @@ progressions = Array[ExtResource("8_g11bw")]([ExtResource("9_s8y5s"), ExtResourc
 ambience = ExtResource("8_pd00h")
 drop_particles = ExtResource("23_drop")
 recipe_particles = ExtResource("24_celebrate")
+recipe_open_sound = ExtResource("12_e2hk2")
+recipe_close_sound = ExtResource("13_4hvve")
+correct_order_sound = ExtResource("16_u5134")
+transform_sound = ExtResource("17_2ro4j")
+cat_cue_sound = ExtResource("18_2ro4j")
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
 unique_name_in_owner = true

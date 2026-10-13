@@ -17,7 +17,14 @@ enum View { CUSTOMERS, PREP }
 @export var wrong_order_shake := 3.0
 @export var view_slide_duration := 0.35
 @export var menu_drop_duration := 0.5
-	
+
+@export_group("Sounds")
+@export var recipe_open_sound: AudioStream
+@export var recipe_close_sound: AudioStream
+@export var correct_order_sound: AudioStream
+@export var transform_sound: AudioStream
+@export var cat_cue_sound: AudioStream
+
 var menu: RecipeBook
 var cup: Array[Ingredient] = []
 var current_view := View.CUSTOMERS
@@ -92,6 +99,7 @@ func _ready() -> void:
 
 func _turn() -> void:
 	facing_menu = not facing_menu
+	SFXManager.play(recipe_open_sound if facing_menu else recipe_close_sound)
 	_update_balloon_visibility()
 	if _menu_tween:
 		_menu_tween.kill()
@@ -145,6 +153,8 @@ func _serve(slot: CustomerSlot) -> void:
 	var amount := correct_order_money if correct else wrong_order_money
 	money += amount
 	coin_spawner.spawn(amount, slot.get_payment_origin())
+	if correct:
+		SFXManager.play(correct_order_sound)
 	slot.react(correct)
 	if not correct:
 		Juice.shake_position(self, wrong_order_shake)
@@ -223,6 +233,7 @@ func _change_customer_sprites() -> void:
 	for slot in _slots():
 		if slot.order and randf() < slot.customer.sprite_change_chance:
 			slot.change_sprite()
+			SFXManager.play(transform_sound)
 
 func _request_recipe_swap() -> void:
 	if _shift_finished():
@@ -279,7 +290,7 @@ func _animate_recipe_swap() -> void:
 	_finish_recipe_swap()
 
 func _animate_swap_bubble() -> void:
-	SFXManager.cat_cue.play()
+	SFXManager.play(cat_cue_sound)
 	_swap_recipes()
 	swap_bubble.pivot_offset = swap_bubble.size / 2.0
 	swap_bubble.scale = Vector2.ZERO

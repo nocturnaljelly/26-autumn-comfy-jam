@@ -13,7 +13,7 @@ enum CustomerExpression { NEUTRAL, SATISFIED, DISSATISFIED }
 @export var enters_sound: AudioStream
 @export var satisfied_sound: AudioStream
 @export var dissatisfied_sound: AudioStream
-
+@export var alt_dissatisfied_sound: AudioStream
 
 func get_random_sprite(expression: CustomerExpression, exclude: Texture2D = null) -> Texture2D:
 	var options: Array[Texture2D] = [normal_sprites[expression], alternate_sprites[expression]]

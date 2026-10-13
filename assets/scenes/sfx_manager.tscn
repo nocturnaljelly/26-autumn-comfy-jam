@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://bcu4clqdh355o"]
 
 [ext_resource type="Script" uid="uid://cqua2yplygqtb" path="res://assets/scripts/sfx_manager.gd" id="1_5kghb"]
-[ext_resource type="AudioStream" uid="uid://cn7gjm45u3dyp" path="res://assets/audio/sfx/cat_cue.ogg" id="2_c13na"]
+[ext_resource type="AudioStream" uid="uid://cq4aoimctvs82" path="res://assets/audio/sfx/customer_confused_0.ogg" id="2_xrrvl"]
+[ext_resource type="AudioStream" uid="uid://dtvcc61fyyixi" path="res://assets/audio/sfx/customer_confused_1.ogg" id="3_jnc1n"]
+[ext_resource type="AudioStream" uid="uid://bnytahsnhf8r5" path="res://assets/audio/sfx/customer_confused_2.ogg" id="4_ly8vf"]
 
 [node name="SFXManager" type="Node" unique_id=92360530]
 script = ExtResource("1_5kghb")
-
-[node name="CatCue" type="AudioStreamPlayer" parent="." unique_id=281554023]
-unique_name_in_owner = true
-stream = ExtResource("2_c13na")
+confused_sounds = Array[AudioStream]([ExtResource("2_xrrvl"), ExtResource("3_jnc1n"), ExtResource("4_ly8vf")])

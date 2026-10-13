@@ -1,5 +1,6 @@
 extends Node
-@onready var cat_cue: AudioStreamPlayer = %CatCue
+
+@export var confused_sounds: Array[AudioStream] = []
 
 func play(sound: AudioStream, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
 	var player := AudioStreamPlayer.new()

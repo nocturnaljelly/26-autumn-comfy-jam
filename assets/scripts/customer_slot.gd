@@ -90,6 +90,8 @@ func react(correct: bool) -> void:
 	if order == null:
 		return
 	var sound := customer.satisfied_sound if correct else customer.dissatisfied_sound
+	if not correct and customer.alt_dissatisfied_sound != null and sprite.texture in customer.alternate_sprites:
+		sound = customer.alt_dissatisfied_sound
 	SFXManager.play(sound)
 	set_expression(Customer.CustomerExpression.SATISFIED if correct else Customer.CustomerExpression.DISSATISFIED)
 	if correct:
@@ -97,6 +99,7 @@ func react(correct: bool) -> void:
 		Juice.burst(happy_particles, self, get_payment_origin())
 	else:
 		Juice.shake_rotation(sprite, 5.0, 0.5, Vector2(0.5, 1.0))
+		SFXManager.play(SFXManager.confused_sounds.pick_random())
 	say("correct_order" if correct else "incorrect_order")
 	leave()
 	

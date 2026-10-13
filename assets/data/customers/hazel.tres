@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Customer" format=3 uid="uid://dap4wlsjc36ot"]
 
+[ext_resource type="AudioStream" uid="uid://tnt02edyqcxy" path="res://assets/audio/sfx/0_customer_alt_dissatisfied.ogg" id="1_1asw5"]
 [ext_resource type="Texture2D" uid="uid://c2jibggl2vh2o" path="res://assets/images/sprites/0_customer_alt_dissatisfied.png" id="1_5mgfj"]
 [ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="1_customer"]
 [ext_resource type="Texture2D" uid="uid://x56lvv82330o" path="res://assets/images/sprites/0_customer_alt_neutral.png" id="2_dywso"]
@@ -20,3 +21,4 @@ alternate_sprites = Array[Texture2D]([ExtResource("2_dywso"), ExtResource("3_d1o
 enters_sound = ExtResource("5_taukw")
 satisfied_sound = ExtResource("9_ihdh3")
 dissatisfied_sound = ExtResource("4_1asw5")
+alt_dissatisfied_sound = ExtResource("1_1asw5")

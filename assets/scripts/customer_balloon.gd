@@ -152,7 +152,7 @@ func apply_dialogue_line() -> void:
 
 	# Show our balloon
 	if customer_slot:
-		await _attach_to_customer(customer_slot)
+		_attach_to_customer(customer_slot)
 	balloon.show()
 	will_hide_balloon = false
 	dialogue_label.show()

@@ -114,13 +114,19 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="ExampleBalloon" type="CanvasLayer" unique_id=38036521]
-layer = 100
+[node name="ExampleBalloon" type="Control" unique_id=2005373526]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_v4w2v")
 
 [node name="Balloon" type="Control" parent="." unique_id=154399927]
 unique_name_in_owner = true
-layout_mode = 3
+layout_mode = 1
 anchor_right = 0.21400002
 anchor_bottom = 0.231
 offset_right = 0.47198486

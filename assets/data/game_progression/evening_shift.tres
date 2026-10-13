@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameProgression" format=3 uid="uid://bf0uriak76xds"]
+
+[ext_resource type="Script" uid="uid://crlau6b8aruxk" path="res://assets/scripts/data/game_progression.gd" id="1_bkl5c"]
+[ext_resource type="AudioStream" uid="uid://suyxedn70wjl" path="res://assets/audio/music/track_1.ogg" id="1_rv6vh"]
+[ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="2_jb5js"]
+[ext_resource type="Resource" uid="uid://drtmqcuo5e5i2" path="res://assets/data/recipes/black_coffee.tres" id="3_8slyo"]
+[ext_resource type="Resource" uid="uid://cmqp0si4yfao5" path="res://assets/data/recipes/hot_chocolate.tres" id="4_oflmf"]
+
+[resource]
+script = ExtResource("1_bkl5c")
+recipes = Array[ExtResource("2_jb5js")]([ExtResource("3_8slyo"), ExtResource("4_oflmf")])
+music = ExtResource("1_rv6vh")
+metadata/_custom_type_script = "uid://crlau6b8aruxk"

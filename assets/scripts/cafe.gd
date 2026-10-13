@@ -6,6 +6,7 @@ enum View { CUSTOMERS, PREP }
 
 @export var recipe_book: RecipeBook
 @export var customers: Array[Customer] = []
+@export var progressions: Array[GameProgression] = []
 @export var ambience: AudioStream
 	
 var menu: RecipeBook
@@ -16,6 +17,9 @@ var customers_in_sight := true
 var recipe_swap_in_progress := false
 var recipe_swap_pending := false
 var completed_recipes: Array[StringName] = []
+var customers_departed := 0
+var current_progression := 0
+var progression_recipe_book: RecipeBook
 
 @onready var counter_view: Control = %CounterView
 @onready var customer_slots: Container = %CustomerSlots
@@ -36,6 +40,9 @@ var completed_recipes: Array[StringName] = []
 @onready var recipe_swap_timer: Timer = %RecipeSwapTimer
 @onready var swap_bubble: TextureRect = %SwapBubble
 
+@onready var lamps: Node2D = %Lamps
+@onready var lighting: CanvasModulate = %Lighting
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
 
 func _ready() -> void:
 	SFXManager.play(ambience, -30.0)
@@ -48,6 +55,7 @@ func _ready() -> void:
 	cup_view.ingredient_dropped.connect(_add_ingredient)
 	for slot in _slots():
 		slot.plate_button.pressed.connect(_serve.bind(slot))
+		slot.customer_left.connect(_on_customer_left)
 	clear_button.pressed.connect(_clear_cup)
 	recipes_button.pressed.connect(_turn)
 	back_button.pressed.connect(_turn)
@@ -59,7 +67,12 @@ func _ready() -> void:
 	recipe_swap_timer.one_shot = true
 	recipe_swap_timer.timeout.connect(_request_recipe_swap)
 	recipe_swap_timer.start()
-	_update_menu()
+	if not progressions.is_empty():
+		_apply_progression()
+	else:
+		progression_recipe_book = recipe_book
+		_update_menu()
+		
 	_show_view(View.CUSTOMERS)
 	_seat_next_customer()
 	_update_controls()
@@ -101,6 +114,10 @@ func _serve(slot: CustomerSlot) -> void:
 	var correct := completed_recipes.has(slot.order.id)
 	slot.react(correct)
 	_clear_cup()
+
+func _on_customer_left(_customer: Customer) -> void:
+	customers_departed += 1
+	_advance_progression()
 
 func _add_ingredient(ingredient: Ingredient) -> void:
 	if cup.size() < CUP_CAPACITY:
@@ -186,7 +203,7 @@ func _animate_recipe_swap() -> void:
 
 func _animate_swap_bubble() -> void:
 	SFXManager.cat_cue.play()
-	menu.reset_from(recipe_book)
+	_swap_recipes()
 	swap_bubble.pivot_offset = swap_bubble.size / 2.0
 	swap_bubble.scale = Vector2.ZERO
 	swap_bubble.visible = true
@@ -202,7 +219,7 @@ func _animate_swap_bubble() -> void:
 	_finish_recipe_swap()
 
 func _swap_recipes() -> void:
-	menu.reset_from(recipe_book)
+	menu.reset_from(progression_recipe_book)
 	menu.change_random_recipe(CUP_CAPACITY)
 	_update_menu()
 
@@ -241,3 +258,21 @@ func _ingredient_image(ingredient: Ingredient, in_cup: bool = false) -> String:
 	
 func _ingredient_text(ingredient: Ingredient) -> String:
 	return "[color=#%s]%s[/color]" % [ingredient.color.lightened(0.35).to_html(false), ingredient.display_name]
+
+func _apply_progression() -> void:
+	var progression := progressions[current_progression]
+	progression_recipe_book = recipe_book.duplicate()
+	progression_recipe_book.recipes = progression.recipes.duplicate()
+	menu = progression_recipe_book.create_runtime_copy()
+	_update_menu()
+	lighting.visible = progression.night_enabled
+	lamps.visible = progression.night_enabled
+	music_player.stream = progression.music
+	music_player.play()
+	
+func _advance_progression():
+	if current_progression + 1 >= progressions.size():
+		return
+	if customers_departed >= progressions[current_progression + 1].customers_required:
+		current_progression += 1
+		_apply_progression()

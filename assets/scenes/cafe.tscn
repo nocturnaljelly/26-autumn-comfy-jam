@@ -8,14 +8,28 @@
 [ext_resource type="Resource" uid="uid://dap4wlsjc36ot" path="res://assets/data/customers/hazel.tres" id="6_hazel"]
 [ext_resource type="Resource" uid="uid://cmqx4n3vwt3dh" path="res://assets/data/customers/rowan.tres" id="7_rowan"]
 [ext_resource type="Texture2D" uid="uid://baqu6p0dsbgyo" path="res://assets/images/environment.png" id="8_bf56q"]
+[ext_resource type="Script" uid="uid://crlau6b8aruxk" path="res://assets/scripts/data/game_progression.gd" id="8_g11bw"]
 [ext_resource type="Resource" uid="uid://ddjpt78ye5ftp" path="res://assets/data/customers/maple.tres" id="8_maple"]
 [ext_resource type="AudioStream" uid="uid://cpe1vftwt44et" path="res://assets/audio/sfx/ambience.ogg" id="8_pd00h"]
 [ext_resource type="Texture2D" uid="uid://cwvb270hrl6hl" path="res://assets/images/Client_View.png" id="9_0hgwt"]
+[ext_resource type="Resource" uid="uid://bf0uriak76xds" path="res://assets/data/game_progression/evening_shift.tres" id="9_s8y5s"]
 [ext_resource type="PackedScene" uid="uid://dxsoep4cx2uxg" path="res://assets/scenes/customer_slot.tscn" id="9_slot"]
+[ext_resource type="Resource" uid="uid://dyiyfqmw13rkk" path="res://assets/data/game_progression/night_shift.tres" id="10_m6dpc"]
 [ext_resource type="Texture2D" uid="uid://c82v3ikrwodmm" path="res://assets/images/arrow.png" id="11_gei2f"]
 [ext_resource type="PackedScene" uid="uid://dljmag3i214da" path="res://assets/scenes/ingredient_bin.tscn" id="12_bin"]
 [ext_resource type="Texture2D" uid="uid://dkponkelv6ki5" path="res://assets/images/gameplay/cat_recipe_swap_alert.png" id="12_l312g"]
 [ext_resource type="Script" uid="uid://dqd1yjgci38qu" path="res://assets/scripts/cup_view.gd" id="13_cup"]
+
+[sub_resource type="Gradient" id="Gradient_l312g"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l312g"]
+gradient = SubResource("Gradient_l312g")
+width = 96
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8418803, 0.16239317)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prep_board"]
 bg_color = Color(0.84, 0.75, 0.6, 1)
@@ -119,6 +133,7 @@ theme = ExtResource("3_theme")
 script = ExtResource("1_cafe")
 recipe_book = ExtResource("2_book")
 customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("8_maple"), ExtResource("7_rowan")])
+progressions = Array[ExtResource("8_g11bw")]([ExtResource("9_s8y5s"), ExtResource("10_m6dpc")])
 ambience = ExtResource("8_pd00h")
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
@@ -621,6 +636,26 @@ offset_bottom = -121.0
 grow_vertical = 0
 mouse_filter = 2
 texture = ExtResource("12_l312g")
+
+[node name="Lamps" type="Node2D" parent="CounterView/CustomerView" unique_id=154223480]
+unique_name_in_owner = true
+visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="CounterView/CustomerView/Lamps" unique_id=479222337]
+position = Vector2(70, 195)
+scale = Vector2(4.9707026, 5.8098955)
+color = Color(0.9098039, 0.69411767, 0.49411765, 1)
+energy = 0.62
+texture = SubResource("GradientTexture2D_l312g")
+texture_scale = 1.6
+
+[node name="PointLight2D2" type="PointLight2D" parent="CounterView/CustomerView/Lamps" unique_id=1133166085]
+position = Vector2(1087, 195)
+scale = Vector2(4.9707026, 5.8098955)
+color = Color(0.908451, 0.69310325, 0.49316138, 1)
+energy = 0.62
+texture = SubResource("GradientTexture2D_l312g")
+texture_scale = 1.6
 
 [node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=927681668]
 layout_mode = 1
@@ -1664,6 +1699,11 @@ grow_vertical = 0
 text = "Back to prep"
 script = ExtResource("4_button")
 
+[node name="Lighting" type="CanvasModulate" parent="." unique_id=1633548188]
+unique_name_in_owner = true
+visible = false
+color = Color(0.5799765, 0.6510938, 0.8635585, 1)
+
 [node name="ArrivalTimer" type="Timer" parent="." unique_id=155262835]
 unique_name_in_owner = true
 wait_time = 4.0
@@ -1671,3 +1711,5 @@ autostart = true
 
 [node name="RecipeSwapTimer" type="Timer" parent="." unique_id=643335518]
 unique_name_in_owner = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=520347434]

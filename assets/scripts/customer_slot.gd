@@ -57,6 +57,9 @@ func say(cue: String) -> void:
 			order_timer.start()
 		await active_balloon.open_animation()
 
+func get_payment_origin() -> Vector2:
+	return sprite.get_global_rect().get_center()
+
 func set_balloon_visible(value: bool) -> void:
 	balloon_visible = value
 	if is_instance_valid(active_balloon):

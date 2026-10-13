@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://dkponkelv6ki5" path="res://assets/images/gameplay/cat_recipe_swap_alert.png" id="12_l312g"]
 [ext_resource type="Script" uid="uid://dqd1yjgci38qu" path="res://assets/scripts/cup_view.gd" id="13_cup"]
 [ext_resource type="Texture2D" uid="uid://1c4bwwgwlmiv" path="res://assets/images/gameplay/Recipe_Menu_Background.png" id="20_s8y5s"]
+[ext_resource type="PackedScene" path="res://assets/scenes/money_pot.tscn" id="21_pot"]
+[ext_resource type="PackedScene" path="res://assets/scenes/coin_spawner.tscn" id="22_coins"]
 
 [sub_resource type="Gradient" id="Gradient_l312g"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -1204,3 +1206,15 @@ autostart = true
 unique_name_in_owner = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=520347434]
+
+[node name="Hud" type="CanvasLayer" parent="." unique_id=1590002869]
+
+[node name="MoneyPot" parent="Hud" unique_id=681618692 instance=ExtResource("21_pot")]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 176.0
+offset_bottom = 56.0
+
+[node name="CoinSpawner" parent="." unique_id=1989121741 node_paths=PackedStringArray("fly_target") instance=ExtResource("22_coins")]
+unique_name_in_owner = true
+fly_target = NodePath("../Hud/MoneyPot")

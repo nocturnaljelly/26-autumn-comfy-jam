@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/scripts/coin_spawner.gd" id="1_spawner"]
+[ext_resource type="PackedScene" path="res://assets/scenes/coin.tscn" id="2_coin"]
+
+[node name="CoinSpawner" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_spawner")
+coin_scene = ExtResource("2_coin")

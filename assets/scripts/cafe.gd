@@ -8,6 +8,8 @@ enum View { CUSTOMERS, PREP }
 @export var customers: Array[Customer] = []
 @export var progressions: Array[GameProgression] = []
 @export var ambience: AudioStream
+@export var correct_order_money := 10
+@export var wrong_order_money := 2
 	
 var menu: RecipeBook
 var cup: Array[Ingredient] = []
@@ -20,6 +22,7 @@ var completed_recipes: Array[StringName] = []
 var customers_arrived := 0
 var current_progression := 0
 var progression_recipe_book: RecipeBook
+var money := 0
 
 @onready var counter_view: Control = %CounterView
 @onready var customer_slots: Container = %CustomerSlots
@@ -43,6 +46,7 @@ var progression_recipe_book: RecipeBook
 @onready var lamps: Node2D = %Lamps
 @onready var lighting: CanvasModulate = %Lighting
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
+@onready var coin_spawner: CoinSpawner = %CoinSpawner
 
 func _ready() -> void:
 	SFXManager.play(ambience, -30.0)
@@ -124,6 +128,9 @@ func _pick_customer() -> Customer:
 
 func _serve(slot: CustomerSlot) -> void:
 	var correct := completed_recipes.has(slot.order.id)
+	var amount := correct_order_money if correct else wrong_order_money
+	money += amount
+	coin_spawner.spawn(amount, slot.get_payment_origin())
 	slot.react(correct)
 	_clear_cup()
 

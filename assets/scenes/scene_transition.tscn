@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dkihcsr8tx7wp" path="res://assets/scripts/scene_transition.gd" id="1_0x8vl"]
 
 [node name="SceneTransition" type="CanvasLayer" unique_id=501498253]
+layer = 100
 script = ExtResource("1_0x8vl")
 
 [node name="Fade" type="ColorRect" parent="." unique_id=1316519914]

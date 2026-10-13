@@ -10,6 +10,11 @@ enum View { CUSTOMERS, PREP }
 @export var ambience: AudioStream
 @export var correct_order_money := 10
 @export var wrong_order_money := 2
+
+@export_group("Juice")
+@export var drop_particles: PackedScene
+@export var recipe_particles: PackedScene
+@export var wrong_order_shake := 3.0
 	
 var menu: RecipeBook
 var cup: Array[Ingredient] = []
@@ -132,6 +137,8 @@ func _serve(slot: CustomerSlot) -> void:
 	money += amount
 	coin_spawner.spawn(amount, slot.get_payment_origin())
 	slot.react(correct)
+	if not correct:
+		Juice.shake_position(self, wrong_order_shake)
 	_clear_cup()
 
 func _on_customer_left(_customer: Customer) -> void:
@@ -140,13 +147,25 @@ func _add_ingredient(ingredient: Ingredient) -> void:
 	if cup.size() < CUP_CAPACITY:
 		cup.append(ingredient)
 		_update_controls()
+		var had_recipe := not completed_recipes.is_empty()
 		completed_recipes.clear()
 		for recipe in menu.recipes:
 			if recipe.matches(cup):
 				completed_recipes.append(recipe.id)
 		_update_controls()
-		
+		var puff := Juice.burst(drop_particles, cup_view, get_global_mouse_position())
+		if puff is CPUParticles2D:
+			puff.color = ingredient.color
+		if not completed_recipes.is_empty() and not had_recipe:
+			Juice.punch_scale(cup_view, Vector2(0.06, 0.06), 0.6)
+			Juice.shake_rotation(cup_view, 2.0, 0.5)
+			Juice.burst(recipe_particles, cup_view, cup_label.get_global_rect().get_center())
+		else:
+			Juice.punch_scale(cup_label, Vector2(0.12, -0.1))
+
 func _clear_cup() -> void:
+	if not cup.is_empty():
+		Juice.punch_scale(cup_label, Vector2(-0.3, -0.3), 0.5)
 	cup.clear()
 	completed_recipes.clear()
 	_update_controls()

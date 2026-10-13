@@ -6,6 +6,7 @@ signal customer_left(customer: Customer)
 
 @export var fade_duration := 0.8
 @export var customer_dialogue: DialogueResource
+@export var happy_particles: PackedScene
 
 var customer: Customer
 var order: Recipe
@@ -71,6 +72,11 @@ func react(correct: bool) -> void:
 	var sound := customer.satisfied_sound if correct else customer.dissatisfied_sound
 	SFXManager.play(sound)
 	set_expression(Customer.CustomerExpression.SATISFIED if correct else Customer.CustomerExpression.DISSATISFIED)
+	if correct:
+		Juice.punch_scale(sprite, Vector2(-0.06, 0.1), 0.6, Vector2(0.5, 1.0))
+		Juice.burst(happy_particles, self, get_payment_origin())
+	else:
+		Juice.shake_rotation(sprite, 5.0, 0.5, Vector2(0.5, 1.0))
 	say("correct_order" if correct else "incorrect_order")
 	leave()
 	

@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://1c4bwwgwlmiv" path="res://assets/images/gameplay/Recipe_Menu_Background.png" id="20_s8y5s"]
 [ext_resource type="PackedScene" path="res://assets/scenes/money_pot.tscn" id="21_pot"]
 [ext_resource type="PackedScene" path="res://assets/scenes/coin_spawner.tscn" id="22_coins"]
+[ext_resource type="PackedScene" path="res://assets/scenes/drop_particles.tscn" id="23_drop"]
+[ext_resource type="PackedScene" path="res://assets/scenes/celebrate_particles.tscn" id="24_celebrate"]
 
 [sub_resource type="Gradient" id="Gradient_l312g"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -138,6 +140,8 @@ recipe_book = ExtResource("2_book")
 customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("8_maple"), ExtResource("7_rowan")])
 progressions = Array[ExtResource("8_g11bw")]([ExtResource("9_s8y5s"), ExtResource("10_m6dpc")])
 ambience = ExtResource("8_pd00h")
+drop_particles = ExtResource("23_drop")
+recipe_particles = ExtResource("24_celebrate")
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
 unique_name_in_owner = true

@@ -8,6 +8,13 @@ signal customer_left(customer: Customer)
 @export var customer_dialogue: DialogueResource
 @export var happy_particles: PackedScene
 
+@export_group("Motion")
+@export var arrive_offset := 60.0
+@export var arrive_duration := 0.7
+@export var leave_offset := 40.0
+@export var bob_pixels := 2.0
+@export var bob_speed := 2.0
+
 var customer: Customer
 var order: Recipe
 var order_number := 0
@@ -15,6 +22,10 @@ var expression := Customer.CustomerExpression.NEUTRAL
 var _fade_tween: Tween
 var active_balloon: Node
 var balloon_visible := true
+var _rise := 0.0
+var _rise_tween: Tween
+var _bob_time := randf() * TAU
+var _applied_offset := Vector2.ZERO
 
 @onready var customer_view: Control = %Customer
 @onready var bubble: RichTextLabel = %Bubble
@@ -25,6 +36,14 @@ var balloon_visible := true
 
 func _ready() -> void:
 	customer_view.modulate.a = 0.0
+	customer_view.sort_children.connect(func() -> void: _applied_offset = Vector2.ZERO)
+
+func _process(delta: float) -> void:
+	_bob_time += delta * bob_speed
+	var bob := sin(_bob_time) * bob_pixels if customer else 0.0
+	var offset := Vector2(0.0, _rise + bob)
+	sprite.position += offset - _applied_offset
+	_applied_offset = offset
 
 func is_free() -> bool:
 	return customer == null
@@ -34,6 +53,7 @@ func seat(new_customer: Customer, new_order: Recipe) -> void:
 	order = new_order
 	expression = Customer.CustomerExpression.NEUTRAL
 	sprite.texture = customer.get_random_sprite(expression)
+	_tween_rise(arrive_offset, 0.0, arrive_duration, Tween.TRANS_BACK, Tween.EASE_OUT)
 	_fade(1.0)
 	customer_arrived.emit(customer)
 
@@ -85,6 +105,7 @@ func leave() -> void:
 		return
 	order = null
 	plate_button.disabled = true
+	_tween_rise(_rise, leave_offset, fade_duration, Tween.TRANS_SINE, Tween.EASE_IN)
 	_fade(0.0)
 	if is_instance_valid(active_balloon):
 		await active_balloon.close_animation()
@@ -101,6 +122,13 @@ func _on_order_expired() -> void:
 	if order == null:
 		return
 	react(false)
+
+func _tween_rise(from: float, to: float, duration: float, transition: Tween.TransitionType, ease: Tween.EaseType) -> void:
+	if _rise_tween:
+		_rise_tween.kill()
+	_rise = from
+	_rise_tween = create_tween().set_trans(transition).set_ease(ease)
+	_rise_tween.tween_property(self, "_rise", to, duration)
 
 func _fade(alpha: float) -> void:
 	if _fade_tween:

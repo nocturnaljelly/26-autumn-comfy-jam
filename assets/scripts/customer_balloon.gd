@@ -217,6 +217,11 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
 func _attach_to_customer(slot: CustomerSlot) -> void:
+	var view := slot.get_parent().get_parent()
+	if get_parent() != view:
+		reparent(view, true)
+		set_anchors_preset(Control.PRESET_TOP_LEFT)
+		size = get_viewport_rect().size
 	balloon.global_position = slot.dialogue_marker.global_position
 	balloon.global_position.x -= balloon.size.x / 2.0
 	balloon.global_position.y -= balloon.size.y

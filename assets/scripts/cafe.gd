@@ -195,9 +195,8 @@ func _show_view(view: View, animate := true) -> void:
 		_slide_tween.kill()
 	customer_view.position.x = 0.0
 	prep_view.position.x = 0.0
+	_update_balloon_visibility()
 	if animate and previous != view:
-		for slot in _slots():
-			slot.set_balloon_visible(false)
 		var width := counter_view.size.x
 		var direction := 1.0 if view == View.CUSTOMERS else -1.0
 		incoming.visible = true
@@ -209,7 +208,7 @@ func _show_view(view: View, animate := true) -> void:
 		outgoing.position.x = 0.0
 	customer_view.visible = view == View.CUSTOMERS
 	prep_view.visible = view == View.PREP
-	_update_balloon_visibility()
+	
 	_check_pending_recipe_swap()
 	
 func _update_order_text(slot: CustomerSlot) -> void:

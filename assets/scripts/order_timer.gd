@@ -16,6 +16,8 @@ extends Control
 @export var min_pulse_speed := 3.0
 @export var max_pulse_speed := 10.0
 @export var max_wobble_degrees := 3.0
+@onready var critical_sound: AudioStreamPlayer = %CriticalSound
+
 
 @onready var timer: Timer = %Timer
 @onready var progress_bar: TextureProgressBar = %TextureProgressBar
@@ -25,6 +27,7 @@ signal timer_expired
 
 var _phase := 0.0
 var _base_scale := Vector2.ONE
+var critical_sound_played := false
 
 func _ready() -> void:
 	timer.one_shot = true
@@ -41,7 +44,9 @@ func _process(delta: float) -> void:
 		return
 	var progress := timer.time_left / duration
 	progress_bar.value = progress * 100.0
-	if progress <= critical_threshold:
+	if progress <= critical_threshold and not critical_sound_played:
+		critical_sound_played = true
+		critical_sound.play()
 		progress_bar.texture_progress = critical_bar
 	elif progress <= warning_threshold:
 		progress_bar.texture_progress = warning_bar
@@ -50,6 +55,7 @@ func _process(delta: float) -> void:
 	_animate(delta, progress)
 
 func start() -> void:
+	critical_sound_played = false
 	progress_bar.value = 100.0
 	progress_bar.texture_progress = normal_bar
 	_phase = 0.0
@@ -58,6 +64,7 @@ func start() -> void:
 
 func stop() -> void:
 	timer.stop()
+	critical_sound.stop()
 	_reset_motion()
 
 func _animate(delta: float, progress: float) -> void:

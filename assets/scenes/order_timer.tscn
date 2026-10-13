@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://btq3fcwkk4aok" path="res://assets/images/gameplay/warning_bar.png" id="3_2ibj4"]
 [ext_resource type="Texture2D" uid="uid://bmavx86p4328f" path="res://assets/images/gameplay/normal_bar.png" id="3_r7ps1"]
 [ext_resource type="Texture2D" uid="uid://n8lq8e4ocqxv" path="res://assets/images/gameplay/critical_bar.png" id="4_mw1qy"]
+[ext_resource type="AudioStream" uid="uid://dddkbdgasg72e" path="res://assets/audio/sfx/tick_tick.ogg" id="5_mw1qy"]
 
 [node name="OrderTimer" type="Control" unique_id=592437979]
 layout_mode = 3
@@ -27,6 +28,10 @@ offset_left = 98.0
 offset_top = 40.0
 offset_right = 367.0
 offset_bottom = 80.0
+
+[node name="CriticalSound" type="AudioStreamPlayer" parent="." unique_id=1562058645]
+unique_name_in_owner = true
+stream = ExtResource("5_mw1qy")
 
 [node name="Timer" type="Timer" parent="." unique_id=267887348]
 unique_name_in_owner = true

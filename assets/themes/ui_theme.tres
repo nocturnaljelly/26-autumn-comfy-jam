@@ -1,58 +1,22 @@
 [gd_resource type="Theme" format=3 uid="uid://2lg1780hstov"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_disabled"]
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
-bg_color = Color(0.48, 0.29, 0.2, 0.4)
-border_width_bottom = 4
-border_color = Color(0.31, 0.18, 0.12, 0.4)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[ext_resource type="Texture2D" uid="uid://2l36g4inqr3j" path="res://assets/images/gameplay/button_normal.png" id="1_ndjfm"]
+[ext_resource type="Texture2D" uid="uid://bb8v5qwsqvkcx" path="res://assets/images/gameplay/button_pressed.png" id="2_ftahe"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_shs6x"]
+texture = ExtResource("1_ndjfm")
+modulate_color = Color(1, 1, 1, 0.40784314)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
-bg_color = Color(0.58, 0.38, 0.25, 1)
-border_width_bottom = 4
-border_color = Color(0.31, 0.18, 0.12, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndjfm"]
+texture = ExtResource("1_ndjfm")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_normal"]
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
-bg_color = Color(0.48, 0.29, 0.2, 1)
-border_width_bottom = 4
-border_color = Color(0.31, 0.18, 0.12, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w2sxn"]
+texture = ExtResource("1_ndjfm")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
-content_margin_left = 18.0
-content_margin_top = 12.0
-content_margin_right = 18.0
-content_margin_bottom = 8.0
-bg_color = Color(0.37, 0.22, 0.15, 1)
-border_width_top = 4
-border_color = Color(0.27, 0.15, 0.1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_msm3a"]
+texture = ExtResource("2_ftahe")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kr2h2"]
 bg_color = Color(1, 0.9019608, 0.6627451, 1)
@@ -74,11 +38,11 @@ Button/colors/font_focus_color = Color(1, 0.95, 0.86, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_pressed_color = Color(1, 0.95, 0.86, 1)
 Button/colors/font_pressed_color = Color(1, 0.95, 0.86, 1)
-Button/styles/disabled = SubResource("StyleBoxFlat_disabled")
+Button/styles/disabled = SubResource("StyleBoxTexture_shs6x")
 Button/styles/focus = SubResource("StyleBoxEmpty_focus")
-Button/styles/hover = SubResource("StyleBoxFlat_hover")
-Button/styles/normal = SubResource("StyleBoxFlat_normal")
-Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
+Button/styles/hover = SubResource("StyleBoxTexture_ndjfm")
+Button/styles/normal = SubResource("StyleBoxTexture_w2sxn")
+Button/styles/pressed = SubResource("StyleBoxTexture_msm3a")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_kr2h2")
 RichTextLabel/colors/font_outline_color = Color(0.13, 0.08, 0.05, 1)
 RichTextLabel/constants/outline_size = 6

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c57v37yti7y7c" path="res://assets/scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Theme" uid="uid://2lg1780hstov" path="res://assets/themes/ui_theme.tres" id="2_theme"]
 [ext_resource type="Script" uid="uid://dyqb2m2klxrdx" path="res://assets/scripts/animated_button.gd" id="3_button"]
+[ext_resource type="AudioStream" uid="uid://c16jo181l18jx" path="res://assets/audio/music/main_menu.ogg" id="4_57ux2"]
 
 [node name="MainMenu" type="Control" unique_id=156385501]
 layout_mode = 3
@@ -14,8 +15,9 @@ grow_vertical = 2
 theme = ExtResource("2_theme")
 script = ExtResource("1_l6cm7")
 game_scene = "res://assets/scenes/cafe.tscn"
+menu_music = ExtResource("4_57ux2")
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="." unique_id=396579827]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8

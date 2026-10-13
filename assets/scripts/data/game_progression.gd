@@ -4,5 +4,4 @@ extends Resource
 
 @export var customers_required: int = 0
 @export var recipes: Array[Recipe] = []
-@export var music: AudioStream
 @export var night_enabled: bool = false

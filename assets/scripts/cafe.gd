@@ -54,11 +54,11 @@ var _menu_tween: Tween
 
 @onready var lighting: Control = %Lighting
 @onready var modulation: CanvasModulate = %Modulation
-@onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var coin_spawner: CoinSpawner = %CoinSpawner
 
 func _ready() -> void:
 	SFXManager.play(ambience, -30.0)
+	MusicPlayer.start_playlist()
 	menu = recipe_book.create_runtime_copy()
 	var bins := _bins()
 	if menu.ingredients.size() > bins.size():
@@ -82,7 +82,6 @@ func _ready() -> void:
 	recipe_swap_timer.start()
 	if not progressions.is_empty():
 		_apply_progression()
-		_fade_in_music()
 	else:
 		progression_recipe_book = recipe_book
 		_update_menu()
@@ -90,12 +89,6 @@ func _ready() -> void:
 	_show_view(View.CUSTOMERS, false)
 	_seat_next_customer()
 	_update_controls()
-
-# make music player autoload later
-func _fade_in_music() -> void:
-	music_player.volume_db = -30.0
-	music_player.play()
-	await create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).tween_property(music_player, "volume_db", 0.0, 2.0).finished
 
 func _turn() -> void:
 	facing_menu = not facing_menu
@@ -356,7 +349,6 @@ func _apply_progression() -> void:
 	_update_menu()
 	modulation.visible = progression.night_enabled
 	lighting.visible = progression.night_enabled
-	music_player.stream = progression.music
 	
 var progression_in_progress := false
 func _advance_progression():
@@ -368,14 +360,12 @@ func _advance_progression():
 	progression_in_progress = true
 	while recipe_swap_in_progress:
 		await get_tree().process_frame
-	await create_tween().tween_property(music_player, "volume_db", -30.0, 2.0).finished
-	music_player.stop()
-	await get_tree().create_timer(1.0).timeout
+	await MusicPlayer.fade_out()
 	await SceneTransition.hide_screen()
 	current_progression += 1
 	_apply_progression()
 	await SceneTransition.show_screen(2.0)
+	MusicPlayer.fade_in()
 	recipe_swap_pending = false
 	recipe_swap_timer.start()
-	_fade_in_music()
 	progression_in_progress = false

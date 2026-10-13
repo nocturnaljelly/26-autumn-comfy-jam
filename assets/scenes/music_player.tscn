@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b7rsrcbmgwbbb"]
+
+[ext_resource type="Script" uid="uid://tb86j11gg2xp" path="res://assets/scripts/music_player.gd" id="1_rhvhw"]
+[ext_resource type="AudioStream" uid="uid://suyxedn70wjl" path="res://assets/audio/music/track_1.ogg" id="2_10g7n"]
+[ext_resource type="AudioStream" uid="uid://ciqt5b5l6nj5i" path="res://assets/audio/music/track_2.ogg" id="3_twbvl"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" unique_id=962192373]
+script = ExtResource("1_rhvhw")
+playlist = Array[AudioStream]([ExtResource("2_10g7n"), ExtResource("3_twbvl")])

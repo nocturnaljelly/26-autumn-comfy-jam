@@ -187,6 +187,8 @@ func _clear_cup() -> void:
 	_update_controls()
 
 func _show_view(view: View, animate := true) -> void:
+	if recipe_swap_in_progress:
+		return
 	var previous := current_view
 	current_view = view
 	var incoming := customer_view if view == View.CUSTOMERS else prep_view
@@ -244,6 +246,8 @@ func _check_pending_recipe_swap() -> void:
 		return
 	recipe_swap_pending = false
 	recipe_swap_in_progress = true
+	to_prep_button.modulate.a = 0.5
+	to_customers_button.modulate.a = 0.5
 	if current_view == View.PREP:
 		recipes_button.disabled = true
 		_animate_recipe_swap()
@@ -308,6 +312,8 @@ func _finish_recipe_swap() -> void:
 	recipes_button.disabled = false
 	swap_bubble.visible = false
 	recipe_swap_timer.start()
+	to_prep_button.modulate.a = 1.0
+	to_customers_button.modulate.a = 1.0
 
 func _update_menu() -> void:
 	var lines: PackedStringArray = []

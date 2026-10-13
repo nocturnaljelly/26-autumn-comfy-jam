@@ -19,22 +19,22 @@
 [ext_resource type="PackedScene" uid="uid://dljmag3i214da" path="res://assets/scenes/ingredient_bin.tscn" id="12_bin"]
 [ext_resource type="Texture2D" uid="uid://dkponkelv6ki5" path="res://assets/images/gameplay/cat_recipe_swap_alert.png" id="12_l312g"]
 [ext_resource type="Script" uid="uid://dqd1yjgci38qu" path="res://assets/scripts/cup_view.gd" id="13_cup"]
+[ext_resource type="Shader" uid="uid://cid4jbqg6w31t" path="res://assets/shaders/lighting.gdshader" id="18_wx11x"]
+[ext_resource type="Texture2D" uid="uid://b42jf1236aoe6" path="res://assets/images/gameplay/light.png" id="19_ygu5f"]
 [ext_resource type="Texture2D" uid="uid://1c4bwwgwlmiv" path="res://assets/images/gameplay/Recipe_Menu_Background.png" id="20_s8y5s"]
 [ext_resource type="PackedScene" path="res://assets/scenes/money_pot.tscn" id="21_pot"]
 [ext_resource type="PackedScene" path="res://assets/scenes/coin_spawner.tscn" id="22_coins"]
 [ext_resource type="PackedScene" path="res://assets/scenes/drop_particles.tscn" id="23_drop"]
 [ext_resource type="PackedScene" path="res://assets/scenes/celebrate_particles.tscn" id="24_celebrate"]
 
-[sub_resource type="Gradient" id="Gradient_l312g"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_l312g"]
-gradient = SubResource("Gradient_l312g")
-width = 96
-height = 96
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8418803, 0.16239317)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
+shader = ExtResource("18_wx11x")
+shader_parameter/light_texture = ExtResource("19_ygu5f")
+shader_parameter/light_color = Vector3(200, 100, 60)
+shader_parameter/brightness = 0.2910000138225
+shader_parameter/attenuation_strength = 0.7810000370975
+shader_parameter/intensity = 2.8310001344725
+shader_parameter/max_brightness = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prep_board"]
 bg_color = Color(0.84, 0.75, 0.6, 1)
@@ -644,25 +644,34 @@ grow_vertical = 0
 mouse_filter = 2
 texture = ExtResource("12_l312g")
 
-[node name="Lamps" type="Node2D" parent="CounterView/CustomerView" unique_id=154223480]
+[node name="Lighting" type="Control" parent="CounterView/CustomerView" unique_id=411876280]
 unique_name_in_owner = true
-visible = false
+z_index = 100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="PointLight2D" type="PointLight2D" parent="CounterView/CustomerView/Lamps" unique_id=479222337]
-position = Vector2(70, 195)
-scale = Vector2(4.9707026, 5.8098955)
-color = Color(0.9098039, 0.69411767, 0.49411765, 1)
-energy = 0.62
-texture = SubResource("GradientTexture2D_l312g")
-texture_scale = 1.6
+[node name="Lamp1" type="TextureRect" parent="CounterView/CustomerView/Lighting" unique_id=723081793]
+material = SubResource("ShaderMaterial_rg5ck")
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 394.0
+texture = ExtResource("19_ygu5f")
 
-[node name="PointLight2D2" type="PointLight2D" parent="CounterView/CustomerView/Lamps" unique_id=1133166085]
-position = Vector2(1087, 195)
-scale = Vector2(4.9707026, 5.8098955)
-color = Color(0.908451, 0.69310325, 0.49316138, 1)
-energy = 0.62
-texture = SubResource("GradientTexture2D_l312g")
-texture_scale = 1.6
+[node name="Lamp2" type="TextureRect" parent="CounterView/CustomerView/Lighting" unique_id=2043900845]
+material = SubResource("ShaderMaterial_rg5ck")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -153.0
+offset_bottom = 394.0
+grow_horizontal = 0
+texture = ExtResource("19_ygu5f")
 
 [node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=927681668]
 layout_mode = 1
@@ -1116,6 +1125,7 @@ flip_h = true
 
 [node name="MenuView" type="Control" parent="." unique_id=718232917]
 unique_name_in_owner = true
+visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -1197,10 +1207,9 @@ grow_vertical = 0
 text = "Back to prep"
 script = ExtResource("4_button")
 
-[node name="Lighting" type="CanvasModulate" parent="." unique_id=1633548188]
+[node name="Modulation" type="CanvasModulate" parent="." unique_id=1633548188]
 unique_name_in_owner = true
-visible = false
-color = Color(0.5799765, 0.6510938, 0.8635585, 1)
+color = Color(0.73111206, 0.78112, 0.9209361, 1)
 
 [node name="ArrivalTimer" type="Timer" parent="." unique_id=155262835]
 unique_name_in_owner = true

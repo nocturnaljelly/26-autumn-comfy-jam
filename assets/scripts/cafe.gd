@@ -52,8 +52,8 @@ var _menu_tween: Tween
 @onready var recipe_swap_timer: Timer = %RecipeSwapTimer
 @onready var swap_bubble: TextureRect = %SwapBubble
 
-@onready var lamps: Node2D = %Lamps
-@onready var lighting: CanvasModulate = %Lighting
+@onready var lighting: Control = %Lighting
+@onready var modulation: CanvasModulate = %Modulation
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var coin_spawner: CoinSpawner = %CoinSpawner
 
@@ -354,8 +354,8 @@ func _apply_progression() -> void:
 	progression_recipe_book.recipes = progression.recipes.duplicate()
 	menu = progression_recipe_book.create_runtime_copy()
 	_update_menu()
+	modulation.visible = progression.night_enabled
 	lighting.visible = progression.night_enabled
-	lamps.visible = progression.night_enabled
 	music_player.stream = progression.music
 	
 var progression_in_progress := false

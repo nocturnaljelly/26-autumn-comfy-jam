@@ -17,7 +17,7 @@ var customers_in_sight := true
 var recipe_swap_in_progress := false
 var recipe_swap_pending := false
 var completed_recipes: Array[StringName] = []
-var customers_departed := 0
+var customers_arrived := 0
 var current_progression := 0
 var progression_recipe_book: RecipeBook
 
@@ -69,6 +69,7 @@ func _ready() -> void:
 	recipe_swap_timer.start()
 	if not progressions.is_empty():
 		_apply_progression()
+		_fade_in_music()
 	else:
 		progression_recipe_book = recipe_book
 		_update_menu()
@@ -76,6 +77,12 @@ func _ready() -> void:
 	_show_view(View.CUSTOMERS)
 	_seat_next_customer()
 	_update_controls()
+
+# make music player autoload later
+func _fade_in_music() -> void:
+	music_player.volume_db = -30.0
+	music_player.play()
+	await create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).tween_property(music_player, "volume_db", 0.0, 2.0).finished
 
 func _turn() -> void:
 	facing_menu = not facing_menu
@@ -95,12 +102,17 @@ func _bins() -> Array[IngredientBin]:
 	return bins
 
 func _seat_next_customer() -> void:
+	if _shift_finished():
+		return
+	if progression_in_progress:
+		return
 	var free_slots := _slots().filter(func(slot: CustomerSlot) -> bool: return slot.is_free())
 	if free_slots.is_empty():
 		return
 	var free_slot: CustomerSlot = free_slots.pick_random()
 	var customer := _pick_customer()
 	free_slot.seat(customer, menu.get_random_recipe())
+	customers_arrived += 1
 	SFXManager.play(customer.enters_sound)
 	_update_order_text(free_slot)
 	_update_controls()
@@ -116,9 +128,7 @@ func _serve(slot: CustomerSlot) -> void:
 	_clear_cup()
 
 func _on_customer_left(_customer: Customer) -> void:
-	customers_departed += 1
 	_advance_progression()
-
 func _add_ingredient(ingredient: Ingredient) -> void:
 	if cup.size() < CUP_CAPACITY:
 		cup.append(ingredient)
@@ -160,10 +170,14 @@ func _change_customer_sprites() -> void:
 			slot.change_sprite()
 
 func _request_recipe_swap() -> void:
+	if _shift_finished():
+		return
 	recipe_swap_pending = true
 	_check_pending_recipe_swap()
 
 func _check_pending_recipe_swap() -> void:
+	if _shift_finished():
+		return
 	if not recipe_swap_pending or recipe_swap_in_progress or facing_menu:
 		return
 	recipe_swap_pending = false
@@ -259,6 +273,9 @@ func _ingredient_image(ingredient: Ingredient, in_cup: bool = false) -> String:
 func _ingredient_text(ingredient: Ingredient) -> String:
 	return "[color=#%s]%s[/color]" % [ingredient.color.lightened(0.35).to_html(false), ingredient.display_name]
 
+func _shift_finished() -> bool:
+	return current_progression + 1 < progressions.size() and customers_arrived >= progressions[current_progression + 1].customers_required
+
 func _apply_progression() -> void:
 	var progression := progressions[current_progression]
 	progression_recipe_book = recipe_book.duplicate()
@@ -268,11 +285,23 @@ func _apply_progression() -> void:
 	lighting.visible = progression.night_enabled
 	lamps.visible = progression.night_enabled
 	music_player.stream = progression.music
-	music_player.play()
 	
+var progression_in_progress := false
 func _advance_progression():
-	if current_progression + 1 >= progressions.size():
+	if progression_in_progress or not _shift_finished():
 		return
-	if customers_departed >= progressions[current_progression + 1].customers_required:
-		current_progression += 1
-		_apply_progression()
+	for slot in _slots():
+		if not slot.is_free():
+			return
+	progression_in_progress = true
+	while recipe_swap_in_progress:
+		await get_tree().process_frame
+	await create_tween().tween_property(music_player, "volume_db", -30.0, 2.0).finished
+	music_player.stop()
+	await get_tree().create_timer(1.0).timeout
+	await SceneTransition.fade_out()
+	current_progression += 1
+	_apply_progression()
+	await SceneTransition.fade_in(2.0)
+	_fade_in_music()
+	progression_in_progress = false

@@ -1,9 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d2bjy6n06oyoo"]
 
-[ext_resource type="Script" path="res://assets/scripts/coin_spawner.gd" id="1_spawner"]
+[ext_resource type="Script" uid="uid://cert5jls64d11" path="res://assets/scripts/coin_spawner.gd" id="1_spawner"]
 [ext_resource type="PackedScene" path="res://assets/scenes/coin.tscn" id="2_coin"]
+[ext_resource type="AudioStream" uid="uid://damjiuxco8nuj" path="res://assets/audio/sfx/coin3.ogg" id="3_ggk3q"]
 
-[node name="CoinSpawner" type="CanvasLayer"]
+[node name="CoinSpawner" type="CanvasLayer" unique_id=1630241975]
 layer = 2
 script = ExtResource("1_spawner")
 coin_scene = ExtResource("2_coin")
+coin_sound = ExtResource("3_ggk3q")

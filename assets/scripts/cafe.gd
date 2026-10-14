@@ -358,7 +358,7 @@ func _update_menu() -> void:
 		var names: PackedStringArray = []
 		for ingredient in recipe.ingredients:
 			names.append(_ingredient_image(ingredient))
-		lines.append("[color=%s]%d.[/color] %s = [wave amp=25 freq=3]%s[/wave]" % [HIGHLIGHT_COLOR, menu.get_number(recipe), " + ".join(names), recipe.display_name])
+		lines.append("[color=%s]%d.[/color] %s = [img]%s[/img] [wave amp=25 freq=3]%s[/wave]" % [HIGHLIGHT_COLOR, menu.get_number(recipe), " + ".join(names), recipe.icon.resource_path,  recipe.display_name])
 	menu_label.text = "\n".join(lines)
 
 func _update_controls() -> void:
@@ -367,12 +367,24 @@ func _update_controls() -> void:
 		names.append(_ingredient_image(ingredient, true))
 	if not names.is_empty():
 		names[names.size() - 1] = "%s" % names[names.size() - 1]
-	cup_label.text = "Cup: " + (" + ".join(names) if not names.is_empty() else "[color=#ffffff80]empty[/color]")
+	if not completed_recipes.is_empty():
+		var recipe := menu.get_recipe(completed_recipes[0])
+		cup_label.text = "[img]%s[/img]" % recipe.icon.resource_path
+	else:
+		cup_label.text = (" + ".join(names) if not names.is_empty() else "[color=#ffffff80]empty[/color]")
 	for bin in _bins():
 		bin.disabled = cup.size() >= CUP_CAPACITY
 	cup_view.is_full = cup.size() >= CUP_CAPACITY
 	for slot in _slots():
 		slot.plate_button.disabled = slot.order == null or cup.is_empty()
+		slot.plate_button.text = "Serve"
+		slot.plate_button.icon = null
+		if not completed_recipes.is_empty():
+			for recipe in menu.recipes:
+				if recipe.id == completed_recipes[0]:
+					slot.plate_button.text = ""
+					slot.plate_button.icon = recipe.icon
+					break
 	clear_button.disabled = cup.is_empty()
 
 func _ingredient_image(ingredient: Ingredient, in_cup: bool = false) -> String:

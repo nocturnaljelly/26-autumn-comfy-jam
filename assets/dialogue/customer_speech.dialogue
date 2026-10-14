@@ -1,5 +1,5 @@
 ~ order
-[wave amp=40 freq=5][color=#ffd27a]Number {{order_number}}[/color][/wave]
+[wave amp=40 freq=5]Can I get a {{order.display_name}}?[/wave]
 => END
 
 ~ correct_order

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dxsoep4cx2uxg"]
 
+[ext_resource type="Theme" uid="uid://2lg1780hstov" path="res://assets/themes/ui_theme.tres" id="1_ejjao"]
 [ext_resource type="Script" uid="uid://y4nvg08k6p73" path="res://assets/scripts/customer_slot.gd" id="1_slot"]
 [ext_resource type="Script" uid="uid://dyqb2m2klxrdx" path="res://assets/scripts/animated_button.gd" id="2_button"]
 [ext_resource type="Resource" uid="uid://bufsoanpww30r" path="res://assets/dialogue/customer_speech.dialogue" id="2_u6vf3"]
@@ -13,6 +14,7 @@ anchors_preset = 0
 offset_right = 217.0
 offset_bottom = 370.0
 size_flags_horizontal = 3
+theme = ExtResource("1_ejjao")
 script = ExtResource("1_slot")
 customer_dialogue = ExtResource("2_u6vf3")
 happy_particles = ExtResource("5_celebrate")
@@ -21,7 +23,6 @@ happy_particles = ExtResource("5_celebrate")
 layout_mode = 0
 offset_right = 217.0
 offset_bottom = 355.0
-theme_override_constants/separation = 16
 
 [node name="Customer" type="VBoxContainer" parent="VBoxContainer" unique_id=1340471545]
 unique_name_in_owner = true
@@ -62,6 +63,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 disabled = true
 text = "Serve"
+icon_alignment = 1
+vertical_icon_alignment = 0
 script = ExtResource("2_button")
 
 [node name="DialogueMarker2D" type="Marker2D" parent="." unique_id=1196649018]

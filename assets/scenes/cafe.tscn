@@ -34,7 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://1c4bwwgwlmiv" path="res://assets/images/gameplay/Recipe_Menu_Background.png" id="20_s8y5s"]
 [ext_resource type="PackedScene" path="res://assets/scenes/money_pot.tscn" id="21_pot"]
 [ext_resource type="AudioStream" uid="uid://blecalcuxcqlk" path="res://assets/audio/sfx/swoosh3.ogg" id="21_wjbrc"]
-[ext_resource type="PackedScene" path="res://assets/scenes/coin_spawner.tscn" id="22_coins"]
+[ext_resource type="PackedScene" uid="uid://d2bjy6n06oyoo" path="res://assets/scenes/coin_spawner.tscn" id="22_coins"]
 [ext_resource type="AudioStream" uid="uid://cbpfukgs8ltcf" path="res://assets/audio/sfx/item_down1.ogg" id="22_wjbrc"]
 [ext_resource type="AudioStream" uid="uid://bxy7ax8cocg58" path="res://assets/audio/sfx/item_down2.ogg" id="23_caegs"]
 [ext_resource type="PackedScene" path="res://assets/scenes/drop_particles.tscn" id="23_drop"]
@@ -170,7 +170,6 @@ mouse_filter = 2
 
 [node name="CustomerView" type="Control" parent="CounterView" unique_id=211543271]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -343,6 +342,7 @@ texture = SubResource("AtlasTexture_k28jo")
 
 [node name="PrepView" type="Control" parent="CounterView" unique_id=1206113019]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="Recipe" format=3]
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://brl4y0ko3wkjb"]
 
-[ext_resource type="Script" path="res://assets/scripts/data/ingredient.gd" id="1_0pygv"]
-[ext_resource type="Resource" path="res://assets/data/ingredients/coffee.tres" id="2_7vi1e"]
-[ext_resource type="Resource" path="res://assets/data/ingredients/water.tres" id="3_mtjgh"]
-[ext_resource type="Script" path="res://assets/scripts/data/recipe.gd" id="4_8ivqh"]
+[ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_0pygv"]
+[ext_resource type="Texture2D" uid="uid://u01rswq0nqcp" path="res://assets/images/gameplay/recipe_icons.png" id="1_7vi1e"]
+[ext_resource type="Resource" uid="uid://l8rpfr7mla05" path="res://assets/data/ingredients/coffee.tres" id="2_7vi1e"]
+[ext_resource type="Resource" uid="uid://nsyin5fkiwcd" path="res://assets/data/ingredients/water.tres" id="3_mtjgh"]
+[ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="4_8ivqh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ibvy"]
+atlas = ExtResource("1_7vi1e")
+region = Rect2(0, 75, 0, 79)
+margin = Rect2(0, -4, 0, 0)
 
 [resource]
 script = ExtResource("4_8ivqh")
@@ -12,3 +18,4 @@ display_name = "Black Coffee"
 description = "No nonsense."
 ingredients = Array[ExtResource("1_0pygv")]([ExtResource("2_7vi1e"), ExtResource("3_mtjgh")])
 color = Color(0.2, 0.12, 0.07, 1)
+icon = SubResource("AtlasTexture_5ibvy")

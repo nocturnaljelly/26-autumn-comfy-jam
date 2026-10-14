@@ -30,7 +30,7 @@ var cup: Array[Ingredient] = []
 var current_view := View.CUSTOMERS
 var facing_menu := false
 var customers_in_sight := true
-var recipe_swap_wait_time = 2.0
+var recipe_swap_wait_time = 8.0
 var recipe_swap_in_progress := false
 var recipe_swap_pending := false
 var completed_recipes: Array[StringName] = []
@@ -192,8 +192,6 @@ func _clear_cup() -> void:
 	_update_controls()
 
 func _show_view(view: View, animate := true) -> void:
-	if recipe_swap_in_progress:
-		return
 	var previous := current_view
 	current_view = view
 	var incoming := customer_view if view == View.CUSTOMERS else prep_view
@@ -252,8 +250,6 @@ func _check_pending_recipe_swap() -> void:
 		return
 	recipe_swap_pending = false
 	recipe_swap_in_progress = true
-	to_prep_button.modulate.a = 0.5
-	to_customers_button.modulate.a = 0.5
 	if current_view == View.PREP:
 		recipes_button.disabled = true
 		_animate_recipe_swap()
@@ -262,33 +258,33 @@ func _check_pending_recipe_swap() -> void:
 
 # hash out the motion
 func _animate_recipe_swap() -> void:
-	var button_start := recipes_button.global_position.x
-	var paw_end := paw_graphic.global_position.x
+	var button_start := recipes_button.position.x
+	var paw_end := paw_graphic.position.x
 	var paw_start := -paw_graphic.size.x
-	paw_graphic.global_position.x = paw_start
+	paw_graphic.position.x = paw_start
 	paw_graphic.visible = true
 	
 	var clipboard: Control = recipes_button.get_node("Clipboard")
 	var tween := create_tween()
-	tween.tween_property(paw_graphic, "global_position:x", paw_end, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(paw_graphic, "position:x", paw_end, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(func() -> void: Juice.shake_rotation(clipboard, 6.0, 0.3))
 	tween.tween_interval(0.1)
-	tween.tween_property(paw_graphic, "global_position:x", paw_start, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(recipes_button, "global_position:x", -recipes_button.size.x - 10.0, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_property(paw_graphic, "position:x", paw_start, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.parallel().tween_property(recipes_button, "position:x", -recipes_button.size.x - 10.0, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	await tween.finished
 	
 	_swap_recipes()
 	await get_tree().create_timer(0.3).timeout
 	
 	tween = create_tween()
-	tween.tween_property(paw_graphic, "global_position:x", paw_end, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(recipes_button, "global_position:x", button_start, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(paw_graphic, "position:x", paw_end, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(recipes_button, "position:x", button_start, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(func() -> void: Juice.punch_scale(clipboard, Vector2(0.1, 0.1)))
-	tween.tween_property(paw_graphic, "global_position:x", paw_start, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	tween.tween_property(paw_graphic, "position:x", paw_start, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	await tween.finished
 	
 	paw_graphic.visible = false
-	paw_graphic.global_position.x = paw_end
+	paw_graphic.position.x = paw_end
 	_finish_recipe_swap()
 
 func _animate_swap_bubble() -> void:
@@ -318,8 +314,6 @@ func _finish_recipe_swap() -> void:
 	recipes_button.disabled = false
 	swap_bubble.visible = false
 	recipe_swap_timer.start()
-	to_prep_button.modulate.a = 1.0
-	to_customers_button.modulate.a = 1.0
 
 func _stop_recipe_swaps() -> bool:
 	if not _shift_finished():

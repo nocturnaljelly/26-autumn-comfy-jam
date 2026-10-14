@@ -9,3 +9,27 @@
 ~ incorrect_order
 [shake rate=20 level=10]What is this?[/shake]
 => END
+
+## special customer dialogues below!!
+# tutorial
+
+~ introduction_dialogue
+
+=> END 
+
+~ tutorial_correct_order
+Awesome!
+=> END
+
+~ tutorial_incorrect_order
+Come on, you can do better than that!
+=> END
+
+~ tutorial_cat_warning
+Watch out for Moka!
+=> END
+
+# good ending
+
+
+# bad ending

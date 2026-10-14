@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Customer" format=3 uid="uid://dheuyf8fepvlt"]
+
+[ext_resource type="Texture2D" uid="uid://x56lvv82330o" path="res://assets/images/sprites/0_customer_alt_neutral.png" id="1_jqa4k"]
+[ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="1_pcemb"]
+[ext_resource type="Texture2D" uid="uid://ty53euclrfwf" path="res://assets/images/sprites/0_customer_alt_satisfied.png" id="2_ls814"]
+[ext_resource type="Texture2D" uid="uid://c2jibggl2vh2o" path="res://assets/images/sprites/0_customer_alt_dissatisfied.png" id="3_u86ky"]
+
+[resource]
+script = ExtResource("1_pcemb")
+id = &"special_customer"
+display_name = "Special Customer"
+normal_sprites = Array[Texture2D]([ExtResource("1_jqa4k"), ExtResource("2_ls814"), ExtResource("3_u86ky")])
+metadata/_custom_type_script = "uid://df7auk1drro8p"

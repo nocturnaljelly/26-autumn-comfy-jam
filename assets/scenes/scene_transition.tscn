@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dkihcsr8tx7wp" path="res://assets/scripts/scene_transition.gd" id="1_0x8vl"]
 [ext_resource type="Shader" uid="uid://dfpoqswe4j3yx" path="res://assets/shaders/inverse_mask.gdshader" id="2_shader"]
-[ext_resource type="Texture2D" uid="uid://c82v3ikrwodmm" path="res://assets/images/arrow.png" id="3_mask"]
+[ext_resource type="Texture2D" uid="uid://bwyi1psldnt4j" path="res://assets/images/gameplay/cat_mask.png" id="3_qveo5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mask"]
 shader = ExtResource("2_shader")
-shader_parameter/mask_texture = ExtResource("3_mask")
+shader_parameter/mask_texture = ExtResource("3_qveo5")
 shader_parameter/mask_scale = 0.0
 
 [node name="SceneTransition" type="CanvasLayer" unique_id=501498253]

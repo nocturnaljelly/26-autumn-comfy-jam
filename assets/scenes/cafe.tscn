@@ -32,6 +32,8 @@
 [ext_resource type="PackedScene" path="res://assets/scenes/drop_particles.tscn" id="23_drop"]
 [ext_resource type="PackedScene" path="res://assets/scenes/celebrate_particles.tscn" id="24_celebrate"]
 [ext_resource type="Texture2D" uid="uid://dmwthtot52ye5" path="res://assets/images/gameplay/tip_jar.png" id="27_rmm4h"]
+[ext_resource type="Texture2D" uid="uid://bkp5244khf7xx" path="res://assets/images/gameplay/recipe_book.png" id="28_dbyt7"]
+[ext_resource type="Texture2D" uid="uid://c3csax50mh3rc" path="res://assets/images/gameplay/prep_view.png" id="28_k28jo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
 shader = ExtResource("18_wx11x")
@@ -80,18 +82,6 @@ gradient = SubResource("Gradient_prep_dash")
 width = 18
 height = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prep_mat"]
-bg_color = Color(0.95, 0.9, 0.81, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.55, 0.36, 0.22, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prep_send_off"]
 bg_color = Color(0.42, 0.26, 0.15, 1)
 border_width_left = 4
@@ -128,27 +118,6 @@ corner_radius_top_right = 99
 corner_radius_bottom_right = 99
 corner_radius_bottom_left = 99
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prep_clipboard"]
-bg_color = Color(0.55, 0.36, 0.22, 1)
-border_width_bottom = 4
-border_color = Color(0.42, 0.26, 0.15, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prep_paper"]
-bg_color = Color(0.99, 0.97, 0.92, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.42, 0.26, 0.15, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
 [node name="Cafe" type="Control" unique_id=432355658]
 layout_mode = 3
 anchors_preset = 15
@@ -182,6 +151,7 @@ mouse_filter = 2
 
 [node name="CustomerView" type="Control" parent="CounterView" unique_id=211543271]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -354,26 +324,15 @@ texture = SubResource("AtlasTexture_k28jo")
 
 [node name="PrepView" type="Control" parent="CounterView" unique_id=1206113019]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Background" type="TextureRect" parent="CounterView/PrepView" unique_id=240846062]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 6
 
 [node name="PrototypeGraphics" type="Control" parent="CounterView/PrepView" unique_id=482562561]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -383,6 +342,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Wall" type="ColorRect" parent="CounterView/PrepView/PrototypeGraphics" unique_id=360810748]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -393,6 +353,7 @@ mouse_filter = 2
 color = Color(0.94, 0.88, 0.77, 1)
 
 [node name="Counter" type="ColorRect" parent="CounterView/PrepView/PrototypeGraphics" unique_id=243958976]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.21
@@ -411,6 +372,7 @@ mouse_filter = 2
 color = Color(0.42, 0.26, 0.15, 1)
 
 [node name="Board" type="Panel" parent="CounterView/PrepView/PrototypeGraphics" unique_id=860752741]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
@@ -433,16 +395,6 @@ mouse_filter = 2
 texture = SubResource("GradientTexture2D_prep_dash_h")
 expand_mode = 1
 stretch_mode = 1
-
-[node name="PrepMat" type="Panel" parent="CounterView/PrepView/PrototypeGraphics" unique_id=341847623]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.223
-anchor_top = 0.428
-anchor_right = 0.657
-anchor_bottom = 0.847
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_prep_mat")
 
 [node name="SendOffSign" type="ColorRect" parent="CounterView/PrepView/PrototypeGraphics" unique_id=654909413]
 visible = false
@@ -511,6 +463,22 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_prep_plate_well")
 
+[node name="Graphics" type="Control" parent="CounterView/PrepView" unique_id=1072400104]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="CounterView/PrepView/Graphics" unique_id=23047138]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1112.0
+offset_bottom = 608.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_k28jo")
+
 [node name="RecipesButton" type="Button" parent="CounterView/PrepView" unique_id=903708024]
 unique_name_in_owner = true
 layout_mode = 1
@@ -525,84 +493,11 @@ script = ExtResource("4_button")
 idle_bob_pixels = 0.0
 idle_tilt_degrees = 0.0
 
-[node name="Clipboard" type="Panel" parent="CounterView/PrepView/RecipesButton" unique_id=1024958832]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_prep_clipboard")
-
-[node name="Paper" type="Panel" parent="CounterView/PrepView/RecipesButton/Clipboard" unique_id=349252553]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 20.0
-offset_right = -8.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_prep_paper")
-
-[node name="Title" type="Label" parent="CounterView/PrepView/RecipesButton/Clipboard/Paper" unique_id=1021379510]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 12.0
-offset_bottom = 36.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.42, 0.26, 0.15, 1)
-theme_override_font_sizes/font_size = 16
-text = "Recipes"
-horizontal_alignment = 1
-
-[node name="Line1" type="ColorRect" parent="CounterView/PrepView/RecipesButton/Clipboard/Paper" unique_id=204798588]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.14
-anchor_top = 0.4
-anchor_right = 0.86
-anchor_bottom = 0.4
-offset_bottom = 3.0
-mouse_filter = 2
-color = Color(0.45, 0.42, 0.4, 1)
-
-[node name="Line2" type="ColorRect" parent="CounterView/PrepView/RecipesButton/Clipboard/Paper" unique_id=1004473691]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.14
-anchor_top = 0.57
-anchor_right = 0.72
-anchor_bottom = 0.57
-offset_bottom = 3.0
-mouse_filter = 2
-color = Color(0.45, 0.42, 0.4, 1)
-
-[node name="Line3" type="ColorRect" parent="CounterView/PrepView/RecipesButton/Clipboard/Paper" unique_id=550175574]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.14
-anchor_top = 0.74
-anchor_right = 0.8
-anchor_bottom = 0.74
-offset_bottom = 3.0
-mouse_filter = 2
-color = Color(0.45, 0.42, 0.4, 1)
-
-[node name="Clip" type="ColorRect" parent="CounterView/PrepView/RecipesButton/Clipboard" unique_id=1009784022]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3
-anchor_right = 0.7
-offset_top = 6.0
-offset_bottom = 26.0
-mouse_filter = 2
-color = Color(0.6, 0.6, 0.63, 1)
+[node name="Clipboard" type="TextureRect" parent="CounterView/PrepView/RecipesButton" unique_id=1240951582]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("28_dbyt7")
 
 [node name="PawGraphic" type="ColorRect" parent="CounterView/PrepView" unique_id=2135399802]
 unique_name_in_owner = true
@@ -625,6 +520,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -636,8 +533,10 @@ anchor_left = 0.215
 anchor_top = 0.26
 anchor_right = 0.32
 anchor_bottom = 0.395
-offset_right = -14.959991
-offset_bottom = -28.480011
+offset_left = -1.6800079
+offset_top = -1.4799957
+offset_right = -16.639984
+offset_bottom = -29.960007
 
 [node name="Bin2" parent="CounterView/PrepView/IngredientBins" unique_id=651772881 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -646,8 +545,9 @@ anchor_left = 0.33
 anchor_top = 0.26
 anchor_right = 0.435
 anchor_bottom = 0.395
+offset_top = -1.4799957
 offset_right = -14.959991
-offset_bottom = -28.480011
+offset_bottom = -29.960007
 
 [node name="Bin3" parent="CounterView/PrepView/IngredientBins" unique_id=733577762 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -656,8 +556,10 @@ anchor_left = 0.445
 anchor_top = 0.26
 anchor_right = 0.55
 anchor_bottom = 0.395
-offset_right = -14.960022
-offset_bottom = -28.480011
+offset_left = 2.3599854
+offset_top = -1.4799957
+offset_right = -12.600037
+offset_bottom = -29.960007
 
 [node name="Bin4" parent="CounterView/PrepView/IngredientBins" unique_id=391446420 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -666,8 +568,10 @@ anchor_left = 0.56
 anchor_top = 0.26
 anchor_right = 0.665
 anchor_bottom = 0.395
-offset_right = -14.960022
-offset_bottom = -28.480011
+offset_left = 3.880005
+offset_top = -1.4799957
+offset_right = -11.080017
+offset_bottom = -29.960007
 
 [node name="Bin5" parent="CounterView/PrepView/IngredientBins" unique_id=347126343 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -676,8 +580,10 @@ anchor_left = 0.69
 anchor_top = 0.26
 anchor_right = 0.795
 anchor_bottom = 0.395
-offset_right = -14.960022
-offset_bottom = -28.480011
+offset_left = 6.119995
+offset_top = -1.4799957
+offset_right = -8.840027
+offset_bottom = -29.960007
 
 [node name="Bin6" parent="CounterView/PrepView/IngredientBins" unique_id=116942694 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -686,8 +592,10 @@ anchor_left = 0.69
 anchor_top = 0.415
 anchor_right = 0.795
 anchor_bottom = 0.55
-offset_right = -14.960022
-offset_bottom = -28.480011
+offset_left = 6.119995
+offset_top = 0.52001953
+offset_right = -8.840027
+offset_bottom = -27.959991
 
 [node name="Bin7" parent="CounterView/PrepView/IngredientBins" unique_id=587454471 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -696,8 +604,10 @@ anchor_left = 0.69
 anchor_top = 0.57
 anchor_right = 0.795
 anchor_bottom = 0.705
-offset_right = -14.960022
-offset_bottom = -28.480011
+offset_left = 6.119995
+offset_top = 1.6400146
+offset_right = -8.840027
+offset_bottom = -26.839996
 
 [node name="Bin8" parent="CounterView/PrepView/IngredientBins" unique_id=471020756 instance=ExtResource("12_bin")]
 layout_mode = 1
@@ -706,8 +616,10 @@ anchor_left = 0.69
 anchor_top = 0.725
 anchor_right = 0.795
 anchor_bottom = 0.86
-offset_right = -14.960022
-offset_bottom = -28.47998
+offset_left = 6.119995
+offset_top = 2.1999817
+offset_right = -8.840027
+offset_bottom = -26.279968
 
 [node name="CupView" type="Control" parent="CounterView/PrepView" unique_id=728199504]
 unique_name_in_owner = true

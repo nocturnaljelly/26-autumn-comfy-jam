@@ -30,6 +30,7 @@ var cup: Array[Ingredient] = []
 var current_view := View.CUSTOMERS
 var facing_menu := false
 var customers_in_sight := true
+var recipe_swap_wait_time = 2.0
 var recipe_swap_in_progress := false
 var recipe_swap_pending := false
 var completed_recipes: Array[StringName] = []
@@ -83,7 +84,7 @@ func _ready() -> void:
 	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
 	menu_view.visible = false
-	recipe_swap_timer.wait_time = 8
+	recipe_swap_timer.wait_time = recipe_swap_wait_time
 	recipe_swap_timer.one_shot = true
 	recipe_swap_timer.timeout.connect(_request_recipe_swap)
 	recipe_swap_timer.start()
@@ -237,13 +238,13 @@ func _change_customer_sprites() -> void:
 			SFXManager.play(transform_sound)
 
 func _request_recipe_swap() -> void:
-	if _shift_finished():
+	if _stop_recipe_swaps():
 		return
 	recipe_swap_pending = true
 	_check_pending_recipe_swap()
 
 func _check_pending_recipe_swap() -> void:
-	if _shift_finished():
+	if _stop_recipe_swaps():
 		return
 	if not recipe_swap_pending or recipe_swap_in_progress or facing_menu:
 		return
@@ -319,6 +320,14 @@ func _finish_recipe_swap() -> void:
 	recipe_swap_timer.start()
 	to_prep_button.modulate.a = 1.0
 	to_customers_button.modulate.a = 1.0
+
+func _stop_recipe_swaps() -> bool:
+	if not _shift_finished():
+		return false
+	for slot in _slots():
+		if slot.order and not slot.is_order_almost_expired():
+			return false
+	return true
 
 func _update_menu() -> void:
 	var lines: PackedStringArray = []

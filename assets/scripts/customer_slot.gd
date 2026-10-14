@@ -27,6 +27,7 @@ var _rise_tween: Tween
 var _bob_time := randf() * TAU
 var _applied_offset := Vector2.ZERO
 var order_duration := 30.0
+var order_almost_expired := 5.0
 
 @onready var customer_view: Control = %Customer
 @onready var bubble: RichTextLabel = %Bubble
@@ -104,7 +105,13 @@ func react(correct: bool) -> void:
 		SFXManager.play(SFXManager.confused_sounds.pick_random())
 	say("correct_order" if correct else "incorrect_order")
 	leave()
-	
+
+func is_order_almost_expired() -> bool:
+	if not is_instance_valid(active_balloon):
+		return false
+	var order_timer: OrderTimer = active_balloon.get_node("Balloon/OrderTimer")
+	return order_timer.timer.time_left <= order_almost_expired
+
 func leave() -> void:
 	if order == null:
 		return

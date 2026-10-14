@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsb6qkfqi24vm"
-path="res://.godot/imported/stall.png-951aa2b673aebdcb66d5eeb98f8e3f48.ctex"
+uid="uid://dmwthtot52ye5"
+path="res://.godot/imported/tip_jar.png-81bcff384085fb4c2524df25b9812bf2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/stall.png"
-dest_files=["res://.godot/imported/stall.png-951aa2b673aebdcb66d5eeb98f8e3f48.ctex"]
+source_file="res://assets/images/gameplay/tip_jar.png"
+dest_files=["res://.godot/imported/tip_jar.png-81bcff384085fb4c2524df25b9812bf2.ctex"]
 
 [params]
 

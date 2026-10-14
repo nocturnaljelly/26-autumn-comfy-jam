@@ -55,11 +55,12 @@ var _menu_tween: Tween
 @onready var menu_view: Control = %MenuView
 @onready var menu_label: RichTextLabel = %MenuLabel
 @onready var recipes_button: Button = %RecipesButton
+@onready var recipe_button_start := recipes_button.position.x
 @onready var back_button: Button = %BackButton
 @onready var paw_graphic: ColorRect = %PawGraphic
 @onready var recipe_swap_timer: Timer = %RecipeSwapTimer
 @onready var swap_bubble: TextureRect = %SwapBubble
-
+@onready var tip_jar: Control = %TipJar
 @onready var lighting: Control = %Lighting
 @onready var modulation: CanvasModulate = %Modulation
 @onready var coin_spawner: CoinSpawner = %CoinSpawner
@@ -154,6 +155,7 @@ func _serve(slot: CustomerSlot) -> void:
 	var correct := completed_recipes.has(slot.order.id)
 	var amount := correct_order_money if correct else wrong_order_money
 	money += amount
+	_update_tip_jar()
 	coin_spawner.spawn(amount, slot.get_payment_origin())
 	if correct:
 		SFXManager.play(correct_order_sound)
@@ -161,6 +163,18 @@ func _serve(slot: CustomerSlot) -> void:
 	if not correct:
 		Juice.shake_position(self, wrong_order_shake)
 	_clear_cup()
+
+# later make it fractional after setting win/lose conditions
+func _update_tip_jar() -> void:
+	var frame := 0
+	if money >= 100:
+		frame = 3
+	elif money >= 67:
+		frame = 2
+	elif money >= 34:
+		frame = 1
+	for i in tip_jar.get_child_count():
+		tip_jar.get_child(i).visible = i == frame
 
 func _on_customer_left(_customer: Customer) -> void:
 	_advance_progression()
@@ -258,7 +272,6 @@ func _check_pending_recipe_swap() -> void:
 
 # hash out the motion
 func _animate_recipe_swap() -> void:
-	var button_start := recipes_button.position.x
 	var paw_end := paw_graphic.position.x
 	var paw_start := -paw_graphic.size.x
 	paw_graphic.position.x = paw_start
@@ -278,13 +291,14 @@ func _animate_recipe_swap() -> void:
 	
 	tween = create_tween()
 	tween.tween_property(paw_graphic, "position:x", paw_end, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(recipes_button, "position:x", button_start, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(recipes_button, "position:x", recipe_button_start, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(func() -> void: Juice.punch_scale(clipboard, Vector2(0.1, 0.1)))
 	tween.tween_property(paw_graphic, "position:x", paw_start, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	await tween.finished
 	
 	paw_graphic.visible = false
 	paw_graphic.position.x = paw_end
+	recipes_button.position.x = recipe_button_start
 	_finish_recipe_swap()
 
 func _animate_swap_bubble() -> void:

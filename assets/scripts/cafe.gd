@@ -8,8 +8,10 @@ enum View { CUSTOMERS, PREP }
 @export var customers: Array[Customer] = []
 @export var progressions: Array[GameProgression] = []
 @export var ambience: AudioStream
+@export var money_goal := 20
 @export var correct_order_money := 10
 @export var wrong_order_money := 2
+@export var customers_until_end := 3
 
 @export_group("Juice")
 @export var drop_particles: PackedScene
@@ -47,6 +49,8 @@ var progression_recipe_book: RecipeBook
 var money := 0
 var _slide_tween: Tween
 var _menu_tween: Tween
+var ending_requested := false
+var ending_won := false
 
 @onready var counter_view: Control = %CounterView
 @onready var customer_slots: Container = %CustomerSlots
@@ -137,6 +141,8 @@ func _bins() -> Array[IngredientBin]:
 	return bins
 
 func _seat_next_customer() -> void:
+	if ending_requested or customers_arrived >= customers_until_end:
+		return
 	if _shift_finished():
 		return
 	if progression_in_progress:
@@ -175,20 +181,21 @@ func _serve(slot: CustomerSlot) -> void:
 		Juice.shake_position(self, wrong_order_shake)
 	_clear_cup()
 
-# later make it fractional after setting win/lose conditions
 func _update_tip_jar() -> void:
 	var frame := 0
-	if money >= 100:
+	if money >= money_goal:
 		frame = 3
-	elif money >= 67:
+	elif money >= money_goal * 2.0/3.0:
 		frame = 2
-	elif money >= 34:
+	elif money >= money_goal * 1.0/3.0:
 		frame = 1
 	for i in tip_jar.get_child_count():
 		tip_jar.get_child(i).visible = i == frame
 
 func _on_customer_left(_customer: Customer) -> void:
-	_advance_progression()
+	_check_ending()
+	if not ending_requested:
+		_advance_progression()
 func _add_ingredient(ingredient: Ingredient) -> void:
 	if cup.size() < CUP_CAPACITY:
 		cup.append(ingredient)
@@ -345,6 +352,8 @@ func _finish_recipe_swap() -> void:
 	recipe_swap_timer.start()
 
 func _stop_recipe_swaps() -> bool:
+	if ending_requested or customers_arrived >= customers_until_end:
+		return true
 	if not _shift_finished():
 		return false
 	for slot in _slots():
@@ -425,3 +434,18 @@ func _advance_progression():
 	recipe_swap_pending = false
 	recipe_swap_timer.start()
 	progression_in_progress = false
+
+func _check_ending() -> void:
+	if ending_requested or customers_arrived < customers_until_end:
+		return
+	for slot in _slots():
+		if not slot.is_free():
+			return
+	ending_won = money >= money_goal
+	ending_requested = true
+	_request_ending()
+
+func _request_ending():
+	arrival_timer.stop()
+	recipe_swap_timer.stop()
+	print("GOOD ENDING!!!!!!!!!" if ending_won else "BAD ENDING!!!!!!!!!!!!!!!!")

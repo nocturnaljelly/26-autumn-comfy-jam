@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_cgr1a"]
 [ext_resource type="Texture2D" uid="uid://ccrecovvyu0p1" path="res://assets/images/gameplay/food_items.png" id="1_wccan"]
+[ext_resource type="AudioStream" uid="uid://btrm622cguhwt" path="res://assets/audio/sfx/item_pickup_hotwatermilk.ogg" id="2_snvly"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hj6x"]
 atlas = ExtResource("1_wccan")
@@ -30,3 +31,4 @@ color = Color(0.25, 0.15, 0.09, 1)
 food_graphic = SubResource("AtlasTexture_2hj6x")
 hover_cursor = SubResource("AtlasTexture_wccan")
 grab_cursor = SubResource("AtlasTexture_snvly")
+pick_up_sound = ExtResource("2_snvly")

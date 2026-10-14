@@ -32,6 +32,7 @@ func _ready() -> void:
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if disabled or not ingredient:
 		return null
+	SFXManager.play(ingredient.pick_up_sound)
 	set_drag_preview(_create_drag_preview())
 	Juice.punch_scale(pile, Vector2(0.15, -0.15), 0.4, Vector2(0.5, 1.0))
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

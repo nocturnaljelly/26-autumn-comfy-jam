@@ -11,5 +11,8 @@ extends Resource
 @export var hover_cursor: Texture2D
 @export var grab_cursor: Texture2D
 
+@export_group("Sounds")
+@export var pick_up_sound: AudioStream
+
 func _to_string() -> String:
 	return "Ingredient(%s)" % id

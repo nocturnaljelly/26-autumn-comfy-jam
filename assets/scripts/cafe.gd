@@ -21,9 +21,16 @@ enum View { CUSTOMERS, PREP }
 @export_group("Sounds")
 @export var recipe_open_sound: AudioStream
 @export var recipe_close_sound: AudioStream
+@export var moka_picksup: AudioStream
+@export var moka_putsdown: AudioStream
 @export var correct_order_sound: AudioStream
 @export var transform_sound: AudioStream
 @export var cat_cue_sound: AudioStream
+@export var prep_clear: AudioStream
+@export var swoosh_sounds: Array[AudioStream] = []
+@export var put_down_sounds: Array[AudioStream] = []
+@export var serve_to_customer: Array[AudioStream] = []
+@export var coin_sounds: Array[AudioStream] = []
 
 var menu: RecipeBook
 var cup: Array[Ingredient] = []
@@ -78,7 +85,7 @@ func _ready() -> void:
 	for slot in _slots():
 		slot.plate_button.pressed.connect(_serve.bind(slot))
 		slot.customer_left.connect(_on_customer_left)
-	clear_button.pressed.connect(_clear_cup)
+	clear_button.pressed.connect(func(): SFXManager.play(prep_clear); _clear_cup())
 	recipes_button.pressed.connect(_turn)
 	back_button.pressed.connect(_turn)
 	arrival_timer.timeout.connect(_seat_next_customer)
@@ -152,11 +159,15 @@ func _pick_customer() -> Customer:
 	return options.pick_random() if not options.is_empty() else customers.pick_random()
 
 func _serve(slot: CustomerSlot) -> void:
+	if not serve_to_customer.is_empty():
+		SFXManager.play(serve_to_customer.pick_random())
+	
 	var correct := completed_recipes.has(slot.order.id)
 	var amount := correct_order_money if correct else wrong_order_money
 	money += amount
 	_update_tip_jar()
 	coin_spawner.spawn(amount, slot.get_payment_origin())
+	SFXManager.play(coin_sounds.pick_random())
 	if correct:
 		SFXManager.play(correct_order_sound)
 	slot.react(correct)
@@ -181,6 +192,7 @@ func _on_customer_left(_customer: Customer) -> void:
 func _add_ingredient(ingredient: Ingredient) -> void:
 	if cup.size() < CUP_CAPACITY:
 		cup.append(ingredient)
+		SFXManager.play(put_down_sounds.pick_random())
 		_update_controls()
 		var had_recipe := not completed_recipes.is_empty()
 		completed_recipes.clear()
@@ -206,6 +218,8 @@ func _clear_cup() -> void:
 	_update_controls()
 
 func _show_view(view: View, animate := true) -> void:
+	if animate and current_view != view:
+		SFXManager.play(swoosh_sounds.pick_random())
 	var previous := current_view
 	current_view = view
 	var incoming := customer_view if view == View.CUSTOMERS else prep_view
@@ -247,7 +261,7 @@ func _change_customer_sprites() -> void:
 	for slot in _slots():
 		if slot.order and randf() < slot.customer.sprite_change_chance:
 			slot.change_sprite()
-			SFXManager.play(transform_sound)
+			SFXManager.play(transform_sound, -15.0)
 
 func _request_recipe_swap() -> void:
 	if _stop_recipe_swaps():
@@ -282,6 +296,7 @@ func _animate_recipe_swap() -> void:
 	tween.tween_property(paw_graphic, "position:x", paw_end, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(func() -> void: Juice.shake_rotation(clipboard, 6.0, 0.3))
 	tween.tween_interval(0.1)
+	tween.tween_callback(func(): SFXManager.play(moka_picksup))
 	tween.tween_property(paw_graphic, "position:x", paw_start, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.parallel().tween_property(recipes_button, "position:x", -recipes_button.size.x - 10.0, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	await tween.finished
@@ -292,7 +307,7 @@ func _animate_recipe_swap() -> void:
 	tween = create_tween()
 	tween.tween_property(paw_graphic, "position:x", paw_end, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(recipes_button, "position:x", recipe_button_start, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_callback(func() -> void: Juice.punch_scale(clipboard, Vector2(0.1, 0.1)))
+	tween.tween_callback(func() -> void: SFXManager.play(moka_putsdown); Juice.punch_scale(clipboard, Vector2(0.1, 0.1)))
 	tween.tween_property(paw_graphic, "position:x", paw_start, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	await tween.finished
 	

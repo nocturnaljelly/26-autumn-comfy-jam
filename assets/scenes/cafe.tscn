@@ -17,23 +17,35 @@
 [ext_resource type="Resource" uid="uid://dyiyfqmw13rkk" path="res://assets/data/game_progression/night_shift.tres" id="10_m6dpc"]
 [ext_resource type="Texture2D" uid="uid://c82v3ikrwodmm" path="res://assets/images/arrow.png" id="11_gei2f"]
 [ext_resource type="PackedScene" uid="uid://dljmag3i214da" path="res://assets/scenes/ingredient_bin.tscn" id="12_bin"]
-[ext_resource type="AudioStream" uid="uid://diqg2yn3o7uq8" path="res://assets/audio/sfx/recipe_open.wav" id="12_e2hk2"]
 [ext_resource type="Texture2D" uid="uid://dkponkelv6ki5" path="res://assets/images/gameplay/cat_recipe_swap_alert.png" id="12_l312g"]
-[ext_resource type="AudioStream" uid="uid://btqef5w10w67q" path="res://assets/audio/sfx/recipe_close.wav" id="13_4hvve"]
 [ext_resource type="Script" uid="uid://dqd1yjgci38qu" path="res://assets/scripts/cup_view.gd" id="13_cup"]
+[ext_resource type="AudioStream" uid="uid://d1v8avmasih5s" path="res://assets/audio/sfx/recipe_close.ogg" id="14_g473u"]
+[ext_resource type="AudioStream" uid="uid://cbeifoqwg8d8t" path="res://assets/audio/sfx/recipe_open.ogg" id="14_lvx68"]
+[ext_resource type="AudioStream" uid="uid://clfofgiyerecv" path="res://assets/audio/sfx/moka_pickups.ogg" id="16_tw36y"]
 [ext_resource type="AudioStream" uid="uid://cd68ia5of8bkn" path="res://assets/audio/sfx/correct_order.ogg" id="16_u5134"]
 [ext_resource type="AudioStream" uid="uid://322yrmh6uhca" path="res://assets/audio/sfx/customer_transform.ogg" id="17_2ro4j"]
+[ext_resource type="AudioStream" uid="uid://b2ixrynkksfh" path="res://assets/audio/sfx/moka_putsdown.ogg" id="17_oiqeo"]
 [ext_resource type="AudioStream" uid="uid://cn7gjm45u3dyp" path="res://assets/audio/sfx/cat_cue.ogg" id="18_2ro4j"]
 [ext_resource type="Shader" uid="uid://cid4jbqg6w31t" path="res://assets/shaders/lighting.gdshader" id="18_wx11x"]
+[ext_resource type="AudioStream" uid="uid://dgaxveuoi3qyr" path="res://assets/audio/sfx/swoosh1.ogg" id="19_47ga7"]
+[ext_resource type="AudioStream" uid="uid://b802ss8snuc4o" path="res://assets/audio/sfx/prep_clear.ogg" id="19_mrl4u"]
 [ext_resource type="Texture2D" uid="uid://b42jf1236aoe6" path="res://assets/images/gameplay/light.png" id="19_ygu5f"]
+[ext_resource type="AudioStream" uid="uid://bx13538emni0j" path="res://assets/audio/sfx/swoosh2.ogg" id="20_csron"]
 [ext_resource type="Texture2D" uid="uid://1c4bwwgwlmiv" path="res://assets/images/gameplay/Recipe_Menu_Background.png" id="20_s8y5s"]
 [ext_resource type="PackedScene" path="res://assets/scenes/money_pot.tscn" id="21_pot"]
+[ext_resource type="AudioStream" uid="uid://blecalcuxcqlk" path="res://assets/audio/sfx/swoosh3.ogg" id="21_wjbrc"]
 [ext_resource type="PackedScene" path="res://assets/scenes/coin_spawner.tscn" id="22_coins"]
+[ext_resource type="AudioStream" uid="uid://cbpfukgs8ltcf" path="res://assets/audio/sfx/item_down1.ogg" id="22_wjbrc"]
+[ext_resource type="AudioStream" uid="uid://bxy7ax8cocg58" path="res://assets/audio/sfx/item_down2.ogg" id="23_caegs"]
 [ext_resource type="PackedScene" path="res://assets/scenes/drop_particles.tscn" id="23_drop"]
+[ext_resource type="AudioStream" uid="uid://bjol5f1fsulu7" path="res://assets/audio/sfx/item_serving1.ogg" id="24_4qrho"]
 [ext_resource type="PackedScene" path="res://assets/scenes/celebrate_particles.tscn" id="24_celebrate"]
+[ext_resource type="AudioStream" uid="uid://dap6gc7p8377u" path="res://assets/audio/sfx/item_serving2.ogg" id="25_mrl4u"]
 [ext_resource type="Texture2D" uid="uid://dmwthtot52ye5" path="res://assets/images/gameplay/tip_jar.png" id="27_rmm4h"]
 [ext_resource type="Texture2D" uid="uid://bkp5244khf7xx" path="res://assets/images/gameplay/recipe_book.png" id="28_dbyt7"]
 [ext_resource type="Texture2D" uid="uid://c3csax50mh3rc" path="res://assets/images/gameplay/prep_view.png" id="28_k28jo"]
+[ext_resource type="AudioStream" uid="uid://damjiuxco8nuj" path="res://assets/audio/sfx/coin3.ogg" id="29_tw36y"]
+[ext_resource type="AudioStream" uid="uid://uvw6to46hett" path="res://assets/audio/sfx/coin4.ogg" id="32_oiqeo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
 shader = ExtResource("18_wx11x")
@@ -133,11 +145,18 @@ progressions = Array[ExtResource("8_g11bw")]([ExtResource("9_s8y5s"), ExtResourc
 ambience = ExtResource("8_pd00h")
 drop_particles = ExtResource("23_drop")
 recipe_particles = ExtResource("24_celebrate")
-recipe_open_sound = ExtResource("12_e2hk2")
-recipe_close_sound = ExtResource("13_4hvve")
+recipe_open_sound = ExtResource("14_lvx68")
+recipe_close_sound = ExtResource("14_g473u")
+moka_picksup = ExtResource("16_tw36y")
+moka_putsdown = ExtResource("17_oiqeo")
 correct_order_sound = ExtResource("16_u5134")
 transform_sound = ExtResource("17_2ro4j")
 cat_cue_sound = ExtResource("18_2ro4j")
+prep_clear = ExtResource("19_mrl4u")
+swoosh_sounds = Array[AudioStream]([ExtResource("19_47ga7"), ExtResource("20_csron"), ExtResource("21_wjbrc")])
+put_down_sounds = Array[AudioStream]([ExtResource("22_wjbrc"), ExtResource("23_caegs")])
+serve_to_customer = Array[AudioStream]([ExtResource("24_4qrho"), ExtResource("25_mrl4u")])
+coin_sounds = Array[AudioStream]([ExtResource("29_tw36y"), ExtResource("32_oiqeo")])
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
 unique_name_in_owner = true

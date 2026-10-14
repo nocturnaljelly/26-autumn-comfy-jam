@@ -26,6 +26,7 @@ var _rise := 0.0
 var _rise_tween: Tween
 var _bob_time := randf() * TAU
 var _applied_offset := Vector2.ZERO
+var order_duration := 30.0
 
 @onready var customer_view: Control = %Customer
 @onready var bubble: RichTextLabel = %Bubble
@@ -75,6 +76,7 @@ func say(cue: String) -> void:
 			if not order_timer.is_node_ready():
 				await order_timer.ready
 			order_timer.timer_expired.connect(_on_order_expired)
+			order_timer.duration = order_duration
 			order_timer.start()
 		await active_balloon.open_animation()
 

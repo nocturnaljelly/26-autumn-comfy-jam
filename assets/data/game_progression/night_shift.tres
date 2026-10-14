@@ -1,16 +1,15 @@
 [gd_resource type="Resource" script_class="GameProgression" format=3 uid="uid://dyiyfqmw13rkk"]
 
 [ext_resource type="Script" uid="uid://crlau6b8aruxk" path="res://assets/scripts/data/game_progression.gd" id="1_65pw5"]
-[ext_resource type="AudioStream" uid="uid://ciqt5b5l6nj5i" path="res://assets/audio/music/track_2.ogg" id="1_ww3fj"]
 [ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="2_fcbhi"]
-[ext_resource type="Resource" uid="uid://8etx55e4mvmk" path="res://assets/data/recipes/black_coffee.tres" id="3_nt258"]
-[ext_resource type="Resource" uid="uid://vh2lnunue022" path="res://assets/data/recipes/hot_chocolate.tres" id="4_mr0vy"]
-[ext_resource type="Resource" uid="uid://ca5j338q1r81q" path="res://assets/data/recipes/pumpkin_spice_latte.tres" id="5_aq41a"]
+[ext_resource type="Resource" path="res://assets/data/recipes/black_coffee.tres" id="3_nt258"]
+[ext_resource type="Resource" path="res://assets/data/recipes/hot_chocolate.tres" id="4_mr0vy"]
+[ext_resource type="Resource" path="res://assets/data/recipes/pumpkin_spice_latte.tres" id="5_aq41a"]
 
 [resource]
 script = ExtResource("1_65pw5")
 customers_required = 2
 recipes = Array[ExtResource("2_fcbhi")]([ExtResource("3_nt258"), ExtResource("4_mr0vy"), ExtResource("5_aq41a")])
-music = ExtResource("1_ww3fj")
 night_enabled = true
+order_duration = 45
 metadata/_custom_type_script = "uid://crlau6b8aruxk"

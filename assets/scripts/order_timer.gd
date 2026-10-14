@@ -1,7 +1,7 @@
 class_name OrderTimer
 extends Control
 
-@export var duration := 30
+@export var duration := 30.0
 
 @export_group("Textures")
 @export var normal_bar: Texture2D

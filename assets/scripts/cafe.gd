@@ -138,6 +138,7 @@ func _seat_next_customer() -> void:
 	var free_slot: CustomerSlot = free_slots.pick_random()
 	var customer := _pick_customer()
 	free_slot.seat(customer, menu.get_random_recipe())
+	free_slot.order_duration = progressions[current_progression].order_duration
 	customers_arrived += 1
 	SFXManager.play(customer.enters_sound)
 	_update_order_text(free_slot)

@@ -267,28 +267,31 @@ offset_bottom = 394.0
 grow_horizontal = 0
 texture = ExtResource("19_ygu5f")
 
-[node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=927681668]
+[node name="ToPrepButton" type="Button" parent="CounterView/CustomerView" unique_id=1286314429]
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 208.0
-offset_right = 74.0
-offset_bottom = 274.0
+offset_left = -1122.0
+offset_top = 187.0
+offset_right = -1016.0
+offset_bottom = 271.0
+grow_horizontal = 0
 grow_vertical = 2
 flat = true
 script = ExtResource("4_button")
 
-[node name="TextureRect" type="TextureRect" parent="CounterView/CustomerView/ToPrepButton" unique_id=298266754]
+[node name="TextureRect" type="TextureRect" parent="CounterView/CustomerView/ToPrepButton" unique_id=1763404668]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.030000001
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.93900007
-offset_top = -1.98
-offset_bottom = 0.025997162
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_gei2f")
+expand_mode = 3
 
 [node name="PrepView" type="Control" parent="CounterView" unique_id=1206113019]
 unique_name_in_owner = true
@@ -698,23 +701,29 @@ script = ExtResource("4_button")
 
 [node name="ToCustomersButton" type="Button" parent="CounterView/PrepView" unique_id=543424645]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.93100005
-anchor_top = 0.772
-anchor_right = 0.994
-anchor_bottom = 0.86700004
-offset_left = -0.51208496
-offset_top = -0.25601196
-offset_right = -0.088012695
-offset_bottom = 0.18395996
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -131.0
+offset_top = 187.0
+offset_right = -25.0
+offset_bottom = 271.0
+grow_horizontal = 0
+grow_vertical = 2
 flat = true
 script = ExtResource("4_button")
 
 [node name="TextureRect" type="TextureRect" parent="CounterView/PrepView/ToCustomersButton" unique_id=1228714730]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("11_gei2f")
+expand_mode = 3
 flip_h = true
 
 [node name="MenuView" type="Control" parent="." unique_id=718232917]

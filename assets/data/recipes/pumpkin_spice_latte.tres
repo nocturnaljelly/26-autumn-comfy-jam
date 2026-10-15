@@ -6,11 +6,26 @@
 [ext_resource type="Resource" uid="uid://57opvs1j7i2u" path="res://assets/data/ingredients/milk.tres" id="3_5ibvy"]
 [ext_resource type="Resource" uid="uid://cpcwvf1d0qx1d" path="res://assets/data/ingredients/pumpkin.tres" id="4_wgvhq"]
 [ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="6_wbjeo"]
+[ext_resource type="Script" path="res://assets/scripts/data/recipe_variant.gd" id="9_variant"]
+[ext_resource type="Resource" uid="uid://dccdieyb3ilum" path="res://assets/data/ingredients/honey.tres" id="9_honey"]
+[ext_resource type="Resource" uid="uid://dcoa8kgvxbtld" path="res://assets/data/ingredients/cinnamon.tres" id="9_cinnamon"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kl32b"]
 atlas = ExtResource("1_qd05a")
 region = Rect2(0, 150, 0, 79)
 margin = Rect2(0, -5, 0, 0)
+
+[sub_resource type="Resource" id="Variant_cinnamon"]
+script = ExtResource("9_variant")
+ingredients = Array[ExtResource("1_uqu6o")]([ExtResource("2_qd05a"), ExtResource("3_5ibvy"), ExtResource("4_wgvhq"), ExtResource("9_cinnamon")])
+
+[sub_resource type="Resource" id="Variant_pumpkin"]
+script = ExtResource("9_variant")
+ingredients = Array[ExtResource("1_uqu6o")]([ExtResource("2_qd05a"), ExtResource("3_5ibvy"), ExtResource("4_wgvhq"), ExtResource("4_wgvhq")])
+
+[sub_resource type="Resource" id="Variant_honey"]
+script = ExtResource("9_variant")
+ingredients = Array[ExtResource("1_uqu6o")]([ExtResource("2_qd05a"), ExtResource("3_5ibvy"), ExtResource("4_wgvhq"), ExtResource("9_honey")])
 
 [resource]
 script = ExtResource("6_wbjeo")
@@ -18,5 +33,6 @@ id = &"pumpkin_spice_latte"
 display_name = "Pumpkin Spice Latte"
 description = "The official drink of autumn."
 ingredients = Array[ExtResource("1_uqu6o")]([ExtResource("2_qd05a"), ExtResource("3_5ibvy"), ExtResource("4_wgvhq")])
+variants = Array[ExtResource("9_variant")]([SubResource("Variant_cinnamon"), SubResource("Variant_pumpkin"), SubResource("Variant_honey")])
 color = Color(0.85, 0.55, 0.3, 1)
 icon = SubResource("AtlasTexture_kl32b")

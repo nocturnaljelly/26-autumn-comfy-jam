@@ -4,6 +4,8 @@
 [ext_resource type="Resource" uid="uid://57opvs1j7i2u" path="res://assets/data/ingredients/milk.tres" id="2_o3cy8"]
 [ext_resource type="Resource" uid="uid://dfgj8mr7e351k" path="res://assets/data/ingredients/cocoa.tres" id="3_nupsd"]
 [ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="4_7v0ut"]
+[ext_resource type="Resource" uid="uid://nsyin5fkiwcd" path="res://assets/data/ingredients/water.tres" id="5_water"]
+[ext_resource type="Script" path="res://assets/scripts/data/recipe_variant.gd" id="6_variant"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yo6o7"]
 load_path = "res://.godot/imported/recipe_icons.png-0a0dc8ecc82f75dcb1fad78dca001980.ctex"
@@ -13,11 +15,20 @@ atlas = SubResource("CompressedTexture2D_yo6o7")
 region = Rect2(0, 0, 0, 79)
 margin = Rect2(0, -5, 0, 0)
 
+[sub_resource type="Resource" id="Resource_cocoa_water"]
+script = ExtResource("6_variant")
+ingredients = Array[ExtResource("1_yo6o7")]([ExtResource("3_nupsd"), ExtResource("5_water")])
+
+[sub_resource type="Resource" id="Resource_double_cocoa_water"]
+script = ExtResource("6_variant")
+ingredients = Array[ExtResource("1_yo6o7")]([ExtResource("3_nupsd"), ExtResource("3_nupsd"), ExtResource("5_water")])
+
 [resource]
 script = ExtResource("4_7v0ut")
 id = &"hot_chocolate"
 display_name = "Hot Chocolate"
 description = "A warm hug in a mug."
 ingredients = Array[ExtResource("1_yo6o7")]([ExtResource("2_o3cy8"), ExtResource("3_nupsd")])
+variants = Array[ExtResource("6_variant")]([SubResource("Resource_cocoa_water"), SubResource("Resource_double_cocoa_water")])
 color = Color(0.5, 0.31, 0.2, 1)
 icon = SubResource("AtlasTexture_o3cy8")

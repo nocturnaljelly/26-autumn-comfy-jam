@@ -49,6 +49,7 @@ var completed_recipes: Array[StringName] = []
 var customers_arrived := 0
 var current_progression := 0
 var progression_recipe_book: RecipeBook
+var _last_swapped_recipe: StringName
 var money := 0
 var _slide_tween: Tween
 var _menu_tween: Tween
@@ -348,7 +349,7 @@ func _animate_recipe_swap() -> void:
 	recipes_button.position.x = recipe_button_start
 	_finish_recipe_swap()
 
-func animate_swap_bubble() -> void:
+func animate_swap_bubble(recipe_id: StringName = &"") -> void:
 	SFXManager.play(cat_cue_sound)
 	_swap_recipes()
 	swap_bubble.pivot_offset = swap_bubble.size / 2.0
@@ -365,9 +366,17 @@ func animate_swap_bubble() -> void:
 	
 	_finish_recipe_swap()
 
-func _swap_recipes() -> void:
+func _swap_recipes(recipe_id: StringName = &"") -> void:
 	menu.reset_from(progression_recipe_book)
-	menu.change_random_recipe(CUP_CAPACITY)
+	var recipe: Recipe
+	if recipe_id.is_empty():
+		recipe = menu.change_random_recipe(_last_swapped_recipe)
+	else:
+		recipe = menu.get_recipe(recipe_id)
+		if recipe:
+			recipe.apply_random_variant()
+	if recipe:
+		_last_swapped_recipe = recipe.id
 	update_menu()
 
 func _finish_recipe_swap() -> void:
@@ -436,6 +445,8 @@ func _apply_progression() -> void:
 	progression_recipe_book = recipe_book.duplicate()
 	progression_recipe_book.recipes = progression.recipes.duplicate()
 	menu = progression_recipe_book.create_runtime_copy()
+	for warning in progression_recipe_book.get_variant_warnings(CUP_CAPACITY):
+		push_warning("Recipe variant: " + warning)
 	update_menu()
 	modulation.visible = progression.night_enabled
 	lighting.visible = progression.night_enabled

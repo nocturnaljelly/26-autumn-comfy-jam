@@ -11,11 +11,12 @@
 [ext_resource type="Resource" uid="uid://ct67tppfc2lo4" path="res://assets/data/ingredients/tea.tres" id="6_0s7hk"]
 [ext_resource type="Resource" uid="uid://dccdieyb3ilum" path="res://assets/data/ingredients/honey.tres" id="7_gfxx8"]
 [ext_resource type="Resource" path="res://assets/data/recipes/pumpkin_spice_latte.tres" id="7_shs6x"]
+[ext_resource type="Resource" path="res://assets/data/recipes/tea.tres" id="10_tea"]
 [ext_resource type="Resource" uid="uid://dcoa8kgvxbtld" path="res://assets/data/ingredients/cinnamon.tres" id="8_kt73a"]
 [ext_resource type="Script" uid="uid://jgchdjmtgasy" path="res://assets/scripts/data/recipe_book.gd" id="8_msm3a"]
 [ext_resource type="Resource" uid="uid://cpcwvf1d0qx1d" path="res://assets/data/ingredients/pumpkin.tres" id="9_a15jr"]
 
 [resource]
 script = ExtResource("8_msm3a")
-recipes = Array[ExtResource("1_jeor5")]([ExtResource("2_2gs1i"), ExtResource("4_y6406"), ExtResource("7_shs6x")])
+recipes = Array[ExtResource("1_jeor5")]([ExtResource("2_2gs1i"), ExtResource("4_y6406"), ExtResource("7_shs6x"), ExtResource("10_tea")])
 ingredients = Array[ExtResource("1_kd47e")]([ExtResource("2_q21u6"), ExtResource("3_f4n2d"), ExtResource("4_i1dnn"), ExtResource("5_1pt8o"), ExtResource("6_0s7hk"), ExtResource("7_gfxx8"), ExtResource("8_kt73a"), ExtResource("9_a15jr")])

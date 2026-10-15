@@ -5,11 +5,27 @@
 [ext_resource type="Resource" uid="uid://ct67tppfc2lo4" path="res://assets/data/ingredients/tea.tres" id="3_tea"]
 [ext_resource type="Resource" uid="uid://nsyin5fkiwcd" path="res://assets/data/ingredients/water.tres" id="4_water"]
 [ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="5_recipe"]
+[ext_resource type="Script" path="res://assets/scripts/data/recipe_variant.gd" id="9_variant"]
+[ext_resource type="Resource" uid="uid://dccdieyb3ilum" path="res://assets/data/ingredients/honey.tres" id="9_honey"]
+[ext_resource type="Resource" uid="uid://dcoa8kgvxbtld" path="res://assets/data/ingredients/cinnamon.tres" id="9_cinnamon"]
+[ext_resource type="Resource" uid="uid://57opvs1j7i2u" path="res://assets/data/ingredients/milk.tres" id="9_milk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tea"]
 atlas = ExtResource("2_icons")
 region = Rect2(0, 225, 0, 76)
 margin = Rect2(0, -5, 0, 0)
+
+[sub_resource type="Resource" id="Variant_honey"]
+script = ExtResource("9_variant")
+ingredients = Array[ExtResource("1_ingredient")]([ExtResource("3_tea"), ExtResource("4_water"), ExtResource("9_honey")])
+
+[sub_resource type="Resource" id="Variant_milk"]
+script = ExtResource("9_variant")
+ingredients = Array[ExtResource("1_ingredient")]([ExtResource("3_tea"), ExtResource("4_water"), ExtResource("9_milk")])
+
+[sub_resource type="Resource" id="Variant_cinnamon"]
+script = ExtResource("9_variant")
+ingredients = Array[ExtResource("1_ingredient")]([ExtResource("3_tea"), ExtResource("4_water"), ExtResource("9_cinnamon")])
 
 [resource]
 script = ExtResource("5_recipe")
@@ -17,5 +33,6 @@ id = &"tea"
 display_name = "Tea"
 description = "Steeped and soothing."
 ingredients = Array[ExtResource("1_ingredient")]([ExtResource("3_tea"), ExtResource("4_water")])
+variants = Array[ExtResource("9_variant")]([SubResource("Variant_honey"), SubResource("Variant_milk"), SubResource("Variant_cinnamon")])
 color = Color(0.45, 0.6, 0.3, 1)
 icon = SubResource("AtlasTexture_tea")

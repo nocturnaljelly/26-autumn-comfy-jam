@@ -14,11 +14,12 @@ func tutorial() -> void:
 	var correct := false
 	cafe.customer_slots.visible = false
 	cafe.menu.recipes.clear()
-	cafe.menu.recipes.append(tutorial_coffee)
+	var coffee := tutorial_coffee.create_runtime_copy()
+	cafe.menu.recipes.append(coffee)
 	cafe.update_menu()
 	slot.stay_after_serving = true
 	slot.order_timer_enabled = false
-	slot.seat(special_customer, tutorial_coffee)
+	slot.seat(special_customer, coffee)
 	SFXManager.play(special_customer.enters_sound)
 	slot.can_serve = false
 	cafe.update_controls()
@@ -38,7 +39,8 @@ func tutorial() -> void:
 	await DialogueManager.dialogue_ended
 	
 	# unlock the hot chocolate
-	cafe.menu.recipes.append(tutorial_hot_chocolate)
+	var hot_chocolate := tutorial_hot_chocolate.create_runtime_copy()
+	cafe.menu.recipes.append(hot_chocolate)
 	cafe.update_menu()
 	
 	# warn the player about Moka and swap the recipe
@@ -48,7 +50,7 @@ func tutorial() -> void:
 	
 	# swap recipes
 	cafe.recipe_swap_in_progress = true
-	await cafe.animate_swap_bubble()
+	await cafe.animate_swap_bubble(hot_chocolate.id)
 	
 	
 	# react to swap
@@ -56,7 +58,7 @@ func tutorial() -> void:
 	await DialogueManager.dialogue_ended
 	
 	# order hot chocolate
-	slot.order = tutorial_hot_chocolate
+	slot.order = hot_chocolate
 	slot.set_expression(Customer.CustomerExpression.NEUTRAL)
 	slot.say("order_tutorial_hot_chocolate")
 	slot.can_serve = true

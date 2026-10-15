@@ -1,9 +1,11 @@
+class_name Cafe
 extends Control
 
 const CUP_CAPACITY := 4
 const HIGHLIGHT_COLOR := "#ffd27a"
 enum View { CUSTOMERS, PREP }
 
+@export var tutorial_enabled := false
 @export var recipe_book: RecipeBook
 @export var customers: Array[Customer] = []
 @export var progressions: Array[GameProgression] = []
@@ -42,6 +44,7 @@ var customers_in_sight := true
 var recipe_swap_wait_time = 8.0
 var recipe_swap_in_progress := false
 var recipe_swap_pending := false
+var recipe_swaps_enabled := false # this is for the tutorial sequence!
 var completed_recipes: Array[StringName] = []
 var customers_arrived := 0
 var current_progression := 0
@@ -51,9 +54,12 @@ var _slide_tween: Tween
 var _menu_tween: Tween
 var ending_requested := false
 var ending_won := false
+var tutorial_active := false
 
+@onready var story_events: StoryEvents = %StoryEvents
 @onready var counter_view: Control = %CounterView
 @onready var customer_slots: Container = %CustomerSlots
+@onready var special_customer_slot_1: CustomerSlot = %SpecialCustomerSlot1
 @onready var arrival_timer: Timer = %ArrivalTimer
 @onready var cup_view: CupView = %CupView
 @onready var cup_label: RichTextLabel = %CupLabel
@@ -89,10 +95,11 @@ func _ready() -> void:
 	for slot in _slots():
 		slot.plate_button.pressed.connect(_serve.bind(slot))
 		slot.customer_left.connect(_on_customer_left)
+	special_customer_slot_1.plate_button.pressed.connect(_serve.bind(special_customer_slot_1))
 	clear_button.pressed.connect(func(): SFXManager.play(prep_clear); _clear_cup())
 	recipes_button.pressed.connect(_turn)
 	back_button.pressed.connect(_turn)
-	arrival_timer.timeout.connect(_seat_next_customer)
+	arrival_timer.timeout.connect(seat_next_customer)
 	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
 	menu_view.visible = false
@@ -104,12 +111,20 @@ func _ready() -> void:
 		_apply_progression()
 	else:
 		progression_recipe_book = recipe_book
-		_update_menu()
+		update_menu()
 		
 	_show_view(View.CUSTOMERS, false)
-	_seat_next_customer()
-	_update_controls()
-
+	update_controls()
+	if tutorial_enabled:
+		tutorial_active = true
+		arrival_timer.stop()
+		recipe_swap_timer.stop()
+		story_events.tutorial()
+	else:
+		special_customer_slot_1.get_parent().visible = false
+		recipe_swaps_enabled = true
+		seat_next_customer()
+	
 func _turn() -> void:
 	facing_menu = not facing_menu
 	SFXManager.play(recipe_open_sound if facing_menu else recipe_close_sound)
@@ -135,13 +150,16 @@ func _slots() -> Array[CustomerSlot]:
 	slots.assign(customer_slots.get_children())
 	return slots
 
+func _all_slots() -> Array[CustomerSlot]:
+	return _slots() + [special_customer_slot_1]
+
 func _bins() -> Array[IngredientBin]:
 	var bins: Array[IngredientBin] = []
 	bins.assign(ingredient_bins.get_children())
 	return bins
 
-func _seat_next_customer() -> void:
-	if ending_requested or customers_arrived >= customers_until_end:
+func seat_next_customer() -> void:
+	if tutorial_active or ending_requested or customers_arrived >= customers_until_end:
 		return
 	if _shift_finished():
 		return
@@ -157,7 +175,7 @@ func _seat_next_customer() -> void:
 	customers_arrived += 1
 	SFXManager.play(customer.enters_sound)
 	_update_order_text(free_slot)
-	_update_controls()
+	update_controls()
 
 func _pick_customer() -> Customer:
 	var seated := _slots().map(func(slot: CustomerSlot) -> Customer: return slot.customer)
@@ -170,6 +188,13 @@ func _serve(slot: CustomerSlot) -> void:
 	
 	var correct := completed_recipes.has(slot.order.id)
 	var amount := correct_order_money if correct else wrong_order_money
+	if tutorial_active and slot == special_customer_slot_1:
+		if correct:
+			SFXManager.play(correct_order_sound)
+		slot.react(correct)
+		_clear_cup()
+		story_events.order_served.emit(correct)
+		return
 	money += amount
 	_update_tip_jar()
 	coin_spawner.spawn(amount, slot.get_payment_origin())
@@ -200,13 +225,13 @@ func _add_ingredient(ingredient: Ingredient) -> void:
 	if cup.size() < CUP_CAPACITY:
 		cup.append(ingredient)
 		SFXManager.play(put_down_sounds.pick_random())
-		_update_controls()
+		update_controls()
 		var had_recipe := not completed_recipes.is_empty()
 		completed_recipes.clear()
 		for recipe in menu.recipes:
 			if recipe.matches(cup):
 				completed_recipes.append(recipe.id)
-		_update_controls()
+		update_controls()
 		var puff := Juice.burst(drop_particles, cup_view, get_global_mouse_position())
 		if puff is CPUParticles2D:
 			puff.color = ingredient.color
@@ -222,7 +247,7 @@ func _clear_cup() -> void:
 		Juice.punch_scale(cup_label, Vector2(-0.3, -0.3), 0.5)
 	cup.clear()
 	completed_recipes.clear()
-	_update_controls()
+	update_controls()
 
 func _show_view(view: View, animate := true) -> void:
 	if animate and current_view != view:
@@ -261,11 +286,11 @@ func _update_balloon_visibility() -> void:
 	if customers_in_sight and not in_sight:
 		_change_customer_sprites()
 	customers_in_sight = in_sight
-	for slot in _slots():
+	for slot in _all_slots():
 		slot.set_balloon_visible(in_sight)
 
 func _change_customer_sprites() -> void:
-	for slot in _slots():
+	for slot in _all_slots():
 		if slot.order and randf() < slot.customer.sprite_change_chance:
 			slot.change_sprite()
 			SFXManager.play(transform_sound, -15.0)
@@ -289,7 +314,7 @@ func _check_pending_recipe_swap() -> void:
 		recipes_button.disabled = true
 		_animate_recipe_swap()
 	else:
-		_animate_swap_bubble()
+		animate_swap_bubble()
 
 # hash out the motion
 func _animate_recipe_swap() -> void:
@@ -323,7 +348,7 @@ func _animate_recipe_swap() -> void:
 	recipes_button.position.x = recipe_button_start
 	_finish_recipe_swap()
 
-func _animate_swap_bubble() -> void:
+func animate_swap_bubble() -> void:
 	SFXManager.play(cat_cue_sound)
 	_swap_recipes()
 	swap_bubble.pivot_offset = swap_bubble.size / 2.0
@@ -343,7 +368,7 @@ func _animate_swap_bubble() -> void:
 func _swap_recipes() -> void:
 	menu.reset_from(progression_recipe_book)
 	menu.change_random_recipe(CUP_CAPACITY)
-	_update_menu()
+	update_menu()
 
 func _finish_recipe_swap() -> void:
 	recipe_swap_in_progress = false
@@ -352,7 +377,7 @@ func _finish_recipe_swap() -> void:
 	recipe_swap_timer.start()
 
 func _stop_recipe_swaps() -> bool:
-	if ending_requested or customers_arrived >= customers_until_end:
+	if not recipe_swaps_enabled or ending_requested or customers_arrived >= customers_until_end:
 		return true
 	if not _shift_finished():
 		return false
@@ -361,7 +386,7 @@ func _stop_recipe_swaps() -> bool:
 			return false
 	return true
 
-func _update_menu() -> void:
+func update_menu() -> void:
 	var lines: PackedStringArray = []
 	for recipe in menu.recipes:
 		var names: PackedStringArray = []
@@ -370,7 +395,7 @@ func _update_menu() -> void:
 		lines.append("[color=%s]%d.[/color] %s = [img]%s[/img] [wave amp=25 freq=3]%s[/wave]" % [HIGHLIGHT_COLOR, menu.get_number(recipe), " + ".join(names), recipe.icon.resource_path,  recipe.display_name])
 	menu_label.text = "\n".join(lines)
 
-func _update_controls() -> void:
+func update_controls() -> void:
 	var names: PackedStringArray = []
 	for ingredient in cup:
 		names.append(_ingredient_image(ingredient, true))
@@ -384,8 +409,8 @@ func _update_controls() -> void:
 	for bin in _bins():
 		bin.disabled = cup.size() >= CUP_CAPACITY
 	cup_view.is_full = cup.size() >= CUP_CAPACITY
-	for slot in _slots():
-		slot.plate_button.disabled = slot.order == null or cup.is_empty()
+	for slot in _all_slots():
+		slot.plate_button.disabled = not slot.can_serve or slot.order == null or cup.is_empty()
 		slot.plate_button.text = "Serve"
 		slot.plate_button.icon = null
 		if not completed_recipes.is_empty():
@@ -411,7 +436,7 @@ func _apply_progression() -> void:
 	progression_recipe_book = recipe_book.duplicate()
 	progression_recipe_book.recipes = progression.recipes.duplicate()
 	menu = progression_recipe_book.create_runtime_copy()
-	_update_menu()
+	update_menu()
 	modulation.visible = progression.night_enabled
 	lighting.visible = progression.night_enabled
 	
@@ -425,15 +450,26 @@ func _advance_progression():
 	progression_in_progress = true
 	while recipe_swap_in_progress:
 		await get_tree().process_frame
-	await MusicPlayer.fade_out()
-	await SceneTransition.hide_screen()
-	current_progression += 1
-	_apply_progression()
-	await SceneTransition.show_screen(2.0)
-	MusicPlayer.fade_in()
+	await transition_shifts(func(): current_progression += 1; _apply_progression())
 	recipe_swap_pending = false
 	recipe_swap_timer.start()
 	progression_in_progress = false
+
+func transition_shifts(change_scene_state: Callable) -> void:
+	await MusicPlayer.fade_out()
+	await SceneTransition.hide_screen()
+	await change_scene_state.call()
+	await SceneTransition.show_screen(2.0)
+	MusicPlayer.fade_in()
+
+func finish_tutorial() -> void:
+	await special_customer_slot_1.leave()
+	special_customer_slot_1.get_parent().visible = false
+	customer_slots.visible = true
+	menu.reset_from(progression_recipe_book)
+	update_menu()
+	tutorial_active = false
+	recipe_swaps_enabled = true
 
 func _check_ending() -> void:
 	if ending_requested or customers_arrived < customers_until_end:
@@ -448,4 +484,7 @@ func _check_ending() -> void:
 func _request_ending():
 	arrival_timer.stop()
 	recipe_swap_timer.stop()
-	print("GOOD ENDING!!!!!!!!!" if ending_won else "BAD ENDING!!!!!!!!!!!!!!!!")
+	if ending_won:
+		story_events.good_ending()
+	else:
+		story_events.bad_ending()

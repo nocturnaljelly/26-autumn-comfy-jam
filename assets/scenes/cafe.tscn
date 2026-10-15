@@ -45,7 +45,11 @@
 [ext_resource type="Texture2D" uid="uid://bkp5244khf7xx" path="res://assets/images/gameplay/recipe_book.png" id="28_dbyt7"]
 [ext_resource type="Texture2D" uid="uid://c3csax50mh3rc" path="res://assets/images/gameplay/prep_view.png" id="28_k28jo"]
 [ext_resource type="AudioStream" uid="uid://damjiuxco8nuj" path="res://assets/audio/sfx/coin3.ogg" id="29_tw36y"]
+[ext_resource type="Resource" uid="uid://dheuyf8fepvlt" path="res://assets/data/customers/special_customer.tres" id="31_g2ert"]
+[ext_resource type="Resource" uid="uid://brl4y0ko3wkjb" path="res://assets/data/recipes/black_coffee.tres" id="32_nc71e"]
 [ext_resource type="AudioStream" uid="uid://uvw6to46hett" path="res://assets/audio/sfx/coin4.ogg" id="32_oiqeo"]
+[ext_resource type="Resource" uid="uid://bqqffcc3y8jmr" path="res://assets/data/recipes/hot_chocolate.tres" id="33_rl4o6"]
+[ext_resource type="Script" uid="uid://b27n4g0igu377" path="res://assets/scripts/story_events.gd" id="35_nc71e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
 shader = ExtResource("18_wx11x")
@@ -139,6 +143,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_theme")
 script = ExtResource("1_cafe")
+tutorial_enabled = true
 recipe_book = ExtResource("2_book")
 customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("8_maple"), ExtResource("7_rowan")])
 progressions = Array[ExtResource("8_g11bw")]([ExtResource("9_s8y5s"), ExtResource("10_m6dpc")])
@@ -157,6 +162,13 @@ swoosh_sounds = Array[AudioStream]([ExtResource("19_47ga7"), ExtResource("20_csr
 put_down_sounds = Array[AudioStream]([ExtResource("22_wjbrc"), ExtResource("23_caegs")])
 serve_to_customer = Array[AudioStream]([ExtResource("24_4qrho"), ExtResource("25_mrl4u")])
 coin_sounds = Array[AudioStream]([ExtResource("29_tw36y"), ExtResource("32_oiqeo")])
+
+[node name="StoryEvents" type="Node" parent="." unique_id=1771734207]
+unique_name_in_owner = true
+script = ExtResource("35_nc71e")
+special_customer = ExtResource("31_g2ert")
+tutorial_coffee = ExtResource("32_nc71e")
+tutorial_hot_chocolate = ExtResource("33_rl4o6")
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
 unique_name_in_owner = true
@@ -226,6 +238,25 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CustomerSlot3" parent="CounterView/CustomerView/CustomerSlots" unique_id=840071003 instance=ExtResource("9_slot")]
+layout_mode = 2
+
+[node name="SpecialCustomerSlot" type="HBoxContainer" parent="CounterView/CustomerView" unique_id=2069664759]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -90.0
+offset_right = 121.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="SpecialCustomerSlot1" parent="CounterView/CustomerView/SpecialCustomerSlot" unique_id=113397052 instance=ExtResource("9_slot")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="SwapBubble" type="TextureRect" parent="CounterView/CustomerView" unique_id=729347793]

@@ -12,9 +12,19 @@
 
 ## special customer dialogues below!!
 # tutorial
+~ intro_dialogue
+Anya!! I didn't know you'd be at the festival!
+How's Moka doing now?
+He was so wild as a kitten...
+Blah blah blah
+=> END 
 
-~ introduction_dialogue
+~ order_tutorial_black_coffee
+Anyway, gimme a black coffee!
+=> END 
 
+~ order_tutorial_hot_chocolate
+Anything else? How about a hot chocolate?
 => END 
 
 ~ tutorial_correct_order
@@ -25,8 +35,12 @@ Awesome!
 Come on, you can do better than that!
 => END
 
-~ tutorial_cat_warning
-Watch out for Moka!
+~ tutorial_cat_warning_1
+Watch out for Moka! 
+=> END
+
+~ tutorial_cat_warning_2
+I think he swapped out your recipes!
 => END
 
 # good ending

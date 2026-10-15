@@ -25,6 +25,8 @@ extends Control
 
 @onready var order_timer: OrderTimer = %OrderTimer
 
+@onready var balloon_texture: TextureRect = %BalloonTexture
+
 ## Temporary game states
 var temporary_game_states: Array = []
 
@@ -40,6 +42,8 @@ var locals: Dictionary = {}
 var _locale: String = TranslationServer.get_locale()
 
 var customer_slot: CustomerSlot
+
+var is_order := false
 
 ## The current line
 var dialogue_line: DialogueLine:
@@ -74,8 +78,13 @@ var mutation_cooldown: Timer = Timer.new()
 ## Indicator to show that player can progress dialogue.
 @onready var progress: Polygon2D = %Progress
 
+var hover_scale := 1.05
+var hover_duration := 0.15
+var hover_tween: Tween
 
 func _ready() -> void:
+	balloon.gui_input.connect(on_balloon_gui_input)
+	balloon.mouse_entered.connect(_on_balloon_mouse_entered)
 	balloon.pivot_offset = balloon.size / 2.0
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
@@ -127,6 +136,7 @@ func start(with_dialogue_resource: DialogueResource = null, cue: String = "", ex
 		dialogue_resource = with_dialogue_resource
 	if not cue.is_empty():
 		start_from_cue = cue
+		is_order = start_from_cue.begins_with("order")
 	dialogue_line = await dialogue_resource.get_next_dialogue_line(start_from_cue, temporary_game_states)
 	if customer_slot:
 		visible = customer_slot.balloon_visible
@@ -140,7 +150,9 @@ func apply_dialogue_line() -> void:
 
 	progress.hide()
 	is_waiting_for_input = false
-
+	balloon.focus_mode = Control.FOCUS_ALL
+	balloon.grab_focus()
+	
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
 
@@ -175,6 +187,8 @@ func apply_dialogue_line() -> void:
 		next(dialogue_line.next_id)
 	else:
 		is_waiting_for_input = true
+		balloon.focus_mode = Control.FOCUS_ALL
+		balloon.grab_focus()
 
 
 ## Go to the next line
@@ -213,17 +227,50 @@ func _on_mutated(mutation: Dictionary) -> void:
 		will_hide_balloon = true
 		mutation_cooldown.start(0.1)
 
+func on_balloon_gui_input(event: InputEvent) -> void:
+	if not is_instance_valid(dialogue_line):
+		return
+	if is_order:
+		return
+	# See if we need to skip typing of the dialogue
+	if dialogue_label.is_typing:
+		var mouse_was_clicked: bool = event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
+		var skip_button_was_pressed: bool = event.is_action_pressed(skip_action)
+		if mouse_was_clicked or skip_button_was_pressed:
+			get_viewport().set_input_as_handled()
+			dialogue_label.skip_typing()
+			return
+
+	if not is_waiting_for_input: return
+	if dialogue_line.responses.size() > 0: return
+
+	# When there are no response options the balloon itself is the clickable thing
+	get_viewport().set_input_as_handled()
+
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		next(dialogue_line.next_id)
+	elif event.is_action_pressed(next_action) and get_viewport().gui_get_focus_owner() == balloon:
+		next(dialogue_line.next_id)
+
+func _on_balloon_mouse_entered() -> void:
+	if hover_tween:
+		hover_tween.kill()
+	var og_y := balloon.position.y
+	hover_tween = create_tween()
+	hover_tween.tween_property(balloon, "position:y", og_y - 5.0, 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	hover_tween.tween_property(balloon, "position:y", og_y, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
 func _attach_to_customer(slot: CustomerSlot) -> void:
 	var view := slot.get_parent().get_parent()
-	if get_parent() != view:
-		reparent(view, true)
-		set_anchors_preset(Control.PRESET_TOP_LEFT)
-		size = get_viewport_rect().size
-	balloon.global_position = slot.dialogue_marker.global_position
-	balloon.global_position.x -= balloon.size.x / 2.0
-	balloon.global_position.y -= balloon.size.y
+	if get_parent() == view:
+		return
+	reparent(view, true)
+	set_anchors_preset(Control.PRESET_TOP_LEFT)
+	size = get_viewport_rect().size
+	
+	balloon.global_position = slot.dialogue_marker.global_position - Vector2(balloon.size.x / 2.0, balloon.size.y)
 
 #endregion

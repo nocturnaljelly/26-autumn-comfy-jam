@@ -28,6 +28,9 @@ var _bob_time := randf() * TAU
 var _applied_offset := Vector2.ZERO
 var order_duration := 30.0
 var order_almost_expired := 5.0
+var stay_after_serving := false
+var order_timer_enabled := true
+var can_serve := true
 
 @onready var customer_view: Control = %Customer
 @onready var bubble: RichTextLabel = %Bubble
@@ -39,6 +42,7 @@ var order_almost_expired := 5.0
 func _ready() -> void:
 	customer_view.modulate.a = 0.0
 	customer_view.sort_children.connect(func() -> void: _applied_offset = Vector2.ZERO)
+	sprite.gui_input.connect(_on_sprite_gui_input)
 
 func _process(delta: float) -> void:
 	_bob_time += delta * bob_speed
@@ -67,19 +71,21 @@ func set_expression(new_expression: Customer.CustomerExpression) -> void:
 	sprite.texture = customer.get_expression_sprite(sprite.texture, expression)
 
 func say(cue: String) -> void:
-	if is_instance_valid(active_balloon):
+	var already_open := is_instance_valid(active_balloon)
+	if already_open:
 		active_balloon.queue_free()
 	active_balloon = DialogueManager.show_dialogue_balloon(customer_dialogue, cue, [self])
 	if is_instance_valid(active_balloon):
 		active_balloon.visible = balloon_visible
-		if cue == "order":
+		if cue == "order" and order_timer_enabled:
 			var order_timer: OrderTimer = active_balloon.get_node("Balloon/OrderTimer")
 			if not order_timer.is_node_ready():
 				await order_timer.ready
 			order_timer.timer_expired.connect(_on_order_expired)
 			order_timer.duration = order_duration
 			order_timer.start()
-		await active_balloon.open_animation()
+		if not already_open:
+			await active_balloon.open_animation()
 
 func get_payment_origin() -> Vector2:
 	return sprite.get_global_rect().get_center()
@@ -103,8 +109,11 @@ func react(correct: bool) -> void:
 	else:
 		Juice.shake_rotation(sprite, 5.0, 0.5, Vector2(0.5, 1.0))
 		SFXManager.play(SFXManager.confused_sounds.pick_random())
-	say("correct_order" if correct else "incorrect_order")
-	leave()
+	if stay_after_serving:
+		say("tutorial_correct_order" if correct else "tutorial_incorrect_order")
+	else:
+		say("correct_order" if correct else "incorrect_order")
+		leave()
 
 func is_order_almost_expired() -> bool:
 	if not is_instance_valid(active_balloon):
@@ -148,3 +157,7 @@ func _fade(alpha: float) -> void:
 	_fade_tween = create_tween()
 	_fade_tween.tween_property(customer_view, "modulate:a", alpha, fade_duration)
 	await _fade_tween.finished
+
+func _on_sprite_gui_input(event: InputEvent) -> void:
+	if is_instance_valid(active_balloon) and active_balloon.visible:
+		active_balloon.on_balloon_gui_input(event)

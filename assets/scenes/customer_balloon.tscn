@@ -143,20 +143,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PanelContainer" type="Control" parent="Balloon/MarginContainer" unique_id=2020727169]
 clip_children = 2
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 theme = ExtResource("2_aa7qb")
 
-[node name="TextureRect" type="TextureRect" parent="Balloon/MarginContainer/PanelContainer" unique_id=1865480668]
+[node name="BalloonTexture" type="TextureRect" parent="Balloon/MarginContainer/PanelContainer" unique_id=1865480668]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("3_aa7qb")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer" unique_id=903640783]
@@ -165,19 +168,21 @@ offset_left = 3.0
 offset_top = 3.0
 offset_right = 184.0
 offset_bottom = 117.0
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer" unique_id=1890134056]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1567782692]
 unique_name_in_owner = true
 visible = false
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -187,13 +192,16 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 text = "Dialogue..."
+skip_pause_at_character_if_followed_by = ")\"..."
 
 [node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer" unique_id=418507161]
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 2
 
 [node name="Progress" type="Polygon2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/Control" unique_id=2091292889]
 unique_name_in_owner = true

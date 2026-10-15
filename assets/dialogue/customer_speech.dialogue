@@ -17,14 +17,20 @@ Anya!! I didn't know you'd be at the festival!
 How's Moka doing now?
 He was so wild as a kitten...
 Blah blah blah
+You know, you better be quick with orders...
+You don't want customers leaving!
 => END 
+
+~ took_too_long
+You took too long! But it's okay... for now.
+=> END
 
 ~ order_tutorial_black_coffee
 Anyway, gimme a black coffee!
 => END 
 
 ~ order_tutorial_hot_chocolate
-Anything else? How about a hot chocolate?
+Anyway, how about a hot chocolate?
 => END 
 
 ~ tutorial_correct_order
@@ -37,6 +43,7 @@ Come on, you can do better than that!
 
 ~ tutorial_cat_warning_1
 Watch out for Moka! 
+He's running around at the back!
 => END
 
 ~ tutorial_cat_warning_2

@@ -2,23 +2,26 @@ class_name StoryEvents
 extends Node
 
 signal order_served(correct: bool)
+signal order_attempt_finished(correct: bool)
 @export var special_customer: Customer
 @export var tutorial_coffee: Recipe
 @export var tutorial_hot_chocolate: Recipe
+@export var tutorial_timer_duration := 10.0
 
 @onready var cafe: Cafe = get_parent() as Cafe
 @onready var slot: CustomerSlot = %SpecialCustomerSlot1
 
 func tutorial() -> void:
 	# setup
-	var correct := false
+	slot.order_expired.connect(func(): order_attempt_finished.emit(false))
+	order_served.connect(func(correct: bool): order_attempt_finished.emit(correct))
 	cafe.customer_slots.visible = false
 	cafe.menu.recipes.clear()
 	var coffee := tutorial_coffee.create_runtime_copy()
 	cafe.menu.recipes.append(coffee)
 	cafe.update_menu()
 	slot.stay_after_serving = true
-	slot.order_timer_enabled = false
+	slot.order_duration = tutorial_timer_duration
 	slot.seat(special_customer, coffee)
 	SFXManager.play(special_customer.enters_sound)
 	slot.can_serve = false
@@ -29,14 +32,7 @@ func tutorial() -> void:
 	await DialogueManager.dialogue_ended
 	
 	# order black coffee
-	slot.say("order_tutorial_black_coffee")
-	slot.can_serve = true
-	cafe.update_controls()
-	while not correct:
-		correct = await order_served
-	slot.can_serve = false
-	cafe.update_controls()
-	await DialogueManager.dialogue_ended
+	await _wait_for_order("order_tutorial_black_coffee")
 	
 	# unlock the hot chocolate
 	var hot_chocolate := tutorial_hot_chocolate.create_runtime_copy()
@@ -60,18 +56,25 @@ func tutorial() -> void:
 	# order hot chocolate
 	slot.order = hot_chocolate
 	slot.set_expression(Customer.CustomerExpression.NEUTRAL)
-	slot.say("order_tutorial_hot_chocolate")
-	slot.can_serve = true
-	cafe.update_controls()
-	correct = false
-	while not correct:
-		correct = await order_served
-		
+	await _wait_for_order("order_tutorial_hot_chocolate")
+	
 	# wrap up tutorial here
 	await cafe.transition_shifts(cafe.finish_tutorial)
 	cafe.recipe_swap_timer.start()
 	cafe.seat_next_customer()
 	cafe.arrival_timer.start()
+
+func _wait_for_order(cue: String) -> void:
+	while true:
+		slot.say(cue)
+		slot.can_serve = true
+		cafe.update_controls()
+		var correct: bool = await order_attempt_finished
+		slot.can_serve = false
+		cafe.update_controls()
+		await DialogueManager.dialogue_ended
+		if correct:
+			return
 
 func good_ending() -> void:
 	print("WON!")

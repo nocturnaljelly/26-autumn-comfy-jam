@@ -31,7 +31,8 @@ var critical_sound_played := false
 
 func _ready() -> void:
 	timer.one_shot = true
-	progress_bar.value = 0.0
+	progress_bar.value = 100.0
+	progress_bar.texture_progress = normal_bar
 	timer.timeout.connect(_on_timeout)
 	_base_scale = scale
 	if graphic.texture:

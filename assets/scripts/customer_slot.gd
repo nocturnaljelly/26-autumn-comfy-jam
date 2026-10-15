@@ -3,6 +3,7 @@ extends Control
 
 signal customer_arrived(customer: Customer)
 signal customer_left(customer: Customer)
+signal order_expired
 
 @export var fade_duration := 0.8
 @export var customer_dialogue: DialogueResource
@@ -29,7 +30,6 @@ var _applied_offset := Vector2.ZERO
 var order_duration := 30.0
 var order_almost_expired := 5.0
 var stay_after_serving := false
-var order_timer_enabled := true
 var can_serve := true
 
 @onready var customer_view: Control = %Customer
@@ -77,7 +77,7 @@ func say(cue: String) -> void:
 	active_balloon = DialogueManager.show_dialogue_balloon(customer_dialogue, cue, [self])
 	if is_instance_valid(active_balloon):
 		active_balloon.visible = balloon_visible
-		if cue == "order" and order_timer_enabled:
+		if cue.begins_with("order"):
 			var order_timer: OrderTimer = active_balloon.get_node("Balloon/OrderTimer")
 			if not order_timer.is_node_ready():
 				await order_timer.ready
@@ -142,7 +142,11 @@ func leave() -> void:
 func _on_order_expired() -> void:
 	if order == null:
 		return
-	react(false)
+	if stay_after_serving:
+		say("took_too_long")
+		order_expired.emit()
+	else:
+		react(false)
 
 func _tween_rise(from: float, to: float, duration: float, transition: Tween.TransitionType, ease: Tween.EaseType) -> void:
 	if _rise_tween:

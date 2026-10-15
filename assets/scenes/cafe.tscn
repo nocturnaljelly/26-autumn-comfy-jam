@@ -32,7 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://b42jf1236aoe6" path="res://assets/images/gameplay/light.png" id="19_ygu5f"]
 [ext_resource type="AudioStream" uid="uid://bx13538emni0j" path="res://assets/audio/sfx/swoosh2.ogg" id="20_csron"]
 [ext_resource type="Texture2D" uid="uid://1c4bwwgwlmiv" path="res://assets/images/gameplay/Recipe_Menu_Background.png" id="20_s8y5s"]
-[ext_resource type="PackedScene" path="res://assets/scenes/money_pot.tscn" id="21_pot"]
+[ext_resource type="Script" uid="uid://c7fsp8ho7elhw" path="res://assets/scripts/coin_target.gd" id="21_target"]
 [ext_resource type="AudioStream" uid="uid://blecalcuxcqlk" path="res://assets/audio/sfx/swoosh3.ogg" id="21_wjbrc"]
 [ext_resource type="PackedScene" uid="uid://d2bjy6n06oyoo" path="res://assets/scenes/coin_spawner.tscn" id="22_coins"]
 [ext_resource type="AudioStream" uid="uid://cbpfukgs8ltcf" path="res://assets/audio/sfx/item_down1.ogg" id="22_wjbrc"]
@@ -329,7 +329,7 @@ grow_vertical = 2
 texture = ExtResource("11_gei2f")
 expand_mode = 3
 
-[node name="TipJar" type="Control" parent="CounterView/CustomerView" unique_id=703833515]
+[node name="TipJar" type="Control" parent="CounterView/CustomerView" unique_id=703833515 node_paths=PackedStringArray("visual")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
@@ -343,6 +343,12 @@ offset_right = -45.0
 offset_bottom = -14.0
 grow_horizontal = 0
 grow_vertical = 0
+script = ExtResource("21_target")
+visual = NodePath(".")
+pivot = Vector2(0.5, 1)
+punch_scale = 0.1
+punch_degrees = 4.0
+punch_duration = 0.35
 
 [node name="Empty" type="TextureRect" parent="CounterView/CustomerView/TipJar" unique_id=448293462]
 layout_mode = 0
@@ -844,14 +850,6 @@ autostart = true
 [node name="RecipeSwapTimer" type="Timer" parent="." unique_id=643335518]
 unique_name_in_owner = true
 
-[node name="Hud" type="CanvasLayer" parent="." unique_id=1590002869]
-
-[node name="MoneyPot" parent="Hud" unique_id=681618692 instance=ExtResource("21_pot")]
-offset_left = 16.0
-offset_top = 12.0
-offset_right = 176.0
-offset_bottom = 56.0
-
 [node name="CoinSpawner" parent="." unique_id=1989121741 node_paths=PackedStringArray("fly_target") instance=ExtResource("22_coins")]
 unique_name_in_owner = true
-fly_target = NodePath("../Hud/MoneyPot")
+fly_target = NodePath("../CounterView/CustomerView/TipJar")

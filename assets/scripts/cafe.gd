@@ -77,7 +77,7 @@ var tutorial_active := false
 @onready var paw_graphic: ColorRect = %PawGraphic
 @onready var recipe_swap_timer: Timer = %RecipeSwapTimer
 @onready var swap_bubble: TextureRect = %SwapBubble
-@onready var tip_jar: Control = %TipJar
+@onready var tip_jar: CoinTarget = %TipJar
 @onready var lighting: Control = %Lighting
 @onready var modulation: CanvasModulate = %Modulation
 @onready var coin_spawner: CoinSpawner = %CoinSpawner
@@ -86,6 +86,7 @@ func _ready() -> void:
 	SFXManager.play(ambience, -30.0)
 	MusicPlayer.start_playlist()
 	menu = recipe_book.create_runtime_copy()
+	tip_jar.coin_received.connect(func(_value: int) -> void: _update_tip_jar())
 	var bins := _bins()
 	if menu.ingredients.size() > bins.size():
 		push_warning("%d ingredients but only %d ingredient bins" % [menu.ingredients.size(), bins.size()])
@@ -196,7 +197,6 @@ func _serve(slot: CustomerSlot) -> void:
 		story_events.order_served.emit(correct)
 		return
 	money += amount
-	_update_tip_jar()
 	coin_spawner.spawn(amount, slot.get_payment_origin())
 	SFXManager.play(coin_sounds.pick_random())
 	if correct:
@@ -208,11 +208,11 @@ func _serve(slot: CustomerSlot) -> void:
 
 func _update_tip_jar() -> void:
 	var frame := 0
-	if money >= money_goal:
+	if tip_jar.amount >= money_goal:
 		frame = 3
-	elif money >= money_goal * 2.0/3.0:
+	elif tip_jar.amount >= money_goal * 2.0/3.0:
 		frame = 2
-	elif money >= money_goal * 1.0/3.0:
+	elif tip_jar.amount >= money_goal * 1.0/3.0:
 		frame = 1
 	for i in tip_jar.get_child_count():
 		tip_jar.get_child(i).visible = i == frame

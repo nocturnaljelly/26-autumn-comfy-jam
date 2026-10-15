@@ -5,6 +5,7 @@ signal coin_received(value: int)
 
 @export var visual: Control
 @export var amount_label: Label
+@export var pivot := Vector2(0.5, 0.5)
 
 @export_group("Punch")
 @export var punch_scale := 0.3
@@ -46,4 +47,4 @@ func _update_label() -> void:
 		amount_label.text = str(amount)
 
 func _center_pivot() -> void:
-	visual.pivot_offset = visual.size / 2.0
+	visual.pivot_offset = visual.size * pivot

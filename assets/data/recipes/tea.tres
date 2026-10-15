@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Recipe" format=3]
+
+[ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_ingredient"]
+[ext_resource type="Texture2D" uid="uid://ca3hod3d5hrox" path="res://assets/images/gameplay/recipe_icons.png" id="2_icons"]
+[ext_resource type="Resource" uid="uid://ct67tppfc2lo4" path="res://assets/data/ingredients/tea.tres" id="3_tea"]
+[ext_resource type="Resource" uid="uid://nsyin5fkiwcd" path="res://assets/data/ingredients/water.tres" id="4_water"]
+[ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="5_recipe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tea"]
+atlas = ExtResource("2_icons")
+region = Rect2(0, 225, 0, 76)
+margin = Rect2(0, -5, 0, 0)
+
+[resource]
+script = ExtResource("5_recipe")
+id = &"tea"
+display_name = "Tea"
+description = "Steeped and soothing."
+ingredients = Array[ExtResource("1_ingredient")]([ExtResource("3_tea"), ExtResource("4_water")])
+color = Color(0.45, 0.6, 0.3, 1)
+icon = SubResource("AtlasTexture_tea")

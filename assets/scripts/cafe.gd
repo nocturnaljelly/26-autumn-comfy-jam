@@ -466,7 +466,7 @@ func finish_tutorial() -> void:
 	await special_customer_slot_1.leave()
 	special_customer_slot_1.get_parent().visible = false
 	customer_slots.visible = true
-	menu.reset_from(progression_recipe_book)
+	menu = progression_recipe_book.create_runtime_copy()
 	update_menu()
 	tutorial_active = false
 	recipe_swaps_enabled = true

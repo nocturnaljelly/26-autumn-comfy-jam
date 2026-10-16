@@ -4,9 +4,12 @@
 [ext_resource type="Script" uid="uid://df7auk1drro8p" path="res://assets/scripts/data/customer.gd" id="1_pcemb"]
 [ext_resource type="Texture2D" uid="uid://dxtoctmtmhtse" path="res://assets/images/sprites/special_customer_alt_satisfied.png" id="2_nxneu"]
 [ext_resource type="Texture2D" uid="uid://b6lee1ouh5eyv" path="res://assets/images/sprites/special_customer_alt_dissatisfied.png" id="3_f03ob"]
+[ext_resource type="AudioStream" uid="uid://bvy4dhvj2whom" path="res://assets/audio/sfx/3_customer_dissatisfied.ogg" id="4_2w0kw"]
 [ext_resource type="Texture2D" uid="uid://dwj8c4yegqai2" path="res://assets/images/sprites/special_customer_normal_neutral.png" id="4_l7dxt"]
 [ext_resource type="Texture2D" uid="uid://dv21xyorwr324" path="res://assets/images/sprites/special_customer_normal_satisfied.png" id="5_2w0kw"]
+[ext_resource type="AudioStream" uid="uid://buhj082bvd3cs" path="res://assets/audio/sfx/3_customer_enters.ogg" id="5_007yi"]
 [ext_resource type="Texture2D" uid="uid://c58g1d7mx7wbl" path="res://assets/images/sprites/special_customer_normal_dissatisfied.png" id="6_007yi"]
+[ext_resource type="AudioStream" uid="uid://cw2rn5orjd4ri" path="res://assets/audio/sfx/3_customer_satisfied.ogg" id="9_cyrp2"]
 
 [resource]
 script = ExtResource("1_pcemb")
@@ -14,4 +17,7 @@ id = &"special_customer"
 display_name = "Special Customer"
 normal_sprites = Array[Texture2D]([ExtResource("4_l7dxt"), ExtResource("5_2w0kw"), ExtResource("6_007yi")])
 alternate_sprites = Array[Texture2D]([ExtResource("1_ah1ml"), ExtResource("2_nxneu"), ExtResource("3_f03ob")])
+enters_sound = ExtResource("5_007yi")
+satisfied_sound = ExtResource("9_cyrp2")
+dissatisfied_sound = ExtResource("4_2w0kw")
 metadata/_custom_type_script = "uid://df7auk1drro8p"

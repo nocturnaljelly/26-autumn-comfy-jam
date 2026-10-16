@@ -27,6 +27,8 @@ extends Control
 
 @onready var balloon_texture: TextureRect = %BalloonTexture
 
+@export var ui_select: AudioStream
+
 ## Temporary game states
 var temporary_game_states: Array = []
 
@@ -248,6 +250,7 @@ func on_balloon_gui_input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		SFXManager.play(ui_select, 7.0, 2.0)
 		next(dialogue_line.next_id)
 	elif event.is_action_pressed(next_action) and get_viewport().gui_get_focus_owner() == balloon:
 		next(dialogue_line.next_id)

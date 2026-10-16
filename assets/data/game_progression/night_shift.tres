@@ -5,12 +5,12 @@
 [ext_resource type="Resource" uid="uid://brl4y0ko3wkjb" path="res://assets/data/recipes/black_coffee.tres" id="3_nt258"]
 [ext_resource type="Resource" uid="uid://bqqffcc3y8jmr" path="res://assets/data/recipes/hot_chocolate.tres" id="4_mr0vy"]
 [ext_resource type="Resource" uid="uid://dioilgqohy8it" path="res://assets/data/recipes/pumpkin_spice_latte.tres" id="5_aq41a"]
-[ext_resource type="Resource" path="res://assets/data/recipes/tea.tres" id="6_tea"]
+[ext_resource type="Resource" uid="uid://clq1r1wl0cjh0" path="res://assets/data/recipes/tea.tres" id="6_tea"]
 
 [resource]
 script = ExtResource("1_65pw5")
 customers_required = 1
-recipes = Array[ExtResource("2_fcbhi")]([ExtResource("3_nt258"), ExtResource("4_mr0vy"), ExtResource("5_aq41a"), ExtResource("6_tea")])
+recipes = Array[ExtResource("2_fcbhi")]([ExtResource("3_nt258"), ExtResource("4_mr0vy"), ExtResource("6_tea"), ExtResource("5_aq41a")])
 night_enabled = true
 order_duration = 45.0
 metadata/_custom_type_script = "uid://crlau6b8aruxk"

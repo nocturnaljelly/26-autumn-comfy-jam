@@ -6,9 +6,9 @@
 [ext_resource type="Resource" uid="uid://57opvs1j7i2u" path="res://assets/data/ingredients/milk.tres" id="3_5ibvy"]
 [ext_resource type="Resource" uid="uid://cpcwvf1d0qx1d" path="res://assets/data/ingredients/pumpkin.tres" id="4_wgvhq"]
 [ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="6_wbjeo"]
-[ext_resource type="Script" path="res://assets/scripts/data/recipe_variant.gd" id="9_variant"]
-[ext_resource type="Resource" uid="uid://dccdieyb3ilum" path="res://assets/data/ingredients/honey.tres" id="9_honey"]
 [ext_resource type="Resource" uid="uid://dcoa8kgvxbtld" path="res://assets/data/ingredients/cinnamon.tres" id="9_cinnamon"]
+[ext_resource type="Resource" uid="uid://dccdieyb3ilum" path="res://assets/data/ingredients/honey.tres" id="9_honey"]
+[ext_resource type="Script" uid="uid://b7frlhy61gf7r" path="res://assets/scripts/data/recipe_variant.gd" id="9_variant"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kl32b"]
 atlas = ExtResource("1_qd05a")

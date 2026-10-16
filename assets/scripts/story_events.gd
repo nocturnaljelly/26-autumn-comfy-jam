@@ -11,6 +11,9 @@ signal order_attempt_finished(correct: bool)
 @onready var cafe: Cafe = get_parent() as Cafe
 @onready var slot: CustomerSlot = %SpecialCustomerSlot1
 
+@export var good_ending_sound: AudioStream
+@export var bad_ending_sound: AudioStream
+
 func tutorial() -> void:
 	# setup
 	slot.order_expired.connect(func(): order_attempt_finished.emit(false))
@@ -77,7 +80,11 @@ func _wait_for_order(cue: String) -> void:
 			return
 
 func good_ending() -> void:
+	await MusicPlayer.fade_out()
+	SFXManager.play(good_ending_sound)
 	print("WON!")
 
 func bad_ending() -> void:
+	await MusicPlayer.fade_out()
+	SFXManager.play(bad_ending_sound)
 	print("Lost :(")

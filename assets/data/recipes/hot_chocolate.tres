@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dfgj8mr7e351k" path="res://assets/data/ingredients/cocoa.tres" id="3_nupsd"]
 [ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="4_7v0ut"]
 [ext_resource type="Resource" uid="uid://nsyin5fkiwcd" path="res://assets/data/ingredients/water.tres" id="5_water"]
-[ext_resource type="Script" path="res://assets/scripts/data/recipe_variant.gd" id="6_variant"]
+[ext_resource type="Script" uid="uid://b7frlhy61gf7r" path="res://assets/scripts/data/recipe_variant.gd" id="6_variant"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yo6o7"]
 load_path = "res://.godot/imported/recipe_icons.png-0a0dc8ecc82f75dcb1fad78dca001980.ctex"

@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="Recipe" format=3]
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://clq1r1wl0cjh0"]
 
 [ext_resource type="Script" uid="uid://dxjw8m1rdjeou" path="res://assets/scripts/data/ingredient.gd" id="1_ingredient"]
 [ext_resource type="Texture2D" uid="uid://ca3hod3d5hrox" path="res://assets/images/gameplay/recipe_icons.png" id="2_icons"]
 [ext_resource type="Resource" uid="uid://ct67tppfc2lo4" path="res://assets/data/ingredients/tea.tres" id="3_tea"]
 [ext_resource type="Resource" uid="uid://nsyin5fkiwcd" path="res://assets/data/ingredients/water.tres" id="4_water"]
 [ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="5_recipe"]
-[ext_resource type="Script" path="res://assets/scripts/data/recipe_variant.gd" id="9_variant"]
-[ext_resource type="Resource" uid="uid://dccdieyb3ilum" path="res://assets/data/ingredients/honey.tres" id="9_honey"]
 [ext_resource type="Resource" uid="uid://dcoa8kgvxbtld" path="res://assets/data/ingredients/cinnamon.tres" id="9_cinnamon"]
+[ext_resource type="Resource" uid="uid://dccdieyb3ilum" path="res://assets/data/ingredients/honey.tres" id="9_honey"]
 [ext_resource type="Resource" uid="uid://57opvs1j7i2u" path="res://assets/data/ingredients/milk.tres" id="9_milk"]
+[ext_resource type="Script" uid="uid://b7frlhy61gf7r" path="res://assets/scripts/data/recipe_variant.gd" id="9_variant"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tea"]
 atlas = ExtResource("2_icons")

@@ -25,6 +25,7 @@ enum View { CUSTOMERS, PREP }
 @export_group("Sounds")
 @export var recipe_open_sound: AudioStream
 @export var recipe_close_sound: AudioStream
+@export var moka_meow: AudioStream
 @export var moka_picksup: AudioStream
 @export var moka_putsdown: AudioStream
 @export var correct_order_sound: AudioStream
@@ -35,6 +36,8 @@ enum View { CUSTOMERS, PREP }
 @export var put_down_sounds: Array[AudioStream] = []
 @export var serve_to_customer: Array[AudioStream] = []
 @export var coin_sounds: Array[AudioStream] = []
+@export var shift_transition: AudioStream
+@export var item_hovering: Array[AudioStream] = []
 
 var menu: RecipeBook
 var cup: Array[Ingredient] = []
@@ -81,10 +84,12 @@ var tutorial_active := false
 @onready var tip_jar: CoinTarget = %TipJar
 @onready var lighting: Control = %Lighting
 @onready var modulation: CanvasModulate = %Modulation
+@onready var bg_evening_shift: TextureRect = %BgEveningShift
+@onready var bg_night_shift: TextureRect = %BgNightShift
 @onready var coin_spawner: CoinSpawner = %CoinSpawner
 
 func _ready() -> void:
-	SFXManager.play(ambience, -30.0)
+	SFXManager.play(ambience, -5.0)
 	MusicPlayer.start_playlist()
 	menu = recipe_book.create_runtime_copy()
 	tip_jar.coin_received.connect(func(_value: int) -> void: _update_tip_jar())
@@ -94,6 +99,8 @@ func _ready() -> void:
 	for i in mini(menu.ingredients.size(), bins.size()):
 		bins[i].ingredient = menu.ingredients[i]
 	cup_view.ingredient_dropped.connect(_add_ingredient)
+	for bin in bins:
+		bin.mouse_entered.connect(func(): SFXManager.play(item_hovering.pick_random(), -15.0))
 	for slot in _slots():
 		slot.plate_button.pressed.connect(_serve.bind(slot))
 		slot.customer_left.connect(_on_customer_left)
@@ -329,7 +336,7 @@ func _animate_recipe_swap() -> void:
 	tween.tween_property(paw_graphic, "position:x", paw_end, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(func() -> void: Juice.shake_rotation(clipboard, 6.0, 0.3))
 	tween.tween_interval(0.1)
-	tween.tween_callback(func(): SFXManager.play(moka_picksup))
+	tween.tween_callback(func(): SFXManager.play(moka_picksup); SFXManager.play(moka_meow))
 	tween.tween_property(paw_graphic, "position:x", paw_start, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.parallel().tween_property(recipes_button, "position:x", -recipes_button.size.x - 10.0, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	await tween.finished
@@ -450,6 +457,7 @@ func _apply_progression() -> void:
 	update_menu()
 	modulation.visible = progression.night_enabled
 	lighting.visible = progression.night_enabled
+	bg_night_shift.visible = progression.night_enabled
 	
 var progression_in_progress := false
 func _advance_progression():
@@ -467,12 +475,16 @@ func _advance_progression():
 	progression_in_progress = false
 
 func transition_shifts(change_scene_state: Callable) -> void:
+	recipe_swaps_enabled = false
 	await MusicPlayer.fade_out()
+	SFXManager.play(shift_transition)
 	await SceneTransition.hide_screen()
 	await change_scene_state.call()
-	await SceneTransition.show_screen(2.0)
+	await SceneTransition.show_screen(5.0)
+	await get_tree().create_timer(shift_transition.get_length() / 2.0/3.0).timeout
 	MusicPlayer.fade_in()
-
+	recipe_swaps_enabled = true
+	
 func finish_tutorial() -> void:
 	await special_customer_slot_1.leave()
 	special_customer_slot_1.get_parent().visible = false

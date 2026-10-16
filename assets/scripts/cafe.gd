@@ -44,7 +44,7 @@ var cup: Array[Ingredient] = []
 var current_view := View.CUSTOMERS
 var facing_menu := false
 var customers_in_sight := true
-var recipe_swap_wait_time = 8.0
+var recipe_swap_wait_time = 10.0
 var recipe_swap_in_progress := false
 var recipe_swap_pending := false
 var recipe_swaps_enabled := false # this is for the tutorial sequence!
@@ -305,6 +305,9 @@ func _change_customer_sprites() -> void:
 
 func _request_recipe_swap() -> void:
 	if _stop_recipe_swaps():
+		return
+	if current_view == View.PREP and randf() < 0.80:
+		recipe_swap_timer.start()
 		return
 	recipe_swap_pending = true
 	_check_pending_recipe_swap()

@@ -393,14 +393,7 @@ func _finish_recipe_swap() -> void:
 	recipe_swap_timer.start()
 
 func _stop_recipe_swaps() -> bool:
-	if not recipe_swaps_enabled or ending_requested or customers_arrived >= customers_until_end:
-		return true
-	if not _shift_finished():
-		return false
-	for slot in _slots():
-		if slot.order and not slot.is_order_almost_expired():
-			return false
-	return true
+	return not recipe_swaps_enabled or ending_requested or progression_in_progress
 
 func update_menu() -> void:
 	var lines: PackedStringArray = []

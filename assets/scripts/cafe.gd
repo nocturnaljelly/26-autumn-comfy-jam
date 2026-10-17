@@ -174,6 +174,11 @@ func seat_next_customer() -> void:
 		return
 	if progression_in_progress:
 		return
+	# one customer at a time during evening shift
+	if current_progression == 0:
+		for slot in _slots():
+			if not slot.is_free():
+				return
 	var free_slots := _slots().filter(func(slot: CustomerSlot) -> bool: return slot.is_free())
 	if free_slots.is_empty():
 		return
@@ -217,10 +222,12 @@ func _serve(slot: CustomerSlot) -> void:
 func _update_tip_jar() -> void:
 	var frame := 0
 	if tip_jar.amount >= money_goal:
-		frame = 3
+		frame = 4
 	elif tip_jar.amount >= money_goal * 2.0/3.0:
+		frame = 3
+	elif tip_jar.amount >= 10:
 		frame = 2
-	elif tip_jar.amount >= money_goal * 1.0/3.0:
+	elif tip_jar.amount >= 2:
 		frame = 1
 	for i in tip_jar.get_child_count():
 		tip_jar.get_child(i).visible = i == frame
@@ -472,10 +479,11 @@ func _advance_progression():
 	recipe_swap_timer.start()
 	progression_in_progress = false
 
-func transition_shifts(change_scene_state: Callable) -> void:
+func transition_shifts(change_scene_state: Callable, play_sound: bool = true) -> void:
 	recipe_swaps_enabled = false
 	await MusicPlayer.fade_out()
-	SFXManager.play(shift_transition)
+	if play_sound:
+		SFXManager.play(shift_transition)
 	await SceneTransition.hide_screen()
 	await change_scene_state.call()
 	await SceneTransition.show_screen(5.0)

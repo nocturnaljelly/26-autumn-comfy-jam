@@ -23,8 +23,8 @@ do set_expression(Customer.CustomerExpression.DISSATISFIED)
 Poor Moka was so sick...
 do set_expression(Customer.CustomerExpression.NEUTRAL)
 ...What's that?
-Today's your last shot at paying it off?
-You have to fill that tip jar all the way?
+Today's your last chance at paying it off?
+You have to fill that tip jar all the way up?
 Well then, you better be quick with orders...
 You don't want customers leaving!
 => END 

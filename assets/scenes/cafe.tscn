@@ -57,6 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://pio4bcj13gc" path="res://assets/images/gameplay/bg_night_shift.png" id="36_nc71e"]
 [ext_resource type="AudioStream" uid="uid://mdhabid5vvln" path="res://assets/audio/sfx/good_ending_sound.ogg" id="37_nnnwn"]
 [ext_resource type="AudioStream" uid="uid://da7ps7repdf6g" path="res://assets/audio/sfx/bad_ending_sound.ogg" id="38_mhik7"]
+[ext_resource type="Texture2D" uid="uid://rrqrx6vtgddp" path="res://assets/images/gameplay/tip_jar_low.png" id="52_gpkog"]
 [ext_resource type="Texture2D" uid="uid://cce7540jhgjh" path="res://assets/images/gameplay/moka_paw.png" id="54_p6eo1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
@@ -156,6 +157,8 @@ recipe_book = ExtResource("2_book")
 customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("8_maple"), ExtResource("7_rowan")])
 progressions = Array[ExtResource("8_g11bw")]([ExtResource("9_s8y5s"), ExtResource("10_m6dpc")])
 ambience = ExtResource("8_pd00h")
+money_goal = 80
+customers_until_end = 12
 drop_particles = ExtResource("23_drop")
 recipe_particles = ExtResource("24_celebrate")
 recipe_open_sound = ExtResource("14_lvx68")
@@ -383,6 +386,13 @@ layout_mode = 0
 offset_right = 139.0
 offset_bottom = 146.0
 texture = SubResource("AtlasTexture_2ro4j")
+
+[node name="VeryLow" type="TextureRect" parent="CounterView/CustomerView/TipJar" unique_id=143790424]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("52_gpkog")
 
 [node name="OneThird" type="TextureRect" parent="CounterView/CustomerView/TipJar" unique_id=114805824]
 visible = false

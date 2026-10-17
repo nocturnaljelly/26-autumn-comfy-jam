@@ -62,6 +62,8 @@ func tutorial() -> void:
 	await _wait_for_order("order_tutorial_hot_chocolate")
 	
 	# wrap up tutorial here
+	slot.say("end_tutorial")
+	await DialogueManager.dialogue_ended
 	await cafe.transition_shifts(cafe.finish_tutorial)
 	cafe.recipe_swap_timer.start()
 	cafe.seat_next_customer()

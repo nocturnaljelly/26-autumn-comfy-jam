@@ -299,6 +299,8 @@ func _update_balloon_visibility() -> void:
 
 func _change_customer_sprites() -> void:
 	for slot in _all_slots():
+		if slot == special_customer_slot_1:
+			continue
 		if slot.order and randf() < slot.customer.sprite_change_chance:
 			slot.change_sprite()
 			SFXManager.play(transform_sound, -15.0)

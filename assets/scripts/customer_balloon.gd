@@ -83,6 +83,7 @@ var mutation_cooldown: Timer = Timer.new()
 var hover_scale := 1.05
 var hover_duration := 0.15
 var hover_tween: Tween
+var og_y := 0
 
 func _ready() -> void:
 	balloon.gui_input.connect(on_balloon_gui_input)
@@ -258,7 +259,6 @@ func on_balloon_gui_input(event: InputEvent) -> void:
 func _on_balloon_mouse_entered() -> void:
 	if hover_tween:
 		hover_tween.kill()
-	var og_y := balloon.position.y
 	hover_tween = create_tween()
 	hover_tween.tween_property(balloon, "position:y", og_y - 5.0, 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	hover_tween.tween_property(balloon, "position:y", og_y, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -273,7 +273,7 @@ func _attach_to_customer(slot: CustomerSlot) -> void:
 	reparent(view, true)
 	set_anchors_preset(Control.PRESET_TOP_LEFT)
 	size = get_viewport_rect().size
-	
 	balloon.global_position = slot.dialogue_marker.global_position - Vector2(balloon.size.x / 2.0, balloon.size.y)
+	og_y = balloon.position.y
 
 #endregion

@@ -7,7 +7,9 @@
 => END
 
 ~ incorrect_order
-[shake rate=20 level=10]What is this?[/shake]
+% [shake rate=20 level=10]What is this?[/shake]
+% [shake rate=20 level=10]I didn't ask for this![/shake]
+% [shake rate=20 level=10]Did you even try?[/shake]
 => END
 
 ## special customer dialogues below!!
@@ -16,25 +18,31 @@
 Anya!! I didn't know you'd be at the festival!
 How's Moka doing now?
 He was so wild as a kitten...
-Blah blah blah
-You know, you better be quick with orders...
+I heard about your debt!
+do set_expression(Customer.CustomerExpression.DISSATISFIED)
+Poor Moka was so sick...
+do set_expression(Customer.CustomerExpression.NEUTRAL)
+...What's that?
+Today's your last shot at paying it off?
+
+Well then, you better be quick with orders...
 You don't want customers leaving!
 => END 
 
 ~ took_too_long
-You took too long! But it's okay... for now.
+You took too long! But I don't mind...
 => END
 
 ~ order_tutorial_black_coffee
-Anyway, gimme a black coffee!
+How about a black coffee?
 => END 
 
 ~ order_tutorial_hot_chocolate
-Anyway, how about a hot chocolate?
+Hot chocolate this time!
 => END 
 
 ~ tutorial_correct_order
-Awesome!
+Wonderful!
 => END
 
 ~ tutorial_incorrect_order
@@ -50,7 +58,16 @@ He's running around at the back!
 I think he swapped out your recipes!
 => END
 
-# good ending
+~ end_tutorial
+Now, good luck!
+Do your best, Anya!
+=> END
+
+~ good_ending
+
+=> END
 
 
-# bad ending
+~ bad_ending
+
+=> END

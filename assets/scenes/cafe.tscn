@@ -57,8 +57,10 @@
 [ext_resource type="Texture2D" uid="uid://pio4bcj13gc" path="res://assets/images/gameplay/bg_night_shift.png" id="36_nc71e"]
 [ext_resource type="AudioStream" uid="uid://mdhabid5vvln" path="res://assets/audio/sfx/good_ending_sound.ogg" id="37_nnnwn"]
 [ext_resource type="AudioStream" uid="uid://da7ps7repdf6g" path="res://assets/audio/sfx/bad_ending_sound.ogg" id="38_mhik7"]
+[ext_resource type="Texture2D" uid="uid://qxlrrlxgw1ub" path="res://assets/images/arrow_overlay.png" id="50_eb5bb"]
 [ext_resource type="Texture2D" uid="uid://rrqrx6vtgddp" path="res://assets/images/gameplay/tip_jar_low.png" id="52_gpkog"]
 [ext_resource type="Texture2D" uid="uid://cce7540jhgjh" path="res://assets/images/gameplay/moka_paw.png" id="54_p6eo1"]
+[ext_resource type="Texture2D" uid="uid://ply7py3l2p4x" path="res://assets/images/gameplay/recipe_overlay.png" id="56_slxsu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
 shader = ExtResource("18_wx11x")
@@ -361,6 +363,18 @@ grow_vertical = 2
 texture = ExtResource("11_gei2f")
 expand_mode = 3
 
+[node name="ToPrepOverlay" type="TextureRect" parent="CounterView/CustomerView/ToPrepButton" unique_id=934972919]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("50_eb5bb")
+expand_mode = 3
+
 [node name="TipJar" type="Control" parent="CounterView/CustomerView" unique_id=703833515 node_paths=PackedStringArray("visual")]
 unique_name_in_owner = true
 layout_mode = 1
@@ -582,6 +596,8 @@ anchor_left = 0.035
 anchor_top = 0.33
 anchor_right = 0.165
 anchor_bottom = 0.68
+offset_right = 4.2400055
+offset_bottom = 3.2000122
 tooltip_text = "Check recipes"
 flat = true
 script = ExtResource("4_button")
@@ -589,10 +605,24 @@ idle_bob_pixels = 0.0
 idle_tilt_degrees = 0.0
 
 [node name="Clipboard" type="TextureRect" parent="CounterView/PrepView/RecipesButton" unique_id=1240951582]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("28_dbyt7")
+
+[node name="RecipeWhiteOverlay" type="TextureRect" parent="CounterView/PrepView/RecipesButton" unique_id=366217992]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("56_slxsu")
 
 [node name="PawGraphic" type="TextureRect" parent="CounterView/PrepView" unique_id=281466340]
 unique_name_in_owner = true

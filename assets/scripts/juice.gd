@@ -8,6 +8,13 @@ static func punch_scale(node: Control, amount: Vector2, duration := 0.45, pivot 
 	node.scale = Vector2.ONE + amount
 	tween.tween_property(node, "scale", Vector2.ONE, duration).set_trans(transition).set_ease(Tween.EASE_OUT)
 
+static func pulse_scale(node: Control, amount := 0.02, duration := 1.0, steps := 3) -> void:
+	var tween := _restart(node, &"juice_scale")
+	node.pivot_offset = node.size / 2.0
+	for i in steps:
+		tween.tween_property(node, "scale", Vector2.ONE * (1.0 + amount), duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(node, "scale", Vector2.ONE, duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
 static func shake_rotation(node: Control, degrees := 4.0, duration := 0.4, pivot := Vector2(0.5, 0.5), steps := 6) -> void:
 	var tween := _restart(node, &"juice_rotation").set_trans(Tween.TRANS_SINE)
 	node.pivot_offset = node.size * pivot
@@ -33,6 +40,13 @@ static func burst(scene: PackedScene, parent: CanvasItem, at: Vector2) -> Node2D
 	particles.position = parent.get_global_transform().affine_inverse() * at
 	parent.add_child(particles)
 	return particles
+
+static func pulse_alpha(node: Control, max_alpha := 0.3, duration := 0.5, steps := 3) -> void:
+	var tween := _restart(node, &"juice_alpha")
+	node.modulate.a = 0.0
+	for i in steps:
+		tween.tween_property(node, "modulate:a", max_alpha, duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(node, "modulate:a", 0.0, duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 static func _restart(node: Node, key: StringName) -> Tween:
 	var previous: Tween = node.get_meta(key) if node.has_meta(key) else null

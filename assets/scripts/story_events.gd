@@ -37,6 +37,7 @@ func tutorial() -> void:
 	await DialogueManager.dialogue_ended
 	
 	# order black coffee
+	Juice.pulse_alpha(cafe.to_prep_overlay, 0.2, 1.0, 3)
 	await _wait_for_order("order_tutorial_black_coffee")
 	
 	# unlock the hot chocolate

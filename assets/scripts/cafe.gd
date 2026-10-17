@@ -59,6 +59,7 @@ var _menu_tween: Tween
 var ending_requested := false
 var ending_won := false
 var tutorial_active := false
+var first_prep_visit := true
 
 @onready var story_events: StoryEvents = %StoryEvents
 @onready var counter_view: Control = %CounterView
@@ -71,12 +72,14 @@ var tutorial_active := false
 @onready var clear_button: Button = %ClearButton
 @onready var customer_view: Control = %CustomerView
 @onready var to_prep_button: Button = $CounterView/CustomerView/ToPrepButton
+@onready var to_prep_overlay: TextureRect = %ToPrepOverlay
 @onready var prep_view: Control = %PrepView
 @onready var to_customers_button: Button = $CounterView/PrepView/ToCustomersButton
 @onready var menu_view: Control = %MenuView
 @onready var menu_label: RichTextLabel = %MenuLabel
 @onready var recipes_button: Button = %RecipesButton
 @onready var recipe_button_start := recipes_button.position.x
+@onready var recipe_white_overlay: TextureRect = %RecipeWhiteOverlay
 @onready var back_button: Button = %BackButton
 @onready var paw_graphic: TextureRect = %PawGraphic
 @onready var recipe_swap_timer: Timer = %RecipeSwapTimer
@@ -285,6 +288,9 @@ func _show_view(view: View, animate := true) -> void:
 		_slide_tween.tween_property(incoming, "position:x", 0.0, view_slide_duration)
 		_slide_tween.tween_property(outgoing, "position:x", -width * direction, view_slide_duration)
 		await _slide_tween.finished
+		if tutorial_active and first_prep_visit and view == View.PREP:
+			first_prep_visit = false
+			Juice.pulse_alpha(recipe_white_overlay, 0.3, 1.0, 3)
 		outgoing.position.x = 0.0
 	customer_view.visible = view == View.CUSTOMERS
 	prep_view.visible = view == View.PREP

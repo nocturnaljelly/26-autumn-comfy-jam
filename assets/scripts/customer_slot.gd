@@ -113,6 +113,7 @@ func react(correct: bool) -> void:
 		say("tutorial_correct_order" if correct else "tutorial_incorrect_order")
 	else:
 		say("correct_order" if correct else "incorrect_order")
+		await get_tree().create_timer(1.0).timeout
 		leave()
 
 func is_order_almost_expired() -> bool:
@@ -143,6 +144,7 @@ func _on_order_expired() -> void:
 	if order == null:
 		return
 	if stay_after_serving:
+		set_expression(Customer.CustomerExpression.DISSATISFIED)
 		say("took_too_long")
 		order_expired.emit()
 	else:

@@ -76,6 +76,7 @@ func _wait_for_order(cue: String) -> void:
 		slot.can_serve = false
 		cafe.update_controls()
 		await DialogueManager.dialogue_ended
+		slot.set_expression(Customer.CustomerExpression.NEUTRAL)
 		if correct:
 			return
 

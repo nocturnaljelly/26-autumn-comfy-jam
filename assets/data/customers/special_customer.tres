@@ -17,6 +17,7 @@ id = &"special_customer"
 display_name = "Special Customer"
 normal_sprites = Array[Texture2D]([ExtResource("4_l7dxt"), ExtResource("5_2w0kw"), ExtResource("6_007yi")])
 alternate_sprites = Array[Texture2D]([ExtResource("1_ah1ml"), ExtResource("2_nxneu"), ExtResource("3_f03ob")])
+has_alt_expressions = false
 enters_sound = ExtResource("5_007yi")
 satisfied_sound = ExtResource("9_cyrp2")
 dissatisfied_sound = ExtResource("4_2w0kw")

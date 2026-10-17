@@ -242,6 +242,7 @@ func _update_tip_jar() -> void:
 		tip_jar.get_child(i).visible = i == frame
 
 func _on_customer_left(_customer: Customer) -> void:
+	update_controls()
 	_check_ending()
 	if not ending_requested:
 		_advance_progression()

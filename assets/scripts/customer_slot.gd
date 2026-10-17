@@ -40,6 +40,7 @@ var can_serve := true
 
 
 func _ready() -> void:
+	plate_button.visible = false
 	customer_view.modulate.a = 0.0
 	customer_view.sort_children.connect(func() -> void: _applied_offset = Vector2.ZERO)
 	sprite.gui_input.connect(_on_sprite_gui_input)
@@ -59,6 +60,8 @@ func seat(new_customer: Customer, new_order: Recipe) -> void:
 	order = new_order
 	expression = Customer.CustomerExpression.NEUTRAL
 	sprite.texture = customer.get_random_sprite(expression)
+	plate_button.visible = true
+	plate_button.modulate.a = 1.0
 	_tween_rise(arrive_offset, 0.0, arrive_duration, Tween.TRANS_BACK, Tween.EASE_OUT)
 	_fade(1.0)
 	customer_arrived.emit(customer)
@@ -129,12 +132,14 @@ func leave() -> void:
 	plate_button.disabled = true
 	_tween_rise(_rise, leave_offset, fade_duration, Tween.TRANS_SINE, Tween.EASE_IN)
 	_fade(0.0)
+	create_tween().tween_property(plate_button, "modulate:a", 0.0, fade_duration)
 	if is_instance_valid(active_balloon):
 		await active_balloon.close_animation()
 		active_balloon.queue_free()
 		active_balloon = null
 	if _fade_tween and _fade_tween.is_running():
 		await _fade_tween.finished
+	plate_button.visible = false
 	var leaving := customer
 	customer = null
 	bubble.text = ""

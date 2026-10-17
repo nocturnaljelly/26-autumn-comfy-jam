@@ -155,7 +155,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_theme")
 script = ExtResource("1_cafe")
-tutorial_enabled = true
 recipe_book = ExtResource("2_book")
 customers = Array[ExtResource("5_customer")]([ExtResource("6_hazel"), ExtResource("8_maple"), ExtResource("7_rowan")])
 progressions = Array[ExtResource("8_g11bw")]([ExtResource("9_s8y5s"), ExtResource("10_m6dpc")])

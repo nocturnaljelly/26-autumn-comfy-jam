@@ -149,8 +149,8 @@ func _turn() -> void:
 	_menu_tween = create_tween()
 	if facing_menu:
 		for i in [recipe_swap_alert, recipe_white_overlay]:
-			var tween: Tween = i.get_meta(&"juice_alpha", null)
-			if tween:
+			if i.has_meta(&"juice_alpha"):
+				var tween: Tween = i.get_meta(&"juice_alpha")
 				tween.kill()
 			i.modulate.a = 0.0
 		menu_view.position.y = -menu_view.size.y
@@ -301,7 +301,9 @@ func _show_view(view: View, animate := true) -> void:
 	customer_view.visible = view == View.CUSTOMERS
 	prep_view.visible = view == View.PREP
 	if previous == View.CUSTOMERS and view == View.PREP:
-		_change_customer_sprites()
+		await get_tree().create_timer(1.0).timeout
+		if current_view == View.PREP:
+			_change_customer_sprites()
 	_check_pending_recipe_swap()
 	
 func _update_order_text(slot: CustomerSlot) -> void:

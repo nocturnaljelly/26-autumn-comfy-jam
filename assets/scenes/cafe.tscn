@@ -209,6 +209,7 @@ script = ExtResource("35_nc71e")
 special_customer = ExtResource("31_g2ert")
 tutorial_coffee = ExtResource("32_nc71e")
 tutorial_hot_chocolate = ExtResource("33_rl4o6")
+tutorial_timer_duration = 30.0
 good_ending_sound = ExtResource("37_nnnwn")
 bad_ending_sound = ExtResource("38_mhik7")
 ending_screen = "uid://pvhlyqvcjmuf"

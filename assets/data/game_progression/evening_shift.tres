@@ -9,5 +9,5 @@
 [resource]
 script = ExtResource("1_bkl5c")
 recipes = Array[ExtResource("2_jb5js")]([ExtResource("3_8slyo"), ExtResource("4_oflmf"), ExtResource("5_tea")])
-order_duration = 60.0
+order_duration = 80.0
 metadata/_custom_type_script = "uid://crlau6b8aruxk"

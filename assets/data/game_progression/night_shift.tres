@@ -12,5 +12,5 @@ script = ExtResource("1_65pw5")
 customers_required = 5
 recipes = Array[ExtResource("2_fcbhi")]([ExtResource("3_nt258"), ExtResource("4_mr0vy"), ExtResource("6_tea"), ExtResource("5_aq41a")])
 night_enabled = true
-order_duration = 33.0
+order_duration = 80.0
 metadata/_custom_type_script = "uid://crlau6b8aruxk"

@@ -31,7 +31,7 @@ game_scene = "res://assets/scenes/cafe.tscn"
 menu_music = ExtResource("4_57ux2")
 ui_select = ExtResource("4_xmmar")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1738766778]
+[node name="Bg" type="TextureRect" parent="." unique_id=1738766778]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,11 +40,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_f2xsc")
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=2012552277]
+[node name="Logo" type="TextureRect" parent="." unique_id=2012552277]
 layout_mode = 0
-offset_top = 87.0
+offset_top = 99.0
 offset_right = 419.0
-offset_bottom = 352.0
+offset_bottom = 364.0
 texture = ExtResource("6_66en2")
 
 [node name="PlayButton" type="Button" parent="." unique_id=396579827]
@@ -54,9 +54,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 75.0
-offset_top = 17.0
+offset_top = 29.0
 offset_right = 356.0
-offset_bottom = 86.0
+offset_bottom = 98.0
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_xmmar")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_v71do")

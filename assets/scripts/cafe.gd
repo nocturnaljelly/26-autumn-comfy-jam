@@ -114,7 +114,7 @@ func _ready() -> void:
 	clear_button.pressed.connect(func(): SFXManager.play(prep_clear); _clear_cup())
 	recipes_button.pressed.connect(_turn)
 	back_button.pressed.connect(_turn)
-	arrival_timer.timeout.connect(func(): arrival_timer.wait_time = 8.0; seat_next_customer())
+	arrival_timer.timeout.connect(func(): arrival_timer.wait_time = 6.0; seat_next_customer())
 	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
 	menu_view.visible = false
@@ -201,6 +201,8 @@ func seat_next_customer() -> void:
 	free_slot.seat(customer, menu.get_random_recipe())
 	free_slot.order_duration = progressions[current_progression].order_duration
 	customers_arrived += 1
+	if current_progression == 0:
+		arrival_timer.stop()
 	SFXManager.play(customer.enters_sound)
 	_update_order_text(free_slot)
 	update_controls()
@@ -514,7 +516,7 @@ func transition_shifts(change_scene_state: Callable, play_sound: bool = true) ->
 		SFXManager.play(shift_transition)
 	await SceneTransition.hide_screen()
 	await change_scene_state.call()
-	await SceneTransition.show_screen(5.0)
+	await SceneTransition.show_screen(3.0)
 	await get_tree().create_timer(shift_transition.get_length() / 2.0/3.0).timeout
 	MusicPlayer.fade_in()
 	recipe_swaps_enabled = true

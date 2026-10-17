@@ -108,7 +108,7 @@ func _ready() -> void:
 	clear_button.pressed.connect(func(): SFXManager.play(prep_clear); _clear_cup())
 	recipes_button.pressed.connect(_turn)
 	back_button.pressed.connect(_turn)
-	arrival_timer.timeout.connect(seat_next_customer)
+	arrival_timer.timeout.connect(func(): arrival_timer.wait_time = 8.0; seat_next_customer())
 	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
 	menu_view.visible = false

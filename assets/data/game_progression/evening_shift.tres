@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://crlau6b8aruxk" path="res://assets/scripts/data/game_progression.gd" id="1_bkl5c"]
 [ext_resource type="Script" uid="uid://clpst32mwopol" path="res://assets/scripts/data/recipe.gd" id="2_jb5js"]
-[ext_resource type="Resource" path="res://assets/data/recipes/black_coffee.tres" id="3_8slyo"]
-[ext_resource type="Resource" path="res://assets/data/recipes/hot_chocolate.tres" id="4_oflmf"]
-[ext_resource type="Resource" path="res://assets/data/recipes/tea.tres" id="5_tea"]
+[ext_resource type="Resource" uid="uid://brl4y0ko3wkjb" path="res://assets/data/recipes/black_coffee.tres" id="3_8slyo"]
+[ext_resource type="Resource" uid="uid://bqqffcc3y8jmr" path="res://assets/data/recipes/hot_chocolate.tres" id="4_oflmf"]
+[ext_resource type="Resource" uid="uid://clq1r1wl0cjh0" path="res://assets/data/recipes/tea.tres" id="5_tea"]
 
 [resource]
 script = ExtResource("1_bkl5c")

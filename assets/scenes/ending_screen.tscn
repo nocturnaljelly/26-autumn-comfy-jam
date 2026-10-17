@@ -2,6 +2,30 @@
 
 [ext_resource type="Texture2D" uid="uid://b0opeyvsmm2md" path="res://assets/images/gameplay/ending.png" id="1_54cay"]
 [ext_resource type="Script" uid="uid://b2hem73pa13j7" path="res://assets/scripts/ending_screen.gd" id="1_bmche"]
+[ext_resource type="Texture2D" uid="uid://bo8mvq810fnxq" path="res://assets/images/gameplay/ending_1.png" id="3_see0i"]
+[ext_resource type="Texture2D" uid="uid://dt87ti6ish5qi" path="res://assets/images/gameplay/ending_2.png" id="4_47veo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47veo"]
+atlas = ExtResource("3_see0i")
+region = Rect2(0, 0, 1152, 648)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o82w4"]
+atlas = ExtResource("4_47veo")
+region = Rect2(0, 0, 1152, 648)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rg5ck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47veo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o82w4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="EndingScreen" type="Control" unique_id=1813220955]
 layout_mode = 3
@@ -14,6 +38,7 @@ script = ExtResource("1_bmche")
 main_menu = "uid://b7c7i4sj5kfm2"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1616707942]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,3 +46,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_54cay")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1202353309]
+sprite_frames = SubResource("SpriteFrames_rg5ck")
+autoplay = "default"
+frame_progress = 0.60729647
+centered = false

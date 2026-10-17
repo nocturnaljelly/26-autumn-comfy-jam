@@ -61,6 +61,7 @@
 [ext_resource type="Texture2D" uid="uid://rrqrx6vtgddp" path="res://assets/images/gameplay/tip_jar_low.png" id="52_gpkog"]
 [ext_resource type="Texture2D" uid="uid://cce7540jhgjh" path="res://assets/images/gameplay/moka_paw.png" id="54_p6eo1"]
 [ext_resource type="Texture2D" uid="uid://ply7py3l2p4x" path="res://assets/images/gameplay/recipe_overlay.png" id="56_slxsu"]
+[ext_resource type="Texture2D" uid="uid://dydncaybkwgvr" path="res://assets/images/gameplay/exclaimation.png" id="57_q7g38"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
 shader = ExtResource("18_wx11x")
@@ -623,6 +624,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("56_slxsu")
+
+[node name="RecipeSwapAlert" type="TextureRect" parent="CounterView/PrepView/RecipesButton" unique_id=590598655]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 128.68
+offset_top = -10.840012
+offset_right = 168.68
+offset_bottom = 29.159988
+texture = ExtResource("57_q7g38")
 
 [node name="PawGraphic" type="TextureRect" parent="CounterView/PrepView" unique_id=281466340]
 unique_name_in_owner = true

@@ -56,6 +56,7 @@ func tutorial() -> void:
 	
 	
 	# react to swap
+	Juice.pulse_alpha(cafe.to_prep_overlay, 0.2, 1.0, 3)
 	slot.say("tutorial_cat_warning_2")
 	await DialogueManager.dialogue_ended
 	

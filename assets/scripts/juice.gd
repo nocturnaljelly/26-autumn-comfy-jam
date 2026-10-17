@@ -41,9 +41,11 @@ static func burst(scene: PackedScene, parent: CanvasItem, at: Vector2) -> Node2D
 	parent.add_child(particles)
 	return particles
 
-static func pulse_alpha(node: Control, max_alpha := 0.3, duration := 0.5, steps := 3) -> void:
+static func pulse_alpha(node: Control, max_alpha := 0.3, duration := 0.5, steps := 3, looping := false) -> void:
 	var tween := _restart(node, &"juice_alpha")
 	node.modulate.a = 0.0
+	if looping:
+		tween.set_loops()
 	for i in steps:
 		tween.tween_property(node, "modulate:a", max_alpha, duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(node, "modulate:a", 0.0, duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

@@ -80,6 +80,7 @@ var first_prep_visit := true
 @onready var recipes_button: Button = %RecipesButton
 @onready var recipe_button_start := recipes_button.position.x
 @onready var recipe_white_overlay: TextureRect = %RecipeWhiteOverlay
+@onready var recipe_swap_alert: TextureRect = %RecipeSwapAlert
 @onready var back_button: Button = %BackButton
 @onready var paw_graphic: TextureRect = %PawGraphic
 @onready var recipe_swap_timer: Timer = %RecipeSwapTimer
@@ -147,6 +148,11 @@ func _turn() -> void:
 	menu_view.visible = true
 	_menu_tween = create_tween()
 	if facing_menu:
+		for i in [recipe_swap_alert, recipe_white_overlay]:
+			var tween: Tween = i.get_meta(&"juice_alpha", null)
+			if tween:
+				tween.kill()
+			i.modulate.a = 0.0
 		menu_view.position.y = -menu_view.size.y
 		_menu_tween.tween_property(menu_view, "position:y", 0.0, menu_drop_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	else:
@@ -402,7 +408,8 @@ func _swap_recipes(recipe_id: StringName = &"") -> void:
 	if recipe:
 		_last_swapped_recipe = recipe.id
 	update_menu()
-
+	Juice.pulse_alpha(recipe_swap_alert, 1.0, 0.5, 1, true)
+	
 func _finish_recipe_swap() -> void:
 	recipe_swap_in_progress = false
 	recipes_button.disabled = false

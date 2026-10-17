@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://pvhlyqvcjmuf"]
+
+[ext_resource type="Texture2D" uid="uid://b0opeyvsmm2md" path="res://assets/images/gameplay/ending.png" id="1_54cay"]
+[ext_resource type="Script" uid="uid://b2hem73pa13j7" path="res://assets/scripts/ending_screen.gd" id="1_bmche"]
+
+[node name="EndingScreen" type="Control" unique_id=1813220955]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bmche")
+main_menu = "uid://b7c7i4sj5kfm2"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1616707942]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_54cay")

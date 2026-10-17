@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 @export var open_scale := 3.0
-@export var scene_change_delay := 1.0
 
 @export_group("Hide")
 @export var hide_duration := 0.8
@@ -16,7 +15,7 @@ extends CanvasLayer
 @onready var mask: ColorRect = %Mask
 
 
-func change_scene(path: String) -> void:
+func change_scene(path: String, scene_change_delay: float = 0.0) -> void:
 	await hide_screen()
 	get_tree().change_scene_to_file(path)
 	await get_tree().scene_changed

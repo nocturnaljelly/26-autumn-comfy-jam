@@ -474,6 +474,7 @@ func _advance_progression():
 	while recipe_swap_in_progress:
 		await get_tree().process_frame
 	await transition_shifts(func(): current_progression += 1; _apply_progression())
+	arrival_timer.start(2.0)
 	recipe_swap_pending = false
 	recipe_swap_timer.start()
 	progression_in_progress = false

@@ -185,6 +185,7 @@ tutorial_coffee = ExtResource("32_nc71e")
 tutorial_hot_chocolate = ExtResource("33_rl4o6")
 good_ending_sound = ExtResource("37_nnnwn")
 bad_ending_sound = ExtResource("38_mhik7")
+ending_screen = "uid://pvhlyqvcjmuf"
 
 [node name="CounterView" type="Control" parent="." unique_id=707470788]
 unique_name_in_owner = true
@@ -883,7 +884,7 @@ color = Color(0.73111206, 0.78112, 0.9209361, 1)
 
 [node name="ArrivalTimer" type="Timer" parent="." unique_id=155262835]
 unique_name_in_owner = true
-wait_time = 4.0
+wait_time = 8.0
 autostart = true
 
 [node name="RecipeSwapTimer" type="Timer" parent="." unique_id=643335518]

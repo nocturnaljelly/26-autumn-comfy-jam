@@ -14,6 +14,8 @@ signal order_attempt_finished(correct: bool)
 @export var good_ending_sound: AudioStream
 @export var bad_ending_sound: AudioStream
 
+@export_file("*.tscn") var ending_screen: String
+
 func tutorial() -> void:
 	# setup
 	slot.order_expired.connect(func(): order_attempt_finished.emit(false))
@@ -89,7 +91,7 @@ func _start_ending() -> void:
 	slot.get_parent().visible = true
 	slot.seat(special_customer, null)
 	slot.plate_button.hide()
-	await SceneTransition.show_screen(5.0)
+	await SceneTransition.show_screen(3.0)
 
 func good_ending() -> void:
 	await _start_ending()
@@ -97,7 +99,8 @@ func good_ending() -> void:
 	slot.say("good_ending")
 	await DialogueManager.dialogue_ended
 	SFXManager.play(good_ending_sound)
-
+	SceneTransition.change_scene(ending_screen, 1.0)
+	
 func bad_ending() -> void:
 	await _start_ending()
 	slot.set_expression(Customer.CustomerExpression.DISSATISFIED)
@@ -107,3 +110,4 @@ func bad_ending() -> void:
 	slot.say("bad_ending_2")
 	await DialogueManager.dialogue_ended
 	SFXManager.play(bad_ending_sound)
+	SceneTransition.change_scene(ending_screen, 1.0)

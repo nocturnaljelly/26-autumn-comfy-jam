@@ -58,13 +58,32 @@
 [ext_resource type="Texture2D" uid="uid://pio4bcj13gc" path="res://assets/images/gameplay/bg_night_shift.png" id="36_nc71e"]
 [ext_resource type="AudioStream" uid="uid://mdhabid5vvln" path="res://assets/audio/sfx/good_ending_sound.ogg" id="37_nnnwn"]
 [ext_resource type="AudioStream" uid="uid://da7ps7repdf6g" path="res://assets/audio/sfx/bad_ending_sound.ogg" id="38_mhik7"]
+[ext_resource type="Shader" uid="uid://dtth2b4vr6w43" path="res://assets/shaders/leaves.gdshader" id="44_gs1ka"]
 [ext_resource type="Texture2D" uid="uid://dr0ys15jp6a6e" path="res://assets/images/gameplay/bell_shadow.png" id="44_pb37f"]
 [ext_resource type="Texture2D" uid="uid://ccmebw5u016cf" path="res://assets/images/gameplay/bell.png" id="45_cnywq"]
+[ext_resource type="Texture2D" uid="uid://cwe28dhigf2ev" path="res://assets/images/gameplay/leaf.png" id="45_l3r4a"]
 [ext_resource type="Texture2D" uid="uid://qxlrrlxgw1ub" path="res://assets/images/arrow_overlay.png" id="50_eb5bb"]
 [ext_resource type="Texture2D" uid="uid://rrqrx6vtgddp" path="res://assets/images/gameplay/tip_jar_low.png" id="52_gpkog"]
 [ext_resource type="Texture2D" uid="uid://cce7540jhgjh" path="res://assets/images/gameplay/moka_paw.png" id="54_p6eo1"]
 [ext_resource type="Texture2D" uid="uid://ply7py3l2p4x" path="res://assets/images/gameplay/recipe_overlay.png" id="56_slxsu"]
 [ext_resource type="Texture2D" uid="uid://dydncaybkwgvr" path="res://assets/images/gameplay/exclaimation.png" id="57_q7g38"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gs1ka"]
+shader = ExtResource("44_gs1ka")
+shader_parameter/dimensions = Vector2(1152, 648)
+shader_parameter/rows = 5.0
+shader_parameter/columns = 1.0
+shader_parameter/vertical_scroll = 0.06999997608336006
+shader_parameter/horizontal_scroll = -0.020000021904959975
+shader_parameter/size_min = 0.10000000149012
+shader_parameter/size_max = 0.30000000447036
+shader_parameter/wave_min = 0.1
+shader_parameter/wave_max = 1.0
+shader_parameter/wave_speed = 0.10000000149012
+shader_parameter/wave_rotation = 1.0
+shader_parameter/far_color = Color(0.50710374, 0.39796227, 0.7489385, 1)
+shader_parameter/near_color = Color(1, 1, 1, 1)
+shader_parameter/particle_texture = ExtResource("45_l3r4a")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
 shader = ExtResource("18_wx11x")
@@ -240,6 +259,16 @@ mouse_filter = 2
 texture = ExtResource("36_nc71e")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="Leaves" type="ColorRect" parent="CounterView/CustomerView" unique_id=1629610654]
+z_index = -1
+material = SubResource("ShaderMaterial_gs1ka")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Stall" type="TextureRect" parent="CounterView/CustomerView" unique_id=1597311596]
 layout_mode = 1

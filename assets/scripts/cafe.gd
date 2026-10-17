@@ -114,7 +114,7 @@ func _ready() -> void:
 	clear_button.pressed.connect(func(): SFXManager.play(prep_clear); _clear_cup())
 	recipes_button.pressed.connect(_turn)
 	back_button.pressed.connect(_turn)
-	arrival_timer.timeout.connect(func(): arrival_timer.wait_time = 2.0 if current_progression == 0 else 8.0; seat_next_customer())
+	arrival_timer.timeout.connect(func(): arrival_timer.wait_time = 8.0; seat_next_customer())
 	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
 	menu_view.visible = false
@@ -141,6 +141,7 @@ func _ready() -> void:
 		special_customer_slot_1.get_parent().visible = false
 		recipe_swaps_enabled = true
 		seat_next_customer()
+		arrival_timer.start()
 	
 func _turn() -> void:
 	facing_menu = not facing_menu
@@ -250,6 +251,8 @@ func _on_customer_left(_customer: Customer) -> void:
 	_check_ending()
 	if not ending_requested:
 		_advance_progression()
+		if current_progression == 0 and not _shift_finished():
+			arrival_timer.start(2.0)
 func _add_ingredient(ingredient: Ingredient) -> void:
 	if cup.size() < CUP_CAPACITY:
 		cup.append(ingredient)

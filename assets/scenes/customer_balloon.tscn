@@ -165,6 +165,7 @@ mouse_filter = 2
 texture = ExtResource("3_aa7qb")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer" unique_id=903640783]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 3.0
 offset_top = 3.0
@@ -195,7 +196,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-text = "Dialogue..."
+text = "Dialogue... Dialogue... Dialogue... "
 skip_pause_at_character_if_followed_by = ")\"..."
 
 [node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer" unique_id=418507161]
@@ -262,6 +263,7 @@ text = "Response example"
 
 [node name="OrderTimer" parent="Balloon" unique_id=592437979 instance=ExtResource("6_my5j2")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = -37.000004
 offset_top = -24.0

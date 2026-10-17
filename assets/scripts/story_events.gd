@@ -82,12 +82,28 @@ func _wait_for_order(cue: String) -> void:
 		if correct:
 			return
 
-func good_ending() -> void:
+func _start_ending() -> void:
 	await MusicPlayer.fade_out()
+	await SceneTransition.hide_screen()
+	cafe.customer_slots.visible = false
+	slot.get_parent().visible = true
+	slot.seat(special_customer, null)
+	slot.plate_button.hide()
+	await SceneTransition.show_screen(5.0)
+
+func good_ending() -> void:
+	await _start_ending()
+	slot.set_expression(Customer.CustomerExpression.SATISFIED)
+	slot.say("good_ending")
+	await DialogueManager.dialogue_ended
 	SFXManager.play(good_ending_sound)
-	print("WON!")
 
 func bad_ending() -> void:
-	await MusicPlayer.fade_out()
+	await _start_ending()
+	slot.set_expression(Customer.CustomerExpression.DISSATISFIED)
+	slot.say("bad_ending_1")
+	await DialogueManager.dialogue_ended
+	cafe.coin_spawner.spawn(50, slot.get_payment_origin())
+	slot.say("bad_ending_2")
+	await DialogueManager.dialogue_ended
 	SFXManager.play(bad_ending_sound)
-	print("Lost :(")

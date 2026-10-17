@@ -29,6 +29,8 @@ extends Control
 
 @export var ui_select: AudioStream
 
+@onready var margin_container: MarginContainer = %MarginContainer
+
 ## Temporary game states
 var temporary_game_states: Array = []
 
@@ -139,6 +141,10 @@ func start(with_dialogue_resource: DialogueResource = null, cue: String = "", ex
 		dialogue_resource = with_dialogue_resource
 	if not cue.is_empty():
 		start_from_cue = cue
+		var is_ending := start_from_cue.begins_with("good_ending") or start_from_cue.begins_with("bad_ending")
+		order_timer.visible = not is_ending
+		if is_ending:
+			margin_container.position.y = -9.0
 		is_order = start_from_cue.begins_with("order")
 	dialogue_line = await dialogue_resource.get_next_dialogue_line(start_from_cue, temporary_game_states)
 	if customer_slot:

@@ -24,7 +24,7 @@ Poor Moka was so sick...
 do set_expression(Customer.CustomerExpression.NEUTRAL)
 ...What's that?
 Today's your last shot at paying it off?
-
+You have to fill that tip jar all the way?
 Well then, you better be quick with orders...
 You don't want customers leaving!
 => END 
@@ -64,10 +64,23 @@ Do your best, Anya!
 => END
 
 ~ good_ending
-
+Anya...
+do set_expression(Customer.CustomerExpression.NEUTRAL)
+You did it!!
+You filled up the tip jar!
+I knew you could do it, you always do!
 => END
 
 
-~ bad_ending
+~ bad_ending_1
+Anya...
+You were supposed to try your best...
+do set_expression(Customer.CustomerExpression.SATISFIED)
+But it's fine, really!
+do set_expression(Customer.CustomerExpression.NEUTRAL)
+I'll always have your back!
+=> END
 
+~ bad_ending_2
+Next year's festival will be a success, surely!
 => END

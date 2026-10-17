@@ -57,6 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://pio4bcj13gc" path="res://assets/images/gameplay/bg_night_shift.png" id="36_nc71e"]
 [ext_resource type="AudioStream" uid="uid://mdhabid5vvln" path="res://assets/audio/sfx/good_ending_sound.ogg" id="37_nnnwn"]
 [ext_resource type="AudioStream" uid="uid://da7ps7repdf6g" path="res://assets/audio/sfx/bad_ending_sound.ogg" id="38_mhik7"]
+[ext_resource type="Texture2D" uid="uid://cce7540jhgjh" path="res://assets/images/gameplay/moka_paw.png" id="54_p6eo1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg5ck"]
 shader = ExtResource("18_wx11x")
@@ -582,7 +583,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("28_dbyt7")
 
-[node name="PawGraphic" type="ColorRect" parent="CounterView/PrepView" unique_id=2135399802]
+[node name="PawGraphic" type="TextureRect" parent="CounterView/PrepView" unique_id=281466340]
 unique_name_in_owner = true
 visible = false
 z_index = 10
@@ -590,12 +591,13 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -19.5
-offset_right = 206.0
-offset_bottom = 19.5
+offset_left = -34.0
+offset_top = -20.0
+offset_right = 172.0
+offset_bottom = 20.0
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.32264355, 0.16302705, 0.20494804, 1)
+texture = ExtResource("54_p6eo1")
 
 [node name="IngredientBins" type="Control" parent="CounterView/PrepView" unique_id=374861868]
 unique_name_in_owner = true

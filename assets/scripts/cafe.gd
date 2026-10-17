@@ -288,7 +288,8 @@ func _show_view(view: View, animate := true) -> void:
 		outgoing.position.x = 0.0
 	customer_view.visible = view == View.CUSTOMERS
 	prep_view.visible = view == View.PREP
-	
+	if previous == View.CUSTOMERS and view == View.PREP:
+		_change_customer_sprites()
 	_check_pending_recipe_swap()
 	
 func _update_order_text(slot: CustomerSlot) -> void:
@@ -298,8 +299,6 @@ func _update_order_text(slot: CustomerSlot) -> void:
 
 func _update_balloon_visibility() -> void:
 	var in_sight := current_view == View.CUSTOMERS and not facing_menu
-	if customers_in_sight and not in_sight:
-		_change_customer_sprites()
 	customers_in_sight = in_sight
 	for slot in _all_slots():
 		slot.set_balloon_visible(in_sight)
@@ -310,7 +309,7 @@ func _change_customer_sprites() -> void:
 			continue
 		if slot.order and randf() < slot.customer.sprite_change_chance:
 			slot.change_sprite()
-			SFXManager.play(transform_sound, -15.0)
+			SFXManager.play(transform_sound, -15.0, true)
 
 func _request_recipe_swap() -> void:
 	if _stop_recipe_swaps():

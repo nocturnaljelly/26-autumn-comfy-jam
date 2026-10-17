@@ -3,7 +3,7 @@ extends Control
 
 signal ingredient_dropped(ingredient: Ingredient)
 
-const HIGHLIGHT_COLOR := Color(0.98, 0.68, 0.22)
+const HIGHLIGHT_COLOR := Color(1.0, 0.702, 0.475, 1.0)
 
 var is_full := false
 

@@ -38,6 +38,7 @@ enum View { CUSTOMERS, PREP }
 @export var coin_sounds: Array[AudioStream] = []
 @export var shift_transition: AudioStream
 @export var item_hovering: Array[AudioStream] = []
+@export var ding: AudioStream
 
 var menu: RecipeBook
 var cup: Array[Ingredient] = []
@@ -91,6 +92,7 @@ var first_prep_visit := true
 @onready var bg_evening_shift: TextureRect = %BgEveningShift
 @onready var bg_night_shift: TextureRect = %BgNightShift
 @onready var coin_spawner: CoinSpawner = %CoinSpawner
+@onready var bell: TextureRect = %Bell
 
 func _ready() -> void:
 	SFXManager.play(ambience, -5.0)
@@ -112,7 +114,7 @@ func _ready() -> void:
 	clear_button.pressed.connect(func(): SFXManager.play(prep_clear); _clear_cup())
 	recipes_button.pressed.connect(_turn)
 	back_button.pressed.connect(_turn)
-	arrival_timer.timeout.connect(func(): arrival_timer.wait_time = 8.0; seat_next_customer())
+	arrival_timer.timeout.connect(func(): arrival_timer.wait_time = 2.0 if current_progression == 0 else 8.0; seat_next_customer())
 	to_prep_button.pressed.connect(_show_view.bind(View.PREP))
 	to_customers_button.pressed.connect(_show_view.bind(View.CUSTOMERS))
 	menu_view.visible = false
@@ -120,6 +122,8 @@ func _ready() -> void:
 	recipe_swap_timer.one_shot = true
 	recipe_swap_timer.timeout.connect(_request_recipe_swap)
 	recipe_swap_timer.start()
+	bell.gui_input.connect(_on_bell_clicked)
+	bell.pivot_offset = bell.size / 2.0
 	if not progressions.is_empty():
 		_apply_progression()
 	else:
@@ -325,6 +329,11 @@ func _change_customer_sprites() -> void:
 		if slot.order and randf() < slot.customer.sprite_change_chance:
 			slot.change_sprite()
 			SFXManager.play(transform_sound, -15.0, true)
+
+func _on_bell_clicked(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		Juice.punch_scale(bell, Vector2(0.15, -0.15), 0.3)
+		SFXManager.play(ding)
 
 func _request_recipe_swap() -> void:
 	if _stop_recipe_swaps():

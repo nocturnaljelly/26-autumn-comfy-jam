@@ -52,11 +52,14 @@
 [ext_resource type="AudioStream" uid="uid://uvw6to46hett" path="res://assets/audio/sfx/coin4.ogg" id="32_oiqeo"]
 [ext_resource type="AudioStream" uid="uid://q3foj4ibvuqx" path="res://assets/audio/sfx/shift_transition.ogg" id="33_mhik7"]
 [ext_resource type="Resource" uid="uid://bqqffcc3y8jmr" path="res://assets/data/recipes/hot_chocolate.tres" id="33_rl4o6"]
+[ext_resource type="AudioStream" uid="uid://d11fu5ykuqtqx" path="res://assets/audio/sfx/ding.ogg" id="35_cnywq"]
 [ext_resource type="Script" uid="uid://b27n4g0igu377" path="res://assets/scripts/story_events.gd" id="35_nc71e"]
 [ext_resource type="Texture2D" uid="uid://qc1ejrjs61k7" path="res://assets/images/gameplay/bg_evening_shift.png" id="35_rl4o6"]
 [ext_resource type="Texture2D" uid="uid://pio4bcj13gc" path="res://assets/images/gameplay/bg_night_shift.png" id="36_nc71e"]
 [ext_resource type="AudioStream" uid="uid://mdhabid5vvln" path="res://assets/audio/sfx/good_ending_sound.ogg" id="37_nnnwn"]
 [ext_resource type="AudioStream" uid="uid://da7ps7repdf6g" path="res://assets/audio/sfx/bad_ending_sound.ogg" id="38_mhik7"]
+[ext_resource type="Texture2D" uid="uid://dr0ys15jp6a6e" path="res://assets/images/gameplay/bell_shadow.png" id="44_pb37f"]
+[ext_resource type="Texture2D" uid="uid://ccmebw5u016cf" path="res://assets/images/gameplay/bell.png" id="45_cnywq"]
 [ext_resource type="Texture2D" uid="uid://qxlrrlxgw1ub" path="res://assets/images/arrow_overlay.png" id="50_eb5bb"]
 [ext_resource type="Texture2D" uid="uid://rrqrx6vtgddp" path="res://assets/images/gameplay/tip_jar_low.png" id="52_gpkog"]
 [ext_resource type="Texture2D" uid="uid://cce7540jhgjh" path="res://assets/images/gameplay/moka_paw.png" id="54_p6eo1"]
@@ -178,6 +181,7 @@ serve_to_customer = Array[AudioStream]([ExtResource("24_4qrho"), ExtResource("25
 coin_sounds = Array[AudioStream]([ExtResource("29_tw36y"), ExtResource("32_oiqeo")])
 shift_transition = ExtResource("33_mhik7")
 item_hovering = Array[AudioStream]([ExtResource("31_fwmpb"), ExtResource("32_3nbxg")])
+ding = ExtResource("35_cnywq")
 
 [node name="StoryEvents" type="Node" parent="." unique_id=1771734207]
 unique_name_in_owner = true
@@ -292,6 +296,28 @@ theme_override_constants/separation = 0
 [node name="SpecialCustomerSlot1" parent="CounterView/CustomerView/SpecialCustomerSlot" unique_id=113397052 instance=ExtResource("9_slot")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Bell" type="Control" parent="CounterView/CustomerView" unique_id=1436672673]
+anchors_preset = 0
+offset_left = 380.0
+offset_top = 552.0
+offset_right = 420.0
+offset_bottom = 592.0
+
+[node name="Shadow" type="TextureRect" parent="CounterView/CustomerView/Bell" unique_id=1342128320]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 82.0
+mouse_filter = 2
+texture = ExtResource("44_pb37f")
+
+[node name="Bell" type="TextureRect" parent="CounterView/CustomerView/Bell" unique_id=1846381899]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 0
+texture = ExtResource("45_cnywq")
 
 [node name="SwapBubble" type="TextureRect" parent="CounterView/CustomerView" unique_id=729347793]
 unique_name_in_owner = true
